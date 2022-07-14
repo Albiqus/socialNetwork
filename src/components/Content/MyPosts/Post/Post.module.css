@@ -1,0 +1,16 @@
+.content {
+grid-area: content;
+background-color: yellow;
+
+}
+
+.item {
+    color: rgb(224, 17, 207);
+
+}
+
+.item img {
+    width: 80px;
+    height: 80px;
+    border-radius: 30px;
+}

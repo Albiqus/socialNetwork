@@ -1,0 +1,24 @@
+.nav {
+grid-area: nav;
+background-color: rgb(222, 184, 135);
+text-align: center;
+text-decoration: none;
+}
+
+.item {
+    color: #ffffff; 
+  font-size: 25px; 
+  font-weight: bold;
+  line-height: 1.5;
+  -webkit-transition: all 0.5s ease;
+          transition: all 0.5s ease;
+  text-decoration: none;
+}
+
+.item:hover {
+    color: #5265f6;
+}
+
+.nav2 {
+margin-top: 40px;
+}
