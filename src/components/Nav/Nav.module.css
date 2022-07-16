@@ -3,11 +3,12 @@ grid-area: nav;
 background-color: rgb(222, 184, 135);
 text-align: center;
 text-decoration: none;
+margin: 10px;
 }
 
 .item {
     color: #ffffff; 
-  font-size: 25px; 
+  font-size: 20px; 
   font-weight: bold;
   line-height: 1.5;
   -webkit-transition: all 0.5s ease;

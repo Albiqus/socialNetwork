@@ -6,6 +6,7 @@ background-color: yellow;
 
 .item {
     color: rgb(224, 17, 207);
+    display: flex;
 
 }
 
@@ -13,4 +14,8 @@ background-color: yellow;
     width: 80px;
     height: 80px;
     border-radius: 30px;
+}
+
+.likes {
+    padding-top: 59px;
 }

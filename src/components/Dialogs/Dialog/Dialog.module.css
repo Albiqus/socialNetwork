@@ -1,0 +1,25 @@
+.item {
+    margin-bottom: 5px;
+    display: flex;
+    border: 2px solid rgb(188, 143, 143);
+    position: relative;
+}
+
+.item img {
+    width: 80px;
+    height: 80px;
+}
+
+.item h1 {
+    font-size: 20px;
+    position: absolute;
+    top: 0;
+    left: 90px;
+}
+
+.item p {
+    font-size: 20px;
+    position: absolute;
+    bottom: 0;
+    left: 90px;
+}
