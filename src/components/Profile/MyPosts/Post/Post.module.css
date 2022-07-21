@@ -1,21 +1,39 @@
-.content {
-grid-area: content;
-background-color: yellow;
-
-}
 
 .item {
-    color: rgb(224, 17, 207);
+    color: rgb(0, 0, 0);
     display: flex;
-
+    margin-top: 20px;
+    height: 80px;
+    position: relative;
+    border: 2px solid rgb(222, 184, 135);
+    border-radius: 50px;
 }
 
-.item img {
+.item img:first-child {
     width: 80px;
     height: 80px;
-    border-radius: 30px;
+    border-radius: 50px;
 }
 
-.likes {
-    padding-top: 59px;
+.item img:nth-of-type(2n) {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 30px;
+    bottom: 5px;
+}
+
+.item img:nth-of-type(2n):hover {
+opacity: .8;
+}
+
+.item span {
+    position: absolute;
+    right: 55px;
+    bottom: 5px;
+}
+
+.item p {
+    position:absolute;
+    left: 85px;
 }

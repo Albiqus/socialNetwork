@@ -4,11 +4,10 @@ import classes from'./Post.module.css';
 const Post = (props) => {
     return (
         <div className={classes.item}>
-             <img src='https://yt3.ggpht.com/a/AATXAJwjgvDlC7WK-tiqkQw3F78gsspikGg4jiun1JMI=s900-c-k-c0xffffffff-no-rj-mo' alt='фото пользователя'></img>
+            <img src='img/andrew.jpg' alt='фото пользователя'></img>
             <p>{props.message}</p>
-            <div className={classes.likes}>
-                <span>Like {props.likeCount}</span>
-            </div>
+            <img src='img/like.png' alt='лайк'></img>
+            <span>{props.likeCount}</span>
         </div>
     )
 }

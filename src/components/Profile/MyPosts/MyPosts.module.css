@@ -1,0 +1,13 @@
+.box{
+    position: relative;
+}
+
+.MyPostsBlock {
+width: 550px;
+position: absolute;
+right: 0;
+}
+
+.MyPostsBlock h1{
+font-size: 20px;
+}

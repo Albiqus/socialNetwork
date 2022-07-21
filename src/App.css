@@ -6,7 +6,7 @@ width: 1000px;
 grid-template-areas:
 "header header"
 "nav content";
-  grid-template-rows: 220px 500px;
+  grid-template-rows: 220px 700px;
   grid-template-columns: 2fr 10fr;
 }
 
