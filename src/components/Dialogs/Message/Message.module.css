@@ -1,0 +1,14 @@
+
+.messageBlock {
+margin-top: 20px;
+margin-left: 20px;
+}
+
+.messageText {
+height: 40px;
+width: 400px;
+font-size: 18px;
+border-radius: 10px;
+outline: 3px solid rgb(222, 184, 135);
+}
+

@@ -5,8 +5,7 @@ padding-left: 20px;
 text-decoration: none;
 position: relative;
 display: flex;
-position: relative;
-margin-top: 15px;
+margin-bottom: 30px;
 }
 
 .dialog img {
@@ -15,3 +14,6 @@ margin-top: 15px;
     border-radius: 30px;
 }
 
+.dialog p {
+padding-left: 10px;
+}

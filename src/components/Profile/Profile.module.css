@@ -1,6 +1,7 @@
-.profile {
-margin: 10px;
-}
+/* .profileBlock {
+    grid-area: content;
+    background-color: rgb(222, 184, 135);
+} */
 
 .box {
 display: flex;

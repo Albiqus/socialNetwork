@@ -8,7 +8,7 @@ import { Description } from './Description/Description';
 
 const Profile = () => {
     return (
-        <div className={classes.profile}>
+        <div className={classes.profileBlock}>
         <BackgroundImage/>
         <div className={classes.box}>
         <Avatar/>

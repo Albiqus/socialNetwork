@@ -3,7 +3,7 @@ import classes from './Nav.module.css';
 
 const Nav = () => {
     return (
-        <nav className={classes.nav}>
+        <div className={classes.nav}>
             <div className={classes.nav2}>
                 <div><NavLink className={classes.item} to='/profile'>Профиль</NavLink></div>
                 <div><NavLink className={classes.item} to='/dialogs'>Сообщения</NavLink></div>
@@ -11,7 +11,7 @@ const Nav = () => {
                 <div><NavLink className={classes.item} to='#s'>Музыка</NavLink></div>
                 <div><NavLink className={classes.item} to='#s'>Настройки</NavLink></div>
             </div>
-        </nav>
+        </div>
     )
 }
 

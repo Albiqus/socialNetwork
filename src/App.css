@@ -5,14 +5,16 @@ display: grid;
 width: 1000px;
 grid-template-areas:
 "header header"
-"nav content";
-  grid-template-rows: 220px 700px;
+"nav content"
+"nav footer";
+  grid-template-rows: 210px 1500px 100px;
   grid-template-columns: 2fr 10fr;
 }
 
 
 .app-wrapper-content{
 grid-area: content;
+margin: 10px;
 }
 
 

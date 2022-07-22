@@ -10,12 +10,14 @@ position: absolute;
 right: 0;
 width: 544px;
 border-radius: 20px;
-text-align: center
+text-align: center;
+font-size: 18px;
 }
 
 .newpostBlock button{
-width: 100px;
-height: 30px;
+    font-size: 18px;
+width: 130px;
+height: 40px;
 position: absolute;
 margin: auto;
 top: 60%; left: 0; bottom: 0; right: 0;
