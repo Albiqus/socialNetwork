@@ -1,24 +1,25 @@
 
 import classes from './Dialogs.module.css';
 import { Dialog } from './Dialog/Dialog';
-import { Message } from './Message/Message';
+// import { Message } from './Message/Message';
+import { dataOfDialogs } from '../MockData/MockData.js'
 
 
 const Dialogs = () => {
     return (
         <div className={classes.dialogs}>
             <div>
-                <Dialog name='Григорий' id='grigory' src='img/grigory.jpg'/>
-                <Dialog name='Дмитрий' id='dmitry' src='img/dmitry.jpg'/>
-                <Dialog name='Даша' id='dasha' src='img/dasha.jpg'/>
-                <Dialog name='Никита' id='nikita' src='img/nikita.jpg' />
-                <Dialog name='Юля' id='jula' src='img/jula.jpg' />
-                <Dialog name='Наташа' id='natasha' src='img/natasha.jpg' />
+                <Dialog name={dataOfDialogs[0].name} id={dataOfDialogs[0].id} src={dataOfDialogs[0].src} />
+                <Dialog name={dataOfDialogs[1].name} id={dataOfDialogs[1].id} src={dataOfDialogs[1].src} />
+                <Dialog name={dataOfDialogs[2].name} id={dataOfDialogs[2].id} src={dataOfDialogs[2].src} />
+                <Dialog name={dataOfDialogs[3].name} id={dataOfDialogs[3].id} src={dataOfDialogs[3].src} />
+                <Dialog name={dataOfDialogs[4].name} id={dataOfDialogs[4].id} src={dataOfDialogs[4].src} />
+                <Dialog name={dataOfDialogs[5].name} id={dataOfDialogs[5].id} src={dataOfDialogs[5].src} />
             </div>
             <div className={classes.messageBlock}>
-                <Message message='Привет'/>
+                {/* <Message message='Привет'/>
                 <Message message='Есть косарь в долг?' />
-                <Message message='Верну через неделю' />
+                <Message message='Верну через неделю' /> */}
             </div>
         </div>
     )
