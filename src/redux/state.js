@@ -1,5 +1,34 @@
 
 const state = {
+
+     profilePage: {
+         userData: {
+             name: 'Андрей Постулчан',
+             birthday: '10 февраля',
+             city: 'Курган',
+             maritalStatus: 'Женат'
+         },
+
+         dataOfPosts: [{
+                 message: 'наконец починил шкаф!',
+                 likeCount: '4'
+             },
+
+             {
+                 message: 'Жду новый сезон глухаря',
+                 likeCount: '1'
+             },
+
+             {
+                 message: 'Михалыч поймал рыбу ВО ДАЁТ',
+                 likeCount: '7'
+             },
+             {
+                 message: 'выпил пивка заебись!',
+                 likeCount: '30'
+             },
+         ]
+    },
     
      dialogsPage: {
          dataOfDialogs: [{
@@ -75,35 +104,6 @@ const state = {
              }
          ]
     },
-    
-    profilePage: {
-    userData: {
-            name: 'Андрей Постулчан',
-            birthday: '10 февраля',
-            city: 'Курган',
-            maritalStatus: 'Женат'
-        },
-
-        dataOfPosts: [{
-                message: 'наконец починил шкаф!',
-                likeCount: '4'
-            },
-
-            {
-                message: 'Жду новый сезон глухаря',
-                likeCount: '1'
-            },
-
-            {
-                message: 'Михалыч поймал рыбу ВО ДАЁТ',
-                likeCount: '7'
-            },
-            {
-                message: 'выпил пивка заебись!',
-                likeCount: '30'
-            },
-        ]
-    }
     
 }
 

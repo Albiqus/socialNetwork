@@ -1,7 +1,8 @@
 
 import classes from './Dialogs.module.css';
 import { DialogItem } from './Dialog/DialogItem';
-import { Message } from './Message/Message';
+// import { Message } from './Message/Message';
+
 
 
 const Dialogs = (props) => {
@@ -12,9 +13,9 @@ const Dialogs = (props) => {
                 {dialogElements}
             </div>
             <div className={classes.messageBlock}>
-                <Message message='Привет'/>
+                {/* <Message message='Привет'/>
                 <Message message='Есть косарь в долг?' />
-                <Message message='Верну через неделю' />
+                <Message message='Верну через неделю' /> */}
             </div>
         </div>
     )
