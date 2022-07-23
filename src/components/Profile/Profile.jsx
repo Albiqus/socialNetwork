@@ -6,15 +6,15 @@ import { Description } from './Description/Description';
 
 
 
-const Profile = () => {
+const Profile = (props) => {
     return (
         <div className={classes.profileBlock}>
         <BackgroundImage/>
         <div className={classes.box}>
         <Avatar/>
-        <Description/>
+        <Description userData={props.profilePage.userData}/>
         </div>
-        <MyPosts/>
+            <MyPosts dataOfPosts={props.profilePage.dataOfPosts}/>
         </div>
     )
 }
