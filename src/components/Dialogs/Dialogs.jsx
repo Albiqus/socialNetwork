@@ -1,7 +1,8 @@
 
+
 import classes from './Dialogs.module.css';
 import { DialogItem } from './Dialog/DialogItem';
-// import { Message } from './Message/Message';
+import { Message } from './Message/Message';
 
 
 
@@ -12,10 +13,13 @@ const Dialogs = (props) => {
             <div>
                 {dialogElements}
             </div>
-            <div className={classes.messageBlock}>
-                {/* <Message message='Привет'/>
-                <Message message='Есть косарь в долг?' />
-                <Message message='Верну через неделю' /> */}
+            <div className={classes.messagesBlock}>
+                <h1>{props.dialogsPage.dataOfDialogs[0].name}</h1>
+                <div className={classes.messages}>
+                <Message message={props.dialogsPage.dataOfDialogs[0].messages[0]} src={props.dialogsPage.dataOfDialogs[0].src}/>
+                <Message message={props.dialogsPage.dataOfDialogs[0].messages[1]} src={props.dialogsPage.dataOfDialogs[0].src}/>
+                <Message message={props.dialogsPage.dataOfDialogs[0].messages[2]} src={props.dialogsPage.dataOfDialogs[0].src}/>
+                </div>
             </div>
         </div>
     )

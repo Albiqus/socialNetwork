@@ -5,7 +5,7 @@
     margin-top: 20px;
     height: 80px;
     position: relative;
-    border: 2px solid rgb(222, 184, 135);
+    border: 1px solid rgb(93, 93, 93);
     border-radius: 50px;
 }
 
@@ -13,6 +13,8 @@
     width: 80px;
     height: 80px;
     border-radius: 50px;
+    outline: 4px solid rgb(93, 93, 93);
+
 }
 
 .item img:nth-of-type(2n) {

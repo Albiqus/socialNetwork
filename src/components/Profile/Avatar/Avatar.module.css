@@ -1,6 +1,11 @@
-.box{
+.avatarBlock{
+    grid-area: avatar;
+}
+
+.avatarBlock img{
     margin-top: 20px;
     width: 250px;
     height: 250px;
+    border-radius: 125px;
     font-size: 0;
 }

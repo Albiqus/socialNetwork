@@ -1,8 +1,9 @@
-/* .profileBlock {
-    grid-area: content;
-    background-color: rgb(222, 184, 135);
-} */
-
-.box {
-display: flex;
+.profileBlock {
+display: grid;
+grid-template-areas:
+"back back"
+"avatar description"
+"friends posts";
+grid-template-rows: 255px 1fr 1000px;
+grid-template-columns: 260px 1fr;
 }

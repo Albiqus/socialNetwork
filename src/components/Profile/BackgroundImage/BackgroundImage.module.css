@@ -1,7 +1,8 @@
-.box {
+.BackgroundImageBlock {
+    grid-area: back;
     font-size: 0;
 }
 
-.box img{
-    width: 820px;
+.BackgroundImageBlock img{
+    width: 813px;
 }

@@ -1,15 +1,8 @@
-.myPostsBlock{
-    margin-top: 20px;
-    position: relative;
-}
-
-.MyPostsHeader {
-position: absolute;
-right: 0;
-}
-
-.MyPostsBlock h1{
-font-size: 20px;
+.MyFriendsBlock {
+margin-top: 20px;
+width: 250px;
+height: 470px;
+font-size: 16px;
 }
 
 .header{
@@ -28,7 +21,11 @@ font-size: 20px;
   text-decoration: none;
   padding-left: 30px;
 }
-
 .navLink:hover {
     color: #5265f6;
+}
+
+.MyFriendsBlock aside{
+  outline: 1px solid rgb(93, 93, 93);
+  border-radius: 20px;
 }
