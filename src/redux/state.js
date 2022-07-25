@@ -1,3 +1,4 @@
+import { rerender } from "../render";
 
 const state = {
 
@@ -30,37 +31,37 @@ const state = {
          ],
 
          dataOfFriends:[{
-            name: 'Гриня Смирнов',
+            name: 'Гриня',
             id: '1',
             src: 'img/1.jpg',
          }, 
          
          {
-            name: 'Дмитрий Краснов',
+            name: 'Дмитрий',
             id: '2',
             src: 'img/2.jpg'
         },
         
         {
-            name: 'Дашунчик Ковалёва',
+            name: 'Дашунчик',
             id: '3',
             src: 'img/3.jpg',
         }, 
 
         {
-            name: 'Арсен Тадитян ',
+            name: 'Арсен',
             id: '4',
             src: 'img/4.jpg',
         },
         
         {
-            name: 'Юлия Вдовина',
+            name: 'Юлия',
             id: '5',
             src: 'img/5.jpg',
         },
         
         {
-            name: 'Наташа Фирсова',
+            name: 'Наташа',
             id: '6',
             src: 'img/6.jpg',
         }]
@@ -71,48 +72,67 @@ const state = {
                  name: 'Гриня Смирнов',
                  id: '1',
                  src: 'img/1.jpg',
-                 messages: ['Привет', 'Есть косарь в долг?', 'В среду отдам']
              },
 
              {
                  name: 'Дмитрий Краснов',
                  id: '2',
                  src: 'img/2.jpg',
-                 messages: ['Здарова', 'Не хочешь в буолинг сгонять?']
              },
 
              {
                  name: 'Дашунчик Ковалёва',
                  id: '3',
                  src: 'img/3.jpg',
-                 messages: ['Привет, Дима с тобой?', 'он сказал, что к тебе пошёл', 'но мне кажется, что со шмарами тусуется своими']
              },
 
              {
                  name: 'Арсен Тадитян ',
                  id: '4',
                  src: 'img/4.jpg',
-                 messages: ['Не спрашивал у Сани, ко скольки нам идти?']
              },
 
              {
                  name: 'Юлия Вдовина',
                  id: '5',
                  src: 'img/5.jpg',
-                 messages: ['Приииииивет Андрей', 'Как дела?', 'Что делаешь?))']
              },
 
              {
                  name: 'Наташа Фирсова',
                  id: '6',
                  src: 'img/6.jpg',
-                 messages: ['вы где', 'я в машине, заехала во двор', 'ауууу']
              }
+         ],
+         dataOfMessages: [
+          {
+            id: 1,
+            message: 'Привет'
+          },
+
+          {
+            id: 2,
+            message: 'Как дела?'
+          }, 
+          {
+            id: 3,
+            message: 'Чё делаешь?'
+          }
          ]
-    },
+    }
     
 }
 
+const addPost = (postMessage) => {
+    const newPost = {
+        message: postMessage,
+        likeCount: '0' 
+    };
+    state.profilePage.dataOfPosts.push(newPost)
+    rerender(state)
+}
+
+export {addPost}
 
 export {
     state

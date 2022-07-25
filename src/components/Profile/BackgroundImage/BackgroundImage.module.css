@@ -4,5 +4,6 @@
 }
 
 .BackgroundImageBlock img{
-    width: 813px;
+    width: 830px;
+    border-radius: 20px;
 }

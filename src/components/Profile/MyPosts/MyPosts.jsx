@@ -8,7 +8,7 @@ const MyPosts = (props) => {
     return (
         <div className={classes.myPostsBlock}>
             <div className={classes.header}><NavLink className={classes.navLink} to='/posts'>Мои посты</NavLink></div>
-            <NewPost/>
+            <NewPost addPost={props.addPost}/>
             {postElements}
         </div>
     )

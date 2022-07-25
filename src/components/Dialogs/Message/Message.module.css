@@ -9,7 +9,7 @@ display: flex;
 padding-top: 4px;
 font-size: 18px;
 border-radius: 10px;
-outline: 2px solid rgb(222, 184, 135);
+outline: 1px solid rgb(93, 93, 93);
 margin: 0;
 }
 
@@ -18,4 +18,5 @@ margin: 0;
     width: 40px;
     height: 40px;
     border-radius: 20px;
+    outline: 1px solid rgb(93, 93, 93);
 }

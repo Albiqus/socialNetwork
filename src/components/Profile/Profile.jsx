@@ -14,7 +14,7 @@ const Profile = (props) => {
         <Avatar/>
         <Description userData={props.profilePage.userData}/>
         <MyFriends dataOfFriends={props.profilePage.dataOfFriends}/>
-        <MyPosts dataOfPosts={props.profilePage.dataOfPosts}/>
+        <MyPosts dataOfPosts={props.profilePage.dataOfPosts} addPost={props.addPost}/>
         </div>
     )
 }
