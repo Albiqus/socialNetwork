@@ -1,6 +1,37 @@
 .profile {
+    display: flex;
     margin-left: 10px;
     background-color: rgb(158, 158, 158);
-    width: 800px;
+    width: 700px;
     height: 500px;
 }
+
+.avatar{
+    height: 200px;
+    width: 200px;
+    background-image: url(../../../public/incognito/incognito.png);
+    background-color: rgb(136, 136, 136);
+}
+
+.infoBox {
+    width: 500px;
+}
+
+.name {
+    margin: 0;
+    margin-top: 10px;
+    margin-left: 20px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.status {
+    margin: 0;
+    margin-left: 20px;
+    font-style: italic;
+}
+
+.mainInfo p{
+    margin-left: 20px;
+}
+

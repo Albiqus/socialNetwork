@@ -1,0 +1,11 @@
+user {
+id: 1,
+name: 'Альберт Рахманкулов', 
+status: 'Йоу',  (не обяз)
+city: 'Сертолово', (не обяз)
+age: '24', (не обяз)
+marital status: 'unmarried', (не обяз)
+phone: '89992354738', (не обяз)
+email: 'albiqus@bk.ru', 
+password: 'mypassword'
+}

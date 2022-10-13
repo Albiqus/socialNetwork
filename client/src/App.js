@@ -1,12 +1,12 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import { Header } from './components/Header/Header';
-import { Login } from './components/Login/Login';
-import { Messages } from './components/Messages/Messages';
 import { Nav } from './components/Nav/Nav';
-import { Profile } from './components/Profile/Profile';
-import { Settings } from './components/Settings/Settings';
-import { Users } from './components/Users/Users';
+import { Login } from './components/Login/Login';
+import  Messages  from './components/Messages/Messages';
+import Profile  from './components/Profile/Profile';
+import  Settings  from './components/Settings/Settings';
+import  Users from './components/Users/Users';
 
 function App() {
     return (
