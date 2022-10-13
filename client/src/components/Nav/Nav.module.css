@@ -1,0 +1,24 @@
+.navBox {
+    margin-right: 10px;
+    background-color: rgb(136, 136, 136);
+    width: 200px;
+    height: 500px;
+}
+
+.navBox a {
+    font-size: 20px;
+    font-weight:lighter;
+    line-height: 1.5;
+    text-align: center;
+    color: rgb(224, 224, 224);
+    display: block;
+    text-decoration: none;
+}
+
+.navBox a:hover {
+background-color: rgba(0, 0, 0, 0.1)
+}
+
+.nav{
+    margin-top: 20px;
+}
