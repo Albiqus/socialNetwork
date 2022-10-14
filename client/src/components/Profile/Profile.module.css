@@ -4,6 +4,7 @@
     background-color: rgb(158, 158, 158);
     width: 700px;
     height: 500px;
+    border-radius: 10px 10px 10px 10px;
 }
 
 .avatar{
@@ -11,6 +12,7 @@
     width: 200px;
     background-image: url(../../../public/incognito/incognito.png);
     background-color: rgb(136, 136, 136);
+    border-radius: 10px 10px 10px 10px;
 }
 
 .infoBox {

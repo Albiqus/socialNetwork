@@ -3,7 +3,8 @@ const SET_SOMETHING = 'SET_SOMETHING'
 const startState = {
     profile: {
         id: 1,
-        name: 'Альберт Рахманкулов',
+        firstName: 'Альберт',
+        lastName: 'Рахманкулов',
         status: 'Йоу',
         dateOfBirthday: '10.08.1998',
         maritalStatus: 'Не женат',

@@ -8,7 +8,7 @@ export const Profile = (props) => {
         <div className={classes.profile}>
             <div className={classes.avatar}></div>
             <div className={classes.infoBox}>
-                <p className={classes.name}>{props.profile.name}</p>
+                <p className={classes.name}>{props.profile.firstName} {props.profile.lastName}</p>
                 <p className={classes.status}>{props.profile.status}</p>
                 <div className={classes.mainInfo}>
                     <p>Город: {props.profile.city}</p>

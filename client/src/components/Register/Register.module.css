@@ -1,0 +1,98 @@
+.login {
+    margin-left: 10px;
+    background-color: rgb(158, 158, 158);
+    width: 700px;
+    height: 700px;
+    border-radius: 10px 10px 10px 10px;
+    position: relative;
+}
+
+.header {
+    margin: 0;
+    margin-top: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+
+form {
+    margin: 0 auto;
+    margin-top: 30px;
+    width: 200px;
+    
+}
+
+label {
+    display: block;
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+input {
+    font-size: 20px;
+    width: 200px;
+    height: 30px;
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+    background-color: rgb(136, 136, 136);
+}
+
+input::placeholder{
+    color: rgba(0, 0, 0, 0.3)
+}
+
+button {
+    margin: 0 auto;
+    margin-top: 30px;
+    font-size: 20px;
+    width: 200px;
+    height: 40px;
+    background-color: rgb(136, 136, 136);
+    border: none;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.description {
+    position: absolute;
+    text-align: center;
+    bottom: 20px;
+    left: 230px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.error {
+    right: 100px;
+    text-align: center;
+    position: absolute;
+    width: 500px;
+    margin: 0;
+    color: red;
+}
+
+.passwordLevel{
+    width: 200px;
+    height: 10px;
+}
+
+.empty {
+    background-image: url(../../../public/password_strength/empty.png);
+}
+
+.low {
+    background-image: url(../../../public/password_strength/low.png);
+}
+
+.average {
+    background-image: url(../../../public/password_strength/average.png);
+}
+
+.strong {
+    background-image: url(../../../public/password_strength/strong.png);
+}

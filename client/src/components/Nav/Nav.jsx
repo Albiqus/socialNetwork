@@ -9,7 +9,7 @@ export const Nav = () => {
             <NavLink to='/messages'>Сообщения</NavLink>
             <NavLink to='/users'>Пользователи</NavLink>
             <NavLink to='/settings'>Настройки</NavLink>
-            <NavLink to='/login'>Логин</NavLink>
+            <NavLink to='/login'>Выход</NavLink>
             </div>
         </div>
     )
