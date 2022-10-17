@@ -3,7 +3,6 @@ import {
     MIN_FIRST_NAME_LENGTH,
     MIN_LAST_NAME_LENGTH,
     MIN_PASSWORD_LENGTH,
-    PHONE_LENGTH,
     REGISTRATION_ERRORS
 } from "../data/data";
 
@@ -24,11 +23,11 @@ const validateLastName = (lastName) => {
         return (REGISTRATION_ERRORS.lastName.invalidSymbolsAmount)
     }
 }
-const validatePhone = (phone) => {
-    if (phone.length !== PHONE_LENGTH && phone.length !== 0) {
-        return (REGISTRATION_ERRORS.phone.invalidSymbolsAmount)
-    }
-}
+// const validatePhone = (phone) => {
+//     if (phone.length !== PHONE_LENGTH && phone.length !== 0) {
+//         return (REGISTRATION_ERRORS.phone.invalidSymbolsAmount)
+//     }
+// }
 const validateEmail = (email) => {
     let emailSymbols = email.split('')
     if (emailSymbols.length === 0) {
@@ -41,7 +40,7 @@ const validateEmail = (email) => {
     if (lastEmailSymbol === '.' || lastEmailSymbol === '@' || lastEmailSymbol === '-' || lastEmailSymbol === '_') {
         return (REGISTRATION_ERRORS.email.invalidFormat)
     }
-    if (emailSymbols.filter(symbol => symbol === '.' || symbol === '@').length > 2) {
+    if (emailSymbols.filter(symbol => symbol === '@').length > 1) {
         return (REGISTRATION_ERRORS.email.invalidFormat)
     }
 }
@@ -74,22 +73,20 @@ const validatePassword = (password, secondPassword) => {
     }
 }
 
-export const validate = (firstName, lastName, phone, email, password, secondPassword) => {
+export const validate = (firstName, lastName, email, password, secondPassword) => {
     const firstNameError = validateFirstName(firstName)
     const lastNameError = validateLastName(lastName)
-    const phoneError = validatePhone(phone)
     const emailError = validateEmail(email)
     const passwordError = validatePassword(password, secondPassword)
 
     let errorStatus = true
-    if (!firstNameError && !lastNameError && !phoneError && !emailError && !passwordError) {
+    if (!firstNameError && !lastNameError && !emailError && !passwordError) {
         errorStatus = false
     }
 
     return ({
         firstNameError,
         lastNameError,
-        phoneError,
         emailError,
         passwordError,
         errorStatus

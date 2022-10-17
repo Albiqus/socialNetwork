@@ -22,7 +22,7 @@ function App() {
             <Route path='/messages' element={<Messages/>}/> 
             <Route path='/users' element={<Users/>}/> 
             <Route path='/settings' element={<Settings />} />
-            <Route path='/register' element={<Register/>}/> 
+            <Route path='/register' element={<Register/>}/>
             </Routes>
           </div>
     </div>

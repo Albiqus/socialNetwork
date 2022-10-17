@@ -15,20 +15,20 @@
     text-align: center;
 }
 
-form {
+.login form {
     margin: 0 auto;
     margin-top: 30px;
     height: 200px;
     width: 200px;
 }
 
-label {
+.login label {
     display: block;
     margin-top: 10px;
     font-size: 20px;
 }
 
-input {
+.login input {
     font-size: 20px;
     width: 200px;
     height: 30px;
@@ -40,7 +40,7 @@ input {
 
 
 
-button {
+ .login button {
     margin: 0 auto;
     margin-top: 20px;
     font-size: 20px;
@@ -50,7 +50,7 @@ button {
     border: none;
 }
 
-button:hover{
+.login button:hover {
 cursor: pointer;
 }
 
@@ -61,6 +61,6 @@ cursor: pointer;
      left: 210px;
 }
 
-a {
+ .login a {
     text-decoration: none;
 }

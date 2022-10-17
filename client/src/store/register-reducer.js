@@ -5,9 +5,11 @@ const SET_PHONE = 'SET_PHONE'
 const SET_EMAIL = 'SET_EMAIL'
 const SET_PASSWORD = 'SET_PASSWORD'
 const SET_SECOND_PASSWORD = 'SET_SECOND_PASSWORD'
-
+const SET_CURRENT_STEP = 'SET_CURRENT_STEP'
 
 const startState = {
+    currentStep: 1,
+
     firstName: '',
     lastName: '',
     phone: '',
@@ -15,10 +17,12 @@ const startState = {
     password: '',
     secondPassword: '',
 
+    contry: '',
+
+
     errors: {
         firstNameError: null,
         lastNameError: null,
-        phoneError: null,
         emailError: null,
         passwordError: null
     }
@@ -27,13 +31,18 @@ const startState = {
 
 export const registerReducer = (state = startState, action) => {
     switch (action.type) {
+        case SET_CURRENT_STEP: {
+            return {
+                ...state,
+                currentStep: action.currentStep
+            }
+        }
         case SET_ERRORS: {
             return {
                 ...state,
                 errors: {
                     firstNameError: action.errors.firstNameError,
                     lastNameError: action.errors.lastNameError,
-                    phoneError: action.errors.phoneError,
                     emailError: action.errors.emailError,
                     passwordError: action.errors.passwordError
                 }
@@ -79,6 +88,13 @@ export const registerReducer = (state = startState, action) => {
             return state;
     }
 }
+
+
+
+export const setCurrentStep = (currentStep) => ({
+    type: SET_CURRENT_STEP,
+    currentStep
+}) 
 
 export const setErrors = (errors) => ({
     type: SET_ERRORS,

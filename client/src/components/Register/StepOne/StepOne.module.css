@@ -1,0 +1,160 @@
+.stepOne {
+    margin-left: 10px;
+    background-color: rgb(158, 158, 158);
+    width: 700px;
+    height: 700px;
+    border-radius: 10px 10px 10px 10px;
+    position: relative;
+}
+
+.header {
+    margin: 0;
+    margin-top: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.currentStepHeader {
+    margin: 0;
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+}
+
+.stepOne form {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    margin: 0 auto;
+    width: 400px;
+    height: 510px;
+    position: relative;
+}
+
+.stepOne label {
+    width: 200px;
+    height: 30px;
+    margin: 0;
+    margin-left: 100px;
+    margin-top: 25px;
+    font-size: 20px;
+}
+
+.stepOne span {
+    color: red;
+}
+
+.stepOne input {
+    width: 200px;
+    height: 30px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    background-color: rgb(136, 136, 136);
+    font-size: 20px;
+}
+
+.stepOne input::placeholder {
+    color: rgba(0, 0, 0, 0.3)
+}
+
+.buttonBox {
+    width: 250px;
+    margin: 0 auto;
+}
+
+.stepOne button {
+    margin: 0 auto;
+    margin-top: 30px;
+    display: block;
+    width: 200px;
+    height: 30px;
+    font-size: 18px;
+    background-color: rgb(136, 136, 136);
+    border: none;
+    border-radius: 20px;
+}
+
+.stepOne button:hover {
+    cursor: pointer;
+}
+
+/* errors */
+
+.firstNameError {
+    position: absolute;
+    top: 85px;
+    color: red;
+    margin: 0;
+    width: 400px;
+    text-align: center;
+}
+
+.lastNameError {
+    position: absolute;
+    top: 170px;
+    color: red;
+    margin: 0;
+    width: 400px;
+    text-align: center;
+}
+
+.emailError {
+    position: absolute;
+    top: 255px;
+    color: red;
+    margin: 0;
+    width: 400px;
+    text-align: center;
+}
+
+.passwordError {
+    position: absolute;
+    top: 340px;
+    color: red;
+    margin: 0;
+    width: 400px;
+    text-align: center;
+}
+
+.secondPasswordError {
+    position: absolute;
+    top: 425px;
+    color: red;
+    margin: 0;
+    width: 400px;
+    text-align: center;
+}
+
+
+.description {
+    margin: 0;
+    text-align: center;
+}
+
+/* 
+
+
+/* .passwordLevel {
+    width: 200px;
+    height: 10px;
+} */
+
+/* .empty {
+    background-image: url(../../../../public/password_strength/empty.png);
+}
+
+.low {
+    background-image: url(../../../../public/password_strength/low.png);
+}
+
+.average {
+    background-image: url(../../../../public/password_strength/average.png);
+}
+
+.strong {
+    background-image: url(../../../../public/password_strength/strong.png);
+} */
