@@ -1,7 +1,7 @@
 const SET_SOMETHING = 'SET_SOMETHING'
 
 const startState = {
-    isAuth: true
+    isAuth: false
 }
 
 

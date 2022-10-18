@@ -28,16 +28,16 @@
     flex-wrap: wrap;
     align-content: flex-start;
     margin: 0 auto;
-    width: 400px;
+    width: 500px;
     height: 510px;
     position: relative;
 }
 
 .stepOne label {
-    width: 200px;
+    width: 300px;
     height: 30px;
     margin: 0;
-    margin-left: 100px;
+    margin-left: 150px;
     margin-top: 25px;
     font-size: 20px;
 }
@@ -62,13 +62,13 @@
 }
 
 .buttonBox {
-    width: 250px;
+    width: 500px;
     margin: 0 auto;
 }
 
 .stepOne button {
     margin: 0 auto;
-    margin-top: 30px;
+    margin-top: 40px;
     display: block;
     width: 200px;
     height: 30px;
@@ -82,68 +82,56 @@
     cursor: pointer;
 }
 
+.description {
+    margin: 0;
+    margin-top: 20px;
+    text-align: center;
+}
+
 /* errors */
 
-.firstNameError {
+.error {
     position: absolute;
-    top: 85px;
     color: red;
     margin: 0;
-    width: 400px;
+    width: 500px;
     text-align: center;
+}
+
+.firstNameError {
+    top: 85px;
 }
 
 .lastNameError {
-    position: absolute;
     top: 170px;
-    color: red;
-    margin: 0;
-    width: 400px;
-    text-align: center;
 }
 
 .emailError {
-    position: absolute;
     top: 255px;
-    color: red;
-    margin: 0;
-    width: 400px;
-    text-align: center;
 }
 
 .passwordError {
-    position: absolute;
-    top: 340px;
-    color: red;
-    margin: 0;
-    width: 400px;
-    text-align: center;
+    top: 350px;
 }
 
 .secondPasswordError {
-    position: absolute;
-    top: 425px;
-    color: red;
-    margin: 0;
-    width: 400px;
-    text-align: center;
+    top: 435px;
 }
 
+/* password level */
 
-.description {
-    margin: 0;
-    text-align: center;
+
+.passwordLevelBox {
+    width: 500px;
 }
 
-/* 
-
-
-/* .passwordLevel {
+.passwordLevel {
+    margin: 0 auto;
     width: 200px;
     height: 10px;
-} */
+}
 
-/* .empty {
+.empty {
     background-image: url(../../../../public/password_strength/empty.png);
 }
 
@@ -157,4 +145,4 @@
 
 .strong {
     background-image: url(../../../../public/password_strength/strong.png);
-} */
+}

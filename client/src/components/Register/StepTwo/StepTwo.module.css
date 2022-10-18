@@ -1,0 +1,165 @@
+.stepTwo {
+    margin-left: 10px;
+    background-color: rgb(158, 158, 158);
+    width: 700px;
+    height: 800px;
+    border-radius: 10px 10px 10px 10px;
+    position: relative;
+}
+
+.header {
+    margin: 0;
+    margin-top: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.currentStepHeader {
+    margin: 0;
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+}
+
+.stepTwo form {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    margin: 0 auto;
+    width: 500px;
+    height: 510px;
+    position: relative;
+}
+
+.stepTwo label {
+    width: 300px;
+    height: 30px;
+    margin: 0;
+    margin-left: 150px;
+    margin-top: 25px;
+    font-size: 20px;
+}
+
+.stepTwo span {
+    color: red;
+}
+
+.stepTwo input {
+    width: 200px;
+    height: 30px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    background-color: rgb(136, 136, 136);
+    font-size: 20px;
+}
+
+.stepTwo input::placeholder {
+    color: rgba(0, 0, 0, 0.3)
+}
+
+.buttonBox {
+    display: flex;
+    width: 500px;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.stepTwo button {
+    margin: 0 auto;
+    margin-top: 20px;
+    display: block;
+    width: 200px;
+    height: 30px;
+    font-size: 18px;
+    background-color: rgb(136, 136, 136);
+    border: none;
+    border-radius: 20px;
+}
+
+.stepTwo button:hover {
+    cursor: pointer;
+}
+
+.description {
+    margin: 0;
+    margin-top: 130px;
+    text-align: center;
+}
+
+/* errors */
+
+.error {
+    position: absolute;
+    color: red;
+    margin: 0;
+    width: 500px;
+    text-align: center;
+}
+
+.countryError {
+    top: 85px;
+}
+
+.cityError {
+    top: 170px;
+}
+
+.phoneError {
+    top: 255px;
+}
+
+.genderError {
+    top: 440px;
+}
+
+.maritalStatusError {
+    top: 540px;
+}
+
+/* радио */
+
+.radioBox {
+    margin-left: 150px;
+    margin-top: 10px;
+    display: flex;
+    width: 650px;
+    height: 40px;
+}
+
+.radioBox label {
+    width: 120px;
+    height: 30px;
+    margin: 0;
+    margin-left: 5px;
+    font-size: 20px;
+}
+
+.radioBox label:hover {
+    cursor: pointer;
+}
+
+.radio {
+    display: flex;
+    background-color: rgb(109, 109, 109);
+    margin-top: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+}
+
+.selected {
+    margin: 0 auto;
+    background-color: rgb(158, 158, 158);
+    margin-top: 5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+}
+
+.radio:hover {
+    cursor: pointer;
+}

@@ -7,12 +7,12 @@ export const Login = (props) => {
     return (
         <div className={classes.login}>
             <p className={classes.header}>Вход</p>
-                <form action="">
-                        <label for="">Логин</label>
+                <form>
+                        <label>Логин</label>
                         <input type="text" />
-                        <label for="">Пароль</label>
+                        <label>Пароль</label>
                         <input type="password" />
-                        <button type='submit'>Войти</button>
+                        <button>Войти</button>
                 </form>
             <p className={classes.description}>Нет учётной записи? <NavLink to='/register'>Зарегистрируйтесь</NavLink></p> 
         </div>

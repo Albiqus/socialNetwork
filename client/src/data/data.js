@@ -3,9 +3,13 @@ const MIN_FIRST_NAME_LENGTH = 2
 const MAX_LAST_NAME_LENGTH = 25;
 const MIN_LAST_NAME_LENGTH = 2
 const MAX_EMAIL_LENGTH = 30;
-const PHONE_LENGTH = 12;
 const MAX_PASSWORD_LENGTH = 30;
 const MIN_PASSWORD_LENGTH = 6;
+const MAX_COUNTRY_LENGTH = 20;
+const MIN_COUNTRY_LENGTH = 2
+const MAX_CITY_LENGTH = 30;
+const MIN_CITY_LENGTH = 2
+const PHONE_LENGTH = 12;
 
 const REGISTRATION_ERRORS = {
     firstName: {
@@ -15,9 +19,6 @@ const REGISTRATION_ERRORS = {
     lastName: {
         empty: 'Обязательное поле',
         invalidSymbolsAmount: 'Фамилия должна содержать минимум 2 символа'
-    },
-    phone: {
-        invalidSymbolsAmount: 'Телефон должен содержать 12 символов'
     },
     email: {
         empty: 'Обязательное поле',
@@ -30,7 +31,21 @@ const REGISTRATION_ERRORS = {
         lackOfNumbers: 'Пароль должен содержать минимум одну цифру',
         lackOfLetters: 'Пароль должен содержать минимум одну букву'
     },
-
+    country: {
+        invalidSymbolsAmount: 'Страна должна содержать минимум 2 символа'
+    },
+    city: {
+        invalidSymbolsAmount: 'Город должен содержать минимум 2 символа'
+    },
+    phone: {
+        invalidSymbolsAmount: 'Телефон должен содержать 12 символов'
+    },
+    gender: {
+        empty: 'Обязательное поле',
+    },
+    maritalStatus: {
+        empty: 'Обязательное поле',
+    }
 }
 
 export {
@@ -42,5 +57,9 @@ export {
     MAX_EMAIL_LENGTH,
     REGISTRATION_ERRORS,
     MAX_PASSWORD_LENGTH,
-    MIN_PASSWORD_LENGTH
+    MIN_PASSWORD_LENGTH,
+    MAX_COUNTRY_LENGTH,
+    MIN_COUNTRY_LENGTH,
+    MAX_CITY_LENGTH,
+    MIN_CITY_LENGTH
 }
