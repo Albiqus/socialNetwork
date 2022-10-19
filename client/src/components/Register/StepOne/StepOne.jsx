@@ -62,7 +62,7 @@ export const StepOne = (props) => {
 
     const onNextStepButtonClick = (e) => {
         e.preventDefault()
-        let errors = validate(props.data.firstName, props.data.lastName, props.data.email, props.data.password, props.data.secondPassword)
+        let errors = validate(props.userData.firstName, props.userData.lastName, props.userData.email, props.userData.password, props.userData.secondPassword)
         props.setFirstNameError(errors.firstNameError)
         props.setLastNameError(errors.lastNameError)
         props.setEmailError(errors.emailError)
@@ -75,7 +75,7 @@ export const StepOne = (props) => {
     return (
         <div className={classes.stepOne}>
             <p className={classes.header}>Регистрация</p>
-            <p className={classes.currentStepHeader} >Шаг {props.currentStep} из 2</p>
+            <p className={classes.currentStepHeader} >Шаг {props.currentStep} из 3</p>
             <form>
                 {props.firstNameError && <p className={`${classes.error} ${classes.firstNameError}`}>{props.firstNameError}</p>}
                 {props.lastNameError && <p className={`${classes.error} ${classes.lastNameError}`}>{props.lastNameError}</p>}
@@ -84,23 +84,23 @@ export const StepOne = (props) => {
                 {props.passwordError && <p className={`${classes.error} ${classes.secondPasswordError}`}> {props.passwordError}</p >}
 
                 <label>Имя<span title='обязательное поле'>*</span></label>
-                <input onChange={onFirstNameChange} value={props.data.firstName} placeholder='Иван' required></input>
+                <input onChange={onFirstNameChange} value={props.userData.firstName} placeholder='Иван' required></input>
 
                 <label>Фамилия<span title='обязательное поле'>*</span></label>
-                <input onChange={onLastNameChange} value={props.data.lastName} placeholder='Иванов' required></input>
+                <input onChange={onLastNameChange} value={props.userData.lastName} placeholder='Иванов' required></input>
 
                 <label>Почта<span title='обязательное поле'>*</span></label>
-                <input onChange={onEmailChange} value={props.data.email} placeholder='ivan123@email.com' required></input>
+                <input onChange={onEmailChange} value={props.userData.email} placeholder='ivan123@email.com' required></input>
 
                 <label>Пароль<span title='обязательное поле'>*</span></label>
-                <input onChange={onPasswordChange} value={props.data.password} type='password' required></input>
+                <input onChange={onPasswordChange} value={props.userData.password} type='password' required></input>
                 
                 <div className={classes.passwordLevelBox}>
                     <div className={passwordLevel}></div>
                 </div>
 
                 <label>Повторите пароль<span title='обязательное поле'>*</span></label>
-                <input onChange={onSecondPasswordChange} value={props.data.secondPassword} type='password' required></input>
+                <input onChange={onSecondPasswordChange} value={props.userData.secondPassword} type='password' required></input>
 
                 <div className={classes.buttonBox}>
                     <button onClick={onNextStepButtonClick}>Дальше</button>
@@ -114,7 +114,7 @@ export const StepOne = (props) => {
 const mapStateToProps = (state) => {
     return {
         currentStep: state.registerPage.currentStep,
-        data: state.registerPage.data,
+        userData: state.registerPage.userData,
         firstNameError: state.registerPage.firstNameError,
         lastNameError: state.registerPage.lastNameError,
         emailError: state.registerPage.emailError,

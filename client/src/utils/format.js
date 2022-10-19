@@ -4,6 +4,7 @@ import {
     MAX_EMAIL_LENGTH,
     MAX_FIRST_NAME_LENGTH,
     MAX_LAST_NAME_LENGTH,
+    MAX_SECRET_KEY_LENGTH,
     PHONE_LENGTH
 } from "../data/data";
 
@@ -16,25 +17,25 @@ export const format = (value, type) => {
         case 'last_name':
         case 'country':
         case 'city': {
-            let stringLength
+            let valueLength
             if (type === 'first_name') {
-                stringLength = MAX_FIRST_NAME_LENGTH
+                valueLength = MAX_FIRST_NAME_LENGTH
             }
             if (type === 'last_name') {
-                stringLength = MAX_LAST_NAME_LENGTH
+                valueLength = MAX_LAST_NAME_LENGTH
             }
             if (type === 'country') {
-                stringLength = MAX_COUNTRY_LENGTH
+                valueLength = MAX_COUNTRY_LENGTH
             }
-             if (type === 'city') {
-                 stringLength = MAX_CITY_LENGTH
-             }
+            if (type === 'city') {
+                valueLength = MAX_CITY_LENGTH
+            }
             for (let i = 0; i < value.length; i++) {
+                if (i === valueLength) {
+                    break
+                }
                 if (/^[A-ZА-ЯЁ]+$|^$/i.test(value[i])) {
                     i === 0 ? formattedValue += value[i].toUpperCase() : formattedValue += value[i].toLowerCase()
-                }
-                if (i === stringLength - 1) {
-                    break
                 }
             }
             return formattedValue
@@ -81,6 +82,18 @@ export const format = (value, type) => {
                 if (value[i] === '8' || value[i] === '7') {
                     formattedValue += '+7'
                 }
+            }
+            return formattedValue
+        }
+        case 'secretKey': {
+            for (let i = 0; i < value.length; i++) {
+                if (i === MAX_SECRET_KEY_LENGTH) {
+                    break
+                }
+                if (!/^[A-ZА-ЯЁ]+$|^$/i.test(value[i])) {
+                    continue
+                }
+                formattedValue += value[i]
             }
             return formattedValue
         }

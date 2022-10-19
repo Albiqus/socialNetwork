@@ -1,0 +1,123 @@
+.stepThree {
+    margin-left: 10px;
+    background-color: rgb(158, 158, 158);
+    width: 700px;
+    height: 550px;
+    border-radius: 10px 10px 10px 10px;
+    position: relative;
+}
+
+.header {
+    margin: 0;
+    margin-top: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.currentStepHeader {
+    margin: 0;
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+}
+
+.secretCodeHeader {
+    margin: 0;
+    margin-top: 20px;
+    font-size: 20px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.ulBox {
+    display: flex;
+    width: 700px;
+    margin-top: 30px;
+}
+
+.ulBox ul{
+    margin: 0 auto;
+}
+
+.stepThree form {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    margin: 0 auto;
+    width: 500px;
+    height: 190px;
+    position: relative;
+}
+
+.stepThree label {
+    width: 300px;
+    height: 30px;
+    margin: 0;
+    margin-left: 150px;
+    margin-top: 30px;
+    font-size: 20px;
+}
+
+.stepThree span {
+    color: red;
+}
+
+.stepThree input {
+    width: 200px;
+    height: 30px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    background-color: rgb(136, 136, 136);
+    font-size: 20px;
+}
+
+.stepThree input::placeholder {
+    color: rgba(0, 0, 0, 0.3)
+}
+
+.buttonBox {
+    display: flex;
+    width: 500px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.stepThree button {
+    margin: 0 auto;
+    margin-top: 20px;
+    display: block;
+    width: 200px;
+    height: 30px;
+    font-size: 18px;
+    background-color: rgb(136, 136, 136);
+    border: none;
+    border-radius: 20px;
+}
+
+.stepThree button:hover {
+    cursor: pointer;
+}
+
+.description {
+    margin: 0;
+    text-align: center;
+}
+
+/* errors */
+
+.error {
+    position: absolute;
+    color: red;
+    margin: 0;
+    width: 500px;
+    text-align: center;
+}
+
+.secretKeyError {
+    top: 95px;
+}
+

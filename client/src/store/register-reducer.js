@@ -9,23 +9,24 @@ const SET_CITY_ERROR = 'SET_CITY_ERROR'
 const SET_PHONE_ERROR = 'SET_PHONE_ERROR'
 const SET_GENDER_ERROR = 'SET_GENDER_ERROR'
 const SET_MARITAL_STATUS_ERROR = 'SET_MARITAL_STATUS_ERROR'
+const SET_SECRET_KEY_ERROR = 'SET_SECRET_KEY_ERROR'
 
 const SET_FIRST_NAME = 'SET_FIRST_NAME'
 const SET_LAST_NAME = 'SET_LAST_NAME'
 const SET_EMAIL = 'SET_EMAIL'
 const SET_PASSWORD = 'SET_PASSWORD'
 const SET_SECOND_PASSWORD = 'SET_SECOND_PASSWORD'
-
 const SET_COUNTRY = 'SET_COUNTRY'
 const SET_CITY = 'SET_CITY'
 const SET_PHONE = 'SET_PHONE'
 const SET_DATE_OF_BIRTH = 'SET_DATE_OF_BIRTH'
 const SET_GENDER = 'SET_GENDER'
 const SET_MARITAL_STATUS = 'SET_MARITAL_STATUS'
+const SET_SECRET_KEY = 'SET_SECRET_KEY'
 
 const startState = {
     currentStep: 1,
-    data: {
+    userData: {
         firstName: '',
         lastName: '',
         email: '',
@@ -38,6 +39,8 @@ const startState = {
         dateOfBirth: '',
         gender: '',
         maritalStatus: '',
+
+        secretKey: ''
     },
 
     firstNameError: null,
@@ -48,7 +51,8 @@ const startState = {
     cityError: null,
     phoneError: null,
     genderError: null,
-    maritalStatusError: null
+    maritalStatusError: null,
+    secretKeyError: null
 }
 
 
@@ -114,11 +118,17 @@ export const registerReducer = (state = startState, action) => {
                 maritalStatusError: action.error
             }
         }
+        case SET_SECRET_KEY_ERROR: {
+            return {
+                ...state,
+                secretKeyError: action.error
+            }
+        }
         case SET_FIRST_NAME: {
             return {
                 ...state,
-                data: {
-                    ...state.data,
+                userData: {
+                    ...state.userData,
                     firstName: action.firstName
                 }
             }
@@ -126,8 +136,8 @@ export const registerReducer = (state = startState, action) => {
         case SET_LAST_NAME: {
             return {
                 ...state,
-                data: {
-                    ...state.data,
+                userData: {
+                    ...state.userData,
                     lastName: action.lastName
                 }
             }
@@ -135,8 +145,8 @@ export const registerReducer = (state = startState, action) => {
         case SET_EMAIL: {
             return {
                 ...state,
-                data: {
-                    ...state.data,
+                userData: {
+                    ...state.userData,
                     email: action.email
                 }
             }
@@ -144,8 +154,8 @@ export const registerReducer = (state = startState, action) => {
         case SET_PASSWORD: {
             return {
                 ...state,
-                data: {
-                    ...state.data,
+                userData: {
+                    ...state.userData,
                     password: action.password
                 }
             }
@@ -153,8 +163,8 @@ export const registerReducer = (state = startState, action) => {
         case SET_SECOND_PASSWORD: {
             return {
                 ...state,
-                data: {
-                    ...state.data,
+                userData: {
+                    ...state.userData,
                     secondPassword: action.secondPassword
                 }
             }
@@ -162,8 +172,8 @@ export const registerReducer = (state = startState, action) => {
         case SET_COUNTRY: {
             return {
                 ...state,
-                data: {
-                    ...state.data,
+                userData: {
+                    ...state.userData,
                     country: action.country
                 }
             }
@@ -171,8 +181,8 @@ export const registerReducer = (state = startState, action) => {
         case SET_CITY: {
             return {
                 ...state,
-                data: {
-                    ...state.data,
+                userData: {
+                    ...state.userData,
                     city: action.city
                 }
             }
@@ -180,8 +190,8 @@ export const registerReducer = (state = startState, action) => {
         case SET_PHONE: {
             return {
                 ...state,
-                data: {
-                    ...state.data,
+                userData: {
+                    ...state.userData,
                     phone: action.phone
                 }
             }
@@ -189,8 +199,8 @@ export const registerReducer = (state = startState, action) => {
         case SET_DATE_OF_BIRTH: {
             return {
                 ...state,
-                data: {
-                    ...state.data,
+                userData: {
+                    ...state.userData,
                     dateOfBirth: action.dateOfBirth
                 }
             }
@@ -198,8 +208,8 @@ export const registerReducer = (state = startState, action) => {
         case SET_GENDER: {
             return {
                 ...state,
-                data: {
-                    ...state.data,
+                userData: {
+                    ...state.userData,
                     gender: action.gender
                 }
             }
@@ -207,9 +217,18 @@ export const registerReducer = (state = startState, action) => {
         case SET_MARITAL_STATUS: {
             return {
                 ...state,
-                data: {
-                    ...state.data,
+                userData: {
+                    ...state.userData,
                     maritalStatus: action.maritalStatus
+                }
+            }
+        }
+        case SET_SECRET_KEY: {
+            return {
+                ...state,
+                userData: {
+                    ...state.userData,
+                    secretKey: action.secretKey
                 }
             }
         }
@@ -281,6 +300,10 @@ export const setMaritalStatus = (maritalStatus) => ({
     maritalStatus
 })
 
+export const setSecretKey = (secretKey) => ({
+    type: SET_SECRET_KEY,
+    secretKey
+})
 
 export const setFirstNameError = (error) => ({
     type: SET_FIRST_NAME_ERROR,
@@ -324,5 +347,10 @@ export const setGenderError = (error) => ({
 
 export const setMaritalStatusError = (error) => ({
     type: SET_MARITAL_STATUS_ERROR,
+    error
+})
+
+export const setSecretKeyError = (error) => ({
+    type: SET_SECRET_KEY_ERROR,
     error
 })

@@ -1,15 +1,18 @@
 const MAX_FIRST_NAME_LENGTH = 15;
-const MIN_FIRST_NAME_LENGTH = 2
+const MIN_FIRST_NAME_LENGTH = 2;
 const MAX_LAST_NAME_LENGTH = 25;
-const MIN_LAST_NAME_LENGTH = 2
+const MIN_LAST_NAME_LENGTH = 2;
 const MAX_EMAIL_LENGTH = 30;
 const MAX_PASSWORD_LENGTH = 30;
 const MIN_PASSWORD_LENGTH = 6;
 const MAX_COUNTRY_LENGTH = 20;
-const MIN_COUNTRY_LENGTH = 2
+const MIN_COUNTRY_LENGTH = 2;
 const MAX_CITY_LENGTH = 30;
-const MIN_CITY_LENGTH = 2
+const MIN_CITY_LENGTH = 2;
 const PHONE_LENGTH = 12;
+const MAX_SECRET_KEY_LENGTH = 20;
+const MIN_SECRET_KEY_LENGTH = 4;
+
 
 const REGISTRATION_ERRORS = {
     firstName: {
@@ -45,6 +48,9 @@ const REGISTRATION_ERRORS = {
     },
     maritalStatus: {
         empty: 'Обязательное поле',
+    },
+    secretKey: {
+        invalidSymbolsAmount: 'Секретный код должен содержать минимум 4 символа',
     }
 }
 
@@ -61,5 +67,7 @@ export {
     MAX_COUNTRY_LENGTH,
     MIN_COUNTRY_LENGTH,
     MAX_CITY_LENGTH,
-    MIN_CITY_LENGTH
+    MIN_CITY_LENGTH,
+    MAX_SECRET_KEY_LENGTH,
+    MIN_SECRET_KEY_LENGTH
 }

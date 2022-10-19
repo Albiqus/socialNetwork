@@ -85,22 +85,21 @@ export const StepTwo = (props) => {
 
     const onNextStepButtonClick = (e) => {
         e.preventDefault()
-        let errors = validate(props.data.country, props.data.city, props.data.phone, genderStatuses, maritalStatusStatuses)
+        let errors = validate(props.userData.country, props.userData.city, props.userData.phone, genderStatuses, maritalStatusStatuses)
         props.setCountryError(errors.countryError)
         props.setCityError(errors.cityError)
         props.setPhoneError(errors.phoneError)
         props.setGenderError(errors.genderError)
         props.setMaritalStatusError(errors.maritalStatusError)
         if (!errors.errorStatus) {
-            // ПРОДОЛЖЕНИЕ ЗДЕСЬ
-            console.log(props.data)
+            props.setCurrentStep(3)
         }
     }
 
     return (
         <div className={classes.stepTwo}>
             <p className={classes.header}>Регистрация</p>
-            <p className={classes.currentStepHeader} >Шаг {props.currentStep} из 2</p>
+            <p className={classes.currentStepHeader} >Шаг {props.currentStep} из 3</p>
             <form>
                 {props.countryError && <p className={`${classes.error} ${classes.countryError}`}>{props.countryError}</p>}
                 {props.cityError && <p className={`${classes.error} ${classes.cityError}`}>{props.cityError}</p>}
@@ -109,16 +108,16 @@ export const StepTwo = (props) => {
                 {props.maritalStatusError && <p className={`${classes.error} ${classes.maritalStatusError}`}>{props.maritalStatusError}</p>}
 
                 <label>Страна</label>
-                <input onChange={onCountryChange} value={props.data.country} placeholder='Россия'></input>
+                <input onChange={onCountryChange} value={props.userData.country} placeholder='Россия'></input>
 
                 <label>Город</label>
-                <input onChange={onCityChange} value={props.data.city} type='city' placeholder='Москва'></input>
+                <input onChange={onCityChange} value={props.userData.city} type='city' placeholder='Москва'></input>
 
                 <label>Номер телефона</label>
-                <input onChange={onPhoneChange} value={props.data.phone} placeholder='+71234567890'></input>
+                <input onChange={onPhoneChange} value={props.userData.phone} placeholder='+71234567890'></input>
 
                 <label>Дата рождения</label>
-                <input onChange={onDateOfBirthChange} value={props.data.dateOfBirth} type='date'></input>
+                <input onChange={onDateOfBirthChange} value={props.userData.dateOfBirth} type='date'></input>
 
                 <label>Пол<span title='обязательное поле'>*</span></label>
                 <div className={classes.radioBox}>
@@ -157,7 +156,7 @@ export const StepTwo = (props) => {
 const mapStateToProps = (state) => {
     return {
         currentStep: state.registerPage.currentStep,
-        data: state.registerPage.data,
+        userData: state.registerPage.userData,
         countryError: state.registerPage.countryError,
         cityError: state.registerPage.cityError,
         phoneError: state.registerPage.phoneError,

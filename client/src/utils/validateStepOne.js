@@ -1,5 +1,4 @@
 import {
-    MAX_PASSWORD_LENGTH,
     MIN_FIRST_NAME_LENGTH,
     MIN_LAST_NAME_LENGTH,
     MIN_PASSWORD_LENGTH,
@@ -23,11 +22,6 @@ const validateLastName = (lastName) => {
         return (REGISTRATION_ERRORS.lastName.invalidSymbolsAmount)
     }
 }
-// const validatePhone = (phone) => {
-//     if (phone.length !== PHONE_LENGTH && phone.length !== 0) {
-//         return (REGISTRATION_ERRORS.phone.invalidSymbolsAmount)
-//     }
-// }
 const validateEmail = (email) => {
     let emailSymbols = email.split('')
     if (emailSymbols.length === 0) {
@@ -65,7 +59,7 @@ const validatePassword = (password, secondPassword) => {
     if (letterCounter === 0) {
         return (REGISTRATION_ERRORS.password.lackOfLetters)
     }
-    if (password.length < MIN_PASSWORD_LENGTH || password.length > MAX_PASSWORD_LENGTH) {
+    if (password.length < MIN_PASSWORD_LENGTH) {
         return (REGISTRATION_ERRORS.password.invalidSymbolsAmount)
     }
     if (password !== secondPassword) {

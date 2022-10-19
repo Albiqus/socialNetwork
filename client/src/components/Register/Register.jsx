@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import StepOne from './StepOne/StepOne';
+import StepThree from './StepThree/StepThree';
 import StepTwo from './StepTwo/StepTwo';
 
 export const Register = (props) => {
@@ -9,6 +10,7 @@ export const Register = (props) => {
         <>
             {currentStep === 1 && <StepOne />}
             {currentStep === 2 && <StepTwo />}
+            {currentStep === 3 && <StepThree />}
         </>
     )
 }

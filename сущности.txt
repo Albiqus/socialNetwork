@@ -1,11 +1,17 @@
 user {
 id: 1,
-name: 'Альберт Рахманкулов', 
-status: 'Йоу',  (не обяз)
-city: 'Сертолово', (не обяз)
-age: '24', (не обяз)
-marital status: 'unmarried', (не обяз)
-phone: '89992354738', (не обяз)
-email: 'albiqus@bk.ru', 
-password: 'mypassword'
+first_name: 'Альберт', (обяз)
+last_name: 'Рахманкулов', (обяз)
+email: 'albiqus@bk.ru',  (обяз)
+password: 'mypassword' (обяз)
+phone: '89992354738',
+
+country: ' Россия',
+city: 'Сертолово',
+gender: 'male',
+dateOfBirth: '10.08.1998',
+marital status: 'unmarried',
+
+status: 'Йоу', 
+
 }
