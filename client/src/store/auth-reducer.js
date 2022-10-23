@@ -1,4 +1,4 @@
-const SET_SOMETHING = 'SET_SOMETHING'
+const SET_IS_AUTH = 'SET_IS_AUTH'
 
 const startState = {
     isAuth: false
@@ -7,9 +7,10 @@ const startState = {
 
 export const authReducer = (state = startState, action) => {
     switch (action.type) {
-        case SET_SOMETHING: {
+        case SET_IS_AUTH: {
             return {
                 ...state,
+                isAuth: action.status
             }
         }
         default:
@@ -17,7 +18,7 @@ export const authReducer = (state = startState, action) => {
     }
 }
 
-export const setSomething = (something) => ({
-    type: SET_SOMETHING,
-    something
+export const setIsAuth = (status) => ({
+    type: SET_IS_AUTH,
+    status
 })
