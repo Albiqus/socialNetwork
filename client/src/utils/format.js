@@ -6,7 +6,8 @@ import {
     MAX_LAST_NAME_LENGTH,
     MAX_SECRET_KEY_LENGTH,
     PHONE_LENGTH
-} from "../data/data";
+}
+from "../data/register-data";
 
 
 

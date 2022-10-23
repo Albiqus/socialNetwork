@@ -1,31 +1,42 @@
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { compose } from 'redux';
-import { setCurrentStep, setSecretKey, setSecretKeyError } from '../../../store/register-reducer';
-import { registerUser } from '../../../thunks/register-user';
+import { setCurrentStep, setSecretKey } from '../../../store/register-reducer';
+import { registerUser } from '../../../thunks/registerUser';
 import { format } from '../../../utils/format';
-import { validate } from '../../../utils/validateStepThree';
+import { validate } from '../../../utils/validate/validateStepThree';
 import classes from './StepThree.module.css';
 
 export const StepThree = (props) => {
 
+    let [secretKeyError, setSecretKeyError] = useState(null)
+
+    let [secretKeyVisibility, setSecretKeyVisibility] = useState(false)
+
     const onSecretKeyChange = (e) => {
+        setSecretKeyError(null)
         const value = e.target.value;
         const formattedValue = format(value, 'secretKey')
         props.setSecretKey(formattedValue)
+    }
+
+    const onFirstEyeIconClick = () => {
+        setSecretKeyVisibility(!secretKeyVisibility)
     }
 
     const onPrevStepButtonClick = () => {
         props.setCurrentStep(2)
     }
 
-    const onNextStepButtonClick = (e) => {
+    const onNextStepButtonClick = (e) => {              
         e.preventDefault()
         let errors = validate(props.userData.secretKey)
-        props.setSecretKeyError(errors.secretKeyError)
+        setSecretKeyError(errors.secretKeyError)
         if (!errors.errorStatus) {
             props.registerUser(props.userData)
-            // console.log(props.userData)
         }
     }
 
@@ -43,11 +54,11 @@ export const StepThree = (props) => {
                 </ul>
             </div>
             <form>
-                {props.secretKeyError && <p className={`${classes.error} ${classes.secretKeyError}`}>{props.secretKeyError}</p>}
+                {secretKeyError && <p className={`${classes.error} ${classes.secretKeyError}`}>{secretKeyError}</p>}
 
                 <label>Секретный ключ</label>
-                <input onChange={onSecretKeyChange} value={props.userData.secretKey} type='password' required></input>
-
+                <input onChange={onSecretKeyChange} value={props.userData.secretKey} type={!secretKeyVisibility ? 'password' : 'text'} required></input>
+                <FontAwesomeIcon onClick={onFirstEyeIconClick} className={classes.eyeIcon} icon={secretKeyVisibility ? faEye : faEyeSlash} />
                 <div className={classes.buttonBox}>
                     <button onClick={onPrevStepButtonClick}>Назад</button>
                     <button onClick={onNextStepButtonClick} >Дальше</button>
@@ -62,8 +73,7 @@ const mapStateToProps = (state) => {
     return {
         currentStep: state.registerPage.currentStep,
         userData: state.registerPage.userData,
-        secretKeyError: state.registerPage.secretKeyError
     }
 }
 
-export default compose(connect(mapStateToProps, { setCurrentStep, setSecretKey, setSecretKeyError, registerUser }))(StepThree)
+export default compose(connect(mapStateToProps, { setCurrentStep, setSecretKey, registerUser }))(StepThree)

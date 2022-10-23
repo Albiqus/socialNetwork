@@ -1,15 +1,5 @@
+const SET_SUCCESS_REGISTRATION = 'SET_SUCCESS_REGISTRATION'
 const SET_CURRENT_STEP = 'SET_CURRENT_STEP'
-
-const SET_FIRST_NAME_ERROR = 'SET_FIRST_NAME_ERROR'
-const SET_LAST_NAME_ERROR = 'SET_LAST_NAME_ERROR'
-const SET_EMAIL_ERROR = 'SET_EMAIL_ERROR'
-const SET_PASSWORD_ERROR = 'SET_PASSWORD_ERROR'
-const SET_COUNTY_ERROR = 'SET_COUNTY_ERROR'
-const SET_CITY_ERROR = 'SET_CITY_ERROR'
-const SET_PHONE_ERROR = 'SET_PHONE_ERROR'
-const SET_GENDER_ERROR = 'SET_GENDER_ERROR'
-const SET_MARITAL_STATUS_ERROR = 'SET_MARITAL_STATUS_ERROR'
-const SET_SECRET_KEY_ERROR = 'SET_SECRET_KEY_ERROR'
 
 const SET_FIRST_NAME = 'SET_FIRST_NAME'
 const SET_LAST_NAME = 'SET_LAST_NAME'
@@ -24,7 +14,14 @@ const SET_GENDER = 'SET_GENDER'
 const SET_MARITAL_STATUS = 'SET_MARITAL_STATUS'
 const SET_SECRET_KEY = 'SET_SECRET_KEY'
 
+const SET_EXISTING_USER_ERROR = 'SET_EXISTING_USER_ERROR'
+const SET_MALE_SELECTED = 'SET_MALE_SELECTED'
+const SET_FEMALE_SELECTED = 'SET_FEMALE_SELECTED'
+const SET_UNMARRIED_SELECTED = 'UNMARRIED_SELECTED'
+const SET_MARRIED_SELECTED = 'SET_MARRIED_SELECTED'
+
 const startState = {
+    successRegistrationStatus: false,
     currentStep: 1,
     userData: {
         firstName: '',
@@ -32,96 +29,34 @@ const startState = {
         email: '',
         password: '',
         secondPassword: '',
-
         country: '',
         city: '',
         phone: '',
         dateOfBirth: '',
         gender: '',
         maritalStatus: '',
-
         secretKey: ''
     },
-
-    firstNameError: null,
-    lastNameError: null,
-    emailError: null,
-    passwordError: null,
-    countryError: null,
-    cityError: null,
-    phoneError: null,
-    genderError: null,
-    maritalStatusError: null,
-    secretKeyError: null
+    existingUserError: null,
+    maleSelected: false,
+    femaleSelected: false,
+    unmarriedSelected: false,
+    marriedSelected: false,
 }
 
 
 export const registerReducer = (state = startState, action) => {
     switch (action.type) {
+        case SET_SUCCESS_REGISTRATION: {
+            return {
+                ...state,
+                successRegistrationStatus: action.status
+            }
+        }
         case SET_CURRENT_STEP: {
             return {
                 ...state,
                 currentStep: action.currentStep
-            }
-        }
-        case SET_FIRST_NAME_ERROR: {
-            return {
-                ...state,
-                firstNameError: action.error
-            }
-        }
-        case SET_LAST_NAME_ERROR: {
-            return {
-                ...state,
-                lastNameError: action.error
-            }
-        }
-        case SET_EMAIL_ERROR: {
-            return {
-                ...state,
-                emailError: action.error
-            }
-        }
-        case SET_PASSWORD_ERROR: {
-            return {
-                ...state,
-                passwordError: action.error
-            }
-        }
-        case SET_COUNTY_ERROR: {
-            return {
-                ...state,
-                countryError: action.error
-            }
-        }
-        case SET_CITY_ERROR: {
-            return {
-                ...state,
-                cityError: action.error
-            }
-        }
-        case SET_PHONE_ERROR: {
-            return {
-                ...state,
-                phoneError: action.error
-            }
-        }
-        case SET_GENDER_ERROR: {
-            return {
-                ...state,
-                genderError: action.error
-            }
-        }
-        case SET_MARITAL_STATUS_ERROR: {
-            return {
-                ...state,
-                maritalStatusError: action.error
-            }
-        }
-        case SET_SECRET_KEY_ERROR: {
-            return {
-                ...state,
-                secretKeyError: action.error
             }
         }
         case SET_FIRST_NAME: {
@@ -232,12 +167,45 @@ export const registerReducer = (state = startState, action) => {
                 }
             }
         }
+        case SET_EXISTING_USER_ERROR: {
+            return {
+                ...state,
+                existingUserError: action.error
+            }
+        }
+        case SET_MALE_SELECTED: {
+            return {
+                ...state,
+                maleSelected: action.status
+            }
+        }
+        case SET_FEMALE_SELECTED: {
+            return {
+                ...state,
+                femaleSelected: action.status
+            }
+        }
+        case SET_UNMARRIED_SELECTED: {
+            return {
+                ...state,
+                unmarriedSelected: action.status
+            }
+        }
+        case SET_MARRIED_SELECTED: {
+            return {
+                ...state,
+                marriedSelected: action.status
+            }
+        }
         default:
             return state;
     }
 }
 
-
+export const setSuccessRegistrationStatus = (status) => ({
+    type: SET_SUCCESS_REGISTRATION,
+    status
+})
 
 export const setCurrentStep = (currentStep) => ({
     type: SET_CURRENT_STEP,
@@ -305,52 +273,27 @@ export const setSecretKey = (secretKey) => ({
     secretKey
 })
 
-export const setFirstNameError = (error) => ({
-    type: SET_FIRST_NAME_ERROR,
+export const setExistingUserError = (error) => ({
+    type: SET_EXISTING_USER_ERROR,
     error
 })
 
-export const setLastNameError = (error) => ({
-    type: SET_LAST_NAME_ERROR,
-    error
+export const setMaleSelected = (status) => ({
+    type: SET_MALE_SELECTED,
+    status
 })
 
-export const setEmailError = (error) => ({
-    type: SET_EMAIL_ERROR,
-    error
+export const setFemaleSelected = (status) => ({
+    type: SET_FEMALE_SELECTED,
+    status
 })
 
-export const setPasswordError = (error) => ({
-    type: SET_PASSWORD_ERROR,
-    error
+export const setUnmarriedSelected = (status) => ({
+    type: SET_UNMARRIED_SELECTED,
+    status
 })
 
-export const setCountryError = (error) => ({
-    type: SET_COUNTY_ERROR,
-    error
-})
-
-export const setCityError = (error) => ({
-    type: SET_CITY_ERROR,
-    error
-})
-
-export const setPhoneError = (error) => ({
-    type: SET_PHONE_ERROR,
-    error
-})
-
-export const setGenderError = (error) => ({
-    type: SET_GENDER_ERROR,
-    error
-})
-
-export const setMaritalStatusError = (error) => ({
-    type: SET_MARITAL_STATUS_ERROR,
-    error
-})
-
-export const setSecretKeyError = (error) => ({
-    type: SET_SECRET_KEY_ERROR,
-    error
+export const setMarriedSelected = (status) => ({
+    type: SET_MARRIED_SELECTED,
+    status
 })

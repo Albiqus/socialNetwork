@@ -88,6 +88,7 @@
     text-align: center;
 }
 
+
 /* errors */
 
 .error {
@@ -145,4 +146,25 @@
 
 .strong {
     background-image: url(../../../../public/password_strength/strong.png);
+}
+
+/* icons */
+.firstEyeIcon {
+    position: absolute;
+    right: 120px;
+    top: 317px;
+}
+
+.firstEyeIcon:hover {
+    cursor: pointer;
+}
+
+.secondEyeIcon {
+    position: absolute;
+    right: 120px;
+    top: 412px;
+}
+
+.secondEyeIcon:hover {
+    cursor: pointer;
 }

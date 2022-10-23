@@ -121,3 +121,14 @@
     top: 95px;
 }
 
+/* icons */
+.eyeIcon {
+    position: absolute;
+    right: 120px;
+    top: 67px;
+}
+
+.eyeIcon:hover {
+    cursor: pointer;
+}
+

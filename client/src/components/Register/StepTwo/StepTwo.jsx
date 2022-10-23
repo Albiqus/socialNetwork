@@ -2,29 +2,35 @@ import { useState } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { compose } from 'redux';
-import { setCity, setCityError, setCountry, setCountryError, setCurrentStep, setDateOfBirth, setGender, setGenderError, setMaritalStatus, setMaritalStatusError, setPhone, setPhoneError } from '../../../store/register-reducer';
+import { setCity, setCountry, setCurrentStep, setDateOfBirth, setFemaleSelected, setGender, setMaleSelected, setMaritalStatus, setMarriedSelected, setPhone, setUnmarriedSelected } from '../../../store/register-reducer';
 import { format } from '../../../utils/format';
-import { validate } from '../../../utils/validateStepTwo';
+import { validate } from '../../../utils/validate/validateStepTwo';
 import classes from './StepTwo.module.css';
 
 export const StepTwo = (props) => {
 
+    let [countryError, setCountryError] = useState(null)
+    let [cityError, setCityError] = useState(null)
+    let [phoneError, setPhoneError] = useState(null)
+    let [genderError, setGenderError] = useState(null)
+    let [maritalStatusError, setMaritalStatusError] = useState(null)
+
     const onCountryChange = (e) => {
-        props.setCountryError(null)
+        setCountryError(null)
         const value = e.target.value;
         const formattedValue = format(value, 'country')
         props.setCountry(formattedValue)
     }
 
     const onCityChange = (e) => {
-        props.setCityError(null)
+        setCityError(null)
         const value = e.target.value;
         const formattedValue = format(value, 'city')
         props.setCity(formattedValue)
     }
 
     const onPhoneChange = (e) => {
-        props.setPhoneError(null)
+        setPhoneError(null)
         const value = e.target.value;
         const formattedValue = format(value, 'phone')
         props.setPhone(formattedValue)
@@ -35,47 +41,42 @@ export const StepTwo = (props) => {
         props.setDateOfBirth(value)
     }
 
-    const [maleSelected, setMaleSelected] = useState(false)
-    const [femaleSelected, setFemaleSelected] = useState(false)
-    const [unmarriedSelected, setUnmarriedSelected] = useState(false)
-    const [marriedSelected, setMarriedSelected] = useState(false)
-
     const genderStatuses = {
-        maleSelected,
-        femaleSelected
+        maleSelected: props.maleSelected,
+        femaleSelected: props.femaleSelected
     }
 
     const maritalStatusStatuses = {
-        unmarriedSelected,
-        marriedSelected
+        unmarriedSelected: props.unmarriedSelected,
+        marriedSelected: props.marriedSelected
     }
 
 
     const onMaleRadioClick = () => {
-        props.setGenderError(null)
-        setFemaleSelected(false)
-        setMaleSelected(true)
+        setGenderError(null)
+        props.setFemaleSelected(false)
+        props.setMaleSelected(true)
         props.setGender('мужской')
     }
 
     const onFemaleRadioClick = () => {
-        props.setGenderError(null)
-        setMaleSelected(false)
-        setFemaleSelected(true)
+        setGenderError(null)
+        props.setMaleSelected(false)
+        props.setFemaleSelected(true)
         props.setGender('женский')
     }
 
     const onUnmarriedRadioClick = () => {
-        props.setMaritalStatusError(null)
-        setMarriedSelected(false)
-        setUnmarriedSelected(true)
+        setMaritalStatusError(null)
+        props.setMarriedSelected(false)
+        props.setUnmarriedSelected(true)
         props.setMaritalStatus('холост')
     }
 
     const onMarriedRadioClick = () => {
-        props.setMaritalStatusError(null)
-        setUnmarriedSelected(false)
-        setMarriedSelected(true)
+        setMaritalStatusError(null)
+        props.setUnmarriedSelected(false)
+        props.setMarriedSelected(true)
         props.setMaritalStatus('женат')
     }
 
@@ -86,11 +87,11 @@ export const StepTwo = (props) => {
     const onNextStepButtonClick = (e) => {
         e.preventDefault()
         let errors = validate(props.userData.country, props.userData.city, props.userData.phone, genderStatuses, maritalStatusStatuses)
-        props.setCountryError(errors.countryError)
-        props.setCityError(errors.cityError)
-        props.setPhoneError(errors.phoneError)
-        props.setGenderError(errors.genderError)
-        props.setMaritalStatusError(errors.maritalStatusError)
+        setCountryError(errors.countryError)
+        setCityError(errors.cityError)
+        setPhoneError(errors.phoneError)
+        setGenderError(errors.genderError)
+        setMaritalStatusError(errors.maritalStatusError)
         if (!errors.errorStatus) {
             props.setCurrentStep(3)
         }
@@ -101,11 +102,11 @@ export const StepTwo = (props) => {
             <p className={classes.header}>Регистрация</p>
             <p className={classes.currentStepHeader} >Шаг {props.currentStep} из 3</p>
             <form>
-                {props.countryError && <p className={`${classes.error} ${classes.countryError}`}>{props.countryError}</p>}
-                {props.cityError && <p className={`${classes.error} ${classes.cityError}`}>{props.cityError}</p>}
-                {props.phoneError && <p className={`${classes.error} ${classes.phoneError}`}>{props.phoneError}</p>}
-                {props.genderError && <p className={`${classes.error} ${classes.genderError}`}>{props.genderError}</p>}
-                {props.maritalStatusError && <p className={`${classes.error} ${classes.maritalStatusError}`}>{props.maritalStatusError}</p>}
+                {countryError && <p className={`${classes.error} ${classes.countryError}`}>{countryError}</p>}
+                {cityError && <p className={`${classes.error} ${classes.cityError}`}>{cityError}</p>}
+                {phoneError && <p className={`${classes.error} ${classes.phoneError}`}>{phoneError}</p>}
+                {genderError && <p className={`${classes.error} ${classes.genderError}`}>{genderError}</p>}
+                {maritalStatusError && <p className={`${classes.error} ${classes.maritalStatusError}`}>{maritalStatusError}</p>}
 
                 <label>Страна</label>
                 <input onChange={onCountryChange} value={props.userData.country} placeholder='Россия'></input>
@@ -122,25 +123,28 @@ export const StepTwo = (props) => {
                 <label>Пол<span title='обязательное поле'>*</span></label>
                 <div className={classes.radioBox}>
                     <div onClick={onMaleRadioClick} className={classes.radio}>
-                        {maleSelected && <div className={classes.selected}></div>}
+                        {props.maleSelected && <div className={classes.selected}></div>}
                     </div>
                     <label onClick={onMaleRadioClick}>мужской</label>
                     <div onClick={onFemaleRadioClick} className={classes.radio}>
-                        {femaleSelected && <div className={classes.selected}></div>}
+                        {props.femaleSelected && <div className={classes.selected}></div>}
                     </div>
                     <label onClick={onFemaleRadioClick}>женский</label>
                 </div>
 
                 <label>Семейное положение<span title='обязательное поле'>*</span></label>
                 <div className={classes.radioBox}>
+
                     <div onClick={onUnmarriedRadioClick} className={classes.radio}>
-                        {unmarriedSelected && <div className={classes.selected}></div>}
+                        {props.unmarriedSelected && <div className={classes.selected}></div>}
                     </div>
-                    <label onClick={onUnmarriedRadioClick}>{maleSelected ? 'холост' : 'не замужем'}</label>
+                    <label onClick={onUnmarriedRadioClick}>{props.maleSelected ? 'холост' : 'не замужем'}</label>
+
                     <div onClick={onMarriedRadioClick} className={classes.radio}>
-                        {marriedSelected && <div className={classes.selected}></div>}
+                        {props.marriedSelected && <div className={classes.selected}></div>}
                     </div>
-                    <label onClick={onMarriedRadioClick}>{maleSelected ? 'женат' : 'замужем'}</label>
+                    <label onClick={onMarriedRadioClick}>{props.maleSelected ? 'женат' : 'замужем'}</label>
+
                 </div>
 
                 <div className={classes.buttonBox}>
@@ -157,11 +161,10 @@ const mapStateToProps = (state) => {
     return {
         currentStep: state.registerPage.currentStep,
         userData: state.registerPage.userData,
-        countryError: state.registerPage.countryError,
-        cityError: state.registerPage.cityError,
-        phoneError: state.registerPage.phoneError,
-        genderError: state.registerPage.genderError,
-        maritalStatusError: state.registerPage.maritalStatusError
+        maleSelected: state.registerPage.maleSelected,
+        femaleSelected: state.registerPage.femaleSelected,
+        unmarriedSelected: state.registerPage.unmarriedSelected,
+        marriedSelected: state.registerPage.marriedSelected
     }
 }
 
@@ -173,9 +176,8 @@ export default compose(connect(mapStateToProps, {
     setDateOfBirth,
     setGender,
     setMaritalStatus,
-    setCountryError,
-    setCityError,
-    setPhoneError,
-    setGenderError,
-    setMaritalStatusError
+    setMaleSelected,
+    setFemaleSelected,
+    setUnmarriedSelected,
+    setMarriedSelected
 }))(StepTwo)
