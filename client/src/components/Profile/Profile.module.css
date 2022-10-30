@@ -1,39 +1,110 @@
-.profile {
+
+.profileBox {
     display: flex;
-    margin-left: 10px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
     background-color: rgb(158, 158, 158);
     width: 700px;
     height: 500px;
     border-radius: 10px 10px 10px 10px;
 }
 
-.avatar{
+.avatarBox {
+    margin-left: 30px;
+    margin-top: 30px;
+    width: 200px;
+    height: 200px;
+}
+
+.avatar {
     height: 200px;
     width: 200px;
-    background-image: url(../../../public/incognito/incognito.png);
+    background-image: url(../../../public/incognito/incognito-large.png);
     background-color: rgb(136, 136, 136);
     border-radius: 10px 10px 10px 10px;
 }
 
 .infoBox {
-    width: 500px;
+    margin-top: 30px;
+    margin-left: 30px;
+    width: 440px;
+    height: 200px;
+}
+
+.moreInfo {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 88px;
+    margin-top: 50px;
+}
+
+.moreInfo p {
+    margin: 0;
+}
+
+.moreInfo .title {
+    color: rgb(63, 63, 63);
+}
+
+.moreInfo .data {
+    margin-left: 5px;
 }
 
 .name {
     margin: 0;
-    margin-top: 10px;
-    margin-left: 20px;
     font-size: 30px;
     font-weight: bold;
 }
 
 .status {
     margin: 0;
-    margin-left: 20px;
+    height: 21px;
+    width: 440px;
     font-style: italic;
 }
 
-.mainInfo p{
-    margin-left: 20px;
+.panelsBox {
+    height: 25px;
+    width: 200px;
+    margin-top: 20px;
+    margin-left: 30px;
+    background-color: rgb(136, 136, 136);
+    border-radius: 10px 10px 10px 10px;
 }
 
+.postsBox {
+    height: 25px;
+    width: 410px;
+    margin-top: 20px;
+    margin-left: 30px;
+    background-color: rgb(136, 136, 136);
+    border-radius: 10px 10px 10px 10px;
+}
+
+.preloader {
+    width: 500px;
+    height: 500px;
+    display: flex;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.preloader img {
+    width: 100px;
+    height: 100px;
+}
+
+.profileError {
+    width: 100%;
+}
+
+.profileError p{
+    text-align: center;
+    margin: 0 auto;
+    font-size: 20px;
+    margin-top: 30px;
+}

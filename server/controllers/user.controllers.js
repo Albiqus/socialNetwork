@@ -1,7 +1,7 @@
 const db = require('../data-base')
 
 class UserControllers {
-    async getUsers(req, res) {
+    async getAllUsers(req, res) {
         const users = await db.query(`SELECT * FROM users`)
         res.json(users.rows)
 
@@ -9,11 +9,10 @@ class UserControllers {
     async getOneUser(req, res) {
         const email = req.query.login
         const existingUser = await db.query(`SELECT * FROM users WHERE email=$1`, [email])
-        console.log(existingUser.rows)
         if (existingUser.rows.length > 0) {
             res.json({
-                message: 'Пользователь с такой почтой уже зарегистрирован',
-                statusCode: 1
+                statusCode: 1,
+                message: 'Пользователь с такой почтой уже зарегистрирован'
             })
         } else {
             res.json({
@@ -21,8 +20,48 @@ class UserControllers {
             })
         }
     }
+    async getTenUsers(req, res) {
+        const countResult = await db.query('SELECT count( * ) FROM users')
+        const usersCount = countResult.rows[0].count
+        const pagesCount = Math.ceil(usersCount / 10)
+
+        const currentPage = req.query.page
+        let currentUserPosition;
+        if (currentPage === '1') {
+            currentUserPosition = 0
+        } else {
+            currentUserPosition = Number(String(currentPage) + '0') - 10
+        }
+        const usersResult = await db.query(`SELECT * FROM users OFFSET ${currentUserPosition} LIMIT 10`)
+        const tenUsers = usersResult.rows.map((user) => {
+            return {
+                id: user.id,
+                first_name: user.first_name,
+                last_name: user.last_name,
+                status: user.status,
+                country: user.country,
+                date_of_birth: user.date_of_birth
+            }
+        })
+        console.log(1)
+        if (tenUsers.length === 0) {
+            res.json({
+                statusCode: 0,
+                message: 'нет ни одного зарегистрированного пользователя'
+            })
+        } else {
+            res.json({
+                statusCode: 1,
+                data: {
+                    pagesCount: pagesCount,
+                    tenUsers: tenUsers
+                }
+            })
+        }
+    }
+
     async registerUser(req, res) {
-        const {
+        let {
             firstName,
             lastName,
             email,
@@ -35,6 +74,9 @@ class UserControllers {
             maritalStatus,
             secretKey
         } = req.body
+        const status = ''
+        dateOfBirth = dateOfBirth.replace('-', '.').replace('-', '.')
+
         const existingUser = await db.query(`SELECT * FROM users WHERE email=$1`, [email])
 
         if (existingUser.rows.length > 0) {
@@ -43,10 +85,11 @@ class UserControllers {
                 message: 'Пользователь с такой почтой уже зарегистрирован'
             })
         } else {
-            const newUser = await db.query('INSERT INTO users (first_name, last_name, email, password, country, city, phone, date_of_birth, gender, marital_status, secret_key) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *',
+            const newUser = await db.query('INSERT INTO users (first_name, last_name, status, email, password, country, city, phone, date_of_birth, gender, marital_status, secret_key) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *',
                 [
                     firstName,
                     lastName,
+                    status,
                     email,
                     password,
                     country,
@@ -76,10 +119,13 @@ class UserControllers {
             })
         } else {
             if (user.rows[0].password === password) {
+
                 res.json({
                     statusCode: 1,
                     message: 'Авторизация прошла успешно',
-                    data: user.rows[0]
+                    data: {
+                        id: user.rows[0].id
+                    }
                 })
             } else {
                 res.json({
@@ -87,6 +133,33 @@ class UserControllers {
                     message: 'Неправильный логин или пароль',
                 })
             }
+        }
+
+    }
+    async getProfileData(req, res) {
+        const userId = req.query.userId
+        const user = await db.query(`SELECT * FROM users WHERE id=$1`, [userId])
+
+        if (user.rows[0]) {
+            let profileData = {
+                id: user.rows[0].id,
+                firstName: user.rows[0].first_name,
+                lastName: user.rows[0].last_name,
+                status: user.rows[0].status,
+                city: user.rows[0].city,
+                dateOfBirthday: user.rows[0].date_of_birth,
+                maritalStatus: user.rows[0].marital_status
+            }
+            res.json({
+                statusCode: 1,
+                profileData: profileData,
+            })
+        }
+        if (!user.rows[0]) {
+            res.json({
+                statusCode: 0,
+                message: 'пользователь не найден',
+            })
         }
     }
 }

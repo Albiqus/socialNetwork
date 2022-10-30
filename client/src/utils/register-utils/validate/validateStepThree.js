@@ -2,7 +2,7 @@ import {
     MIN_SECRET_KEY_LENGTH,
     REGISTRATION_ERRORS
 }
-from "../../data/register-data";
+from "../../../data/register-data";
 
 
 

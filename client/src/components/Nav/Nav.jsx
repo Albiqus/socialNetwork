@@ -2,18 +2,31 @@ import classes from './Nav.module.css';
 import { NavLink } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { setIsAuth } from '../../store/auth-reducer';
+import { setNavVisible } from '../../store/nav-reducer';
+import { getAndSetTenUsers } from '../../thunks/getAndSetTenUsers';
+import { resetUsersSettings, setCurrentPage } from '../../store/users-reducer';
+
 
 const Nav = (props) => {
-
-    const onExitNavLinkClick = () => {
-        props.setIsAuth(false)
-    }
     
+    const onExitNavLinkClick = () => {
+        localStorage.clear()
+        props.resetUsersSettings()
+        props.setNavVisible(false)
+    }
+
+    let navClassName = classes.navBox;
+    if (!props.navVisible) {
+        navClassName += ` ${classes.hidden}`
+    }
+    if (localStorage.getItem('id')) {
+        navClassName = classes.navBox;
+    }
+
     return (
-        <div className={classes.navBox}>
+        <div className={navClassName}>
             <div className={classes.nav}>
-                <NavLink to='/profile'>Профиль</NavLink>
+                <NavLink to={`/profile/${localStorage.getItem('id')}`}>Профиль</NavLink>
                 <NavLink to='/messages'>Сообщения</NavLink>
                 <NavLink to='/users'>Пользователи</NavLink>
                 <NavLink to='/settings'>Настройки</NavLink>
@@ -25,9 +38,10 @@ const Nav = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-   
+        navVisible: state.nav.navVisible,
+        isClickedProfileLink: state.nav.isClickedProfileLink
     }
 }
 
 
-export default compose(connect(mapStateToProps, { setIsAuth }))(Nav)
+export default compose(connect(mapStateToProps, { setNavVisible, getAndSetTenUsers, setCurrentPage, resetUsersSettings }))(Nav)

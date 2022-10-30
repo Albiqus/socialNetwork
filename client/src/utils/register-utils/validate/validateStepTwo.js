@@ -4,7 +4,7 @@ import {
     PHONE_LENGTH,
     REGISTRATION_ERRORS
 }
-from "../../data/register-data";
+from "../../../data/register-data";
 
 
 const validateCountry = (country) => {

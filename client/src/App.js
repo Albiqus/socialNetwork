@@ -18,9 +18,9 @@ function App() {
             <Nav/>
             <Routes>
             <Route path='/login' element={<Login/>}/> 
-            <Route path='/profile' element={<Profile/>}/> 
+            <Route path='/profile/:userId' element={<Profile key={window.location.pathname}/>}/>       
             <Route path='/messages' element={<Messages/>}/> 
-            <Route path='/users' element={<Users/>}/> 
+            <Route path='/users' element={<Users/>}/>
             <Route path='/settings' element={<Settings />} />
             <Route path='/register' element={<Register/>}/>
             </Routes>

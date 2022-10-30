@@ -7,7 +7,7 @@ import {
     MAX_SECRET_KEY_LENGTH,
     PHONE_LENGTH
 }
-from "../data/register-data";
+from "../../data/register-data";
 
 
 

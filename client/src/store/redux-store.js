@@ -1,17 +1,19 @@
 import { legacy_createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import { authReducer } from "./auth-reducer";
 import { loginReducer } from "./login-reducer";
+import { navReducer } from "./nav-reducer";
 import { profileReducer } from "./profile-reducer";
 import { registerReducer } from "./register-reducer";
+import { usersReducer } from "./users-reducer";
 
 
 
 let reducers = combineReducers({
     profilePage: profileReducer,
-    auth: authReducer,
+    nav: navReducer,
     registerPage: registerReducer,
-    loginPage: loginReducer
+    loginPage: loginReducer,
+    usersPage: usersReducer
 })
 
 let store = legacy_createStore(reducers, applyMiddleware(thunk))

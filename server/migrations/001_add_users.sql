@@ -13,3 +13,4 @@ create table users (
     secret_key VARCHAR(20) NOT NULL,
     status VARCHAR(150)
 );
+

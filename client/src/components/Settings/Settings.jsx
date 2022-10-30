@@ -13,7 +13,6 @@ export const Settings = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        isAuth: state.auth.isAuth
     }
 }
 

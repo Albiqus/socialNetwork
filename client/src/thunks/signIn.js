@@ -1,9 +1,12 @@
-import { setIsAuth } from "../store/auth-reducer";
-import { setInvalidAuthError, setPreloader } from "../store/login-reducer";
+import {
+    setInvalidAuthError,
+    setLoginPreloader
+} from "../store/login-reducer";
+import { setNavVisible } from "../store/nav-reducer";
 
 export const signIn = (login, password) => {
     return (dispatch) => {
-        dispatch(setPreloader(true))
+        dispatch(setLoginPreloader(true))
         fetch(`http://localhost:4000/api/login?login=${login}&password=${password}`, {
             method: 'GET',
             headers: {
@@ -13,13 +16,13 @@ export const signIn = (login, password) => {
             return response.json();
         }).then(function (response) {
             if (response.statusCode === 1) {
-                dispatch(setIsAuth(true))
-                dispatch(setPreloader(false))
+                localStorage.setItem('id', response.data.id)
+                dispatch(setNavVisible(true))
             }
             if (response.statusCode === 0) {
                 dispatch(setInvalidAuthError(response.message))
-                dispatch(setPreloader(false))
             }
+            dispatch(setLoginPreloader(false))
         })
 
     }

@@ -1,11 +1,10 @@
 const SET_INVALID_AUTH_ERROR = 'SET_INVALID_AUTH_ERROR'
-const SET_PRELOADER = 'SET_IS_LOGIN'
+const SET_LOGIN_PRELOADER = 'SET_LOGIN_PRELOADER'
 
 const startState = {
     invalidAuthError: null,
-    preloader: false
+    loginPreloader: false
 }
-
 
 export const loginReducer = (state = startState, action) => {
     switch (action.type) {
@@ -15,10 +14,10 @@ export const loginReducer = (state = startState, action) => {
                 invalidAuthError: action.text
             }
         }
-        case SET_PRELOADER: {
+        case SET_LOGIN_PRELOADER: {
             return {
                 ...state,
-                preloader: action.status
+                loginPreloader: action.status
             }
         }
         default:
@@ -31,7 +30,7 @@ export const setInvalidAuthError = (text) => ({
     text
 })
 
-export const setPreloader = (status) => ({
-    type: SET_PRELOADER,
+export const setLoginPreloader = (status) => ({
+    type: SET_LOGIN_PRELOADER,
     status
 })

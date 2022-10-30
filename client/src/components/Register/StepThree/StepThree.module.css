@@ -1,5 +1,5 @@
 .stepThree {
-    margin-left: 10px;
+    margin: 0 auto;
     background-color: rgb(158, 158, 158);
     width: 700px;
     height: 550px;
@@ -37,7 +37,7 @@
     margin-top: 30px;
 }
 
-.ulBox ul{
+.ulBox ul {
     margin: 0 auto;
 }
 
@@ -107,6 +107,20 @@
     text-align: center;
 }
 
+.preloader {
+    width: 500px;
+    height: 500px;
+    display: flex;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.preloader img {
+    width: 100px;
+    height: 100px;
+}
+
 /* errors */
 
 .error {
@@ -131,4 +145,3 @@
 .eyeIcon:hover {
     cursor: pointer;
 }
-

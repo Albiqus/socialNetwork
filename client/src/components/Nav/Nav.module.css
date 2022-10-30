@@ -1,9 +1,13 @@
 .navBox {
-    margin-right: 10px;
+    margin-right: 20px;
     background-color: rgb(136, 136, 136);
     width: 150px;
     height: 500px;
     border-radius: 10px 10px 10px 10px;
+}
+
+.hidden {
+    display: none;
 }
 
 .navBox a {
@@ -17,9 +21,9 @@
 }
 
 .navBox a:hover {
-background-color: rgba(0, 0, 0, 0.1)
+    background-color: rgba(0, 0, 0, 0.1)
 }
 
-.nav{
+.nav {
     margin-top: 20px;
 }

@@ -1,5 +1,6 @@
 const SET_SUCCESS_REGISTRATION = 'SET_SUCCESS_REGISTRATION'
 const SET_CURRENT_STEP = 'SET_CURRENT_STEP'
+const SET_REGISTER_PRELOADER = 'SET_REGISTER_PRELOADER'
 
 const SET_FIRST_NAME = 'SET_FIRST_NAME'
 const SET_LAST_NAME = 'SET_LAST_NAME'
@@ -13,6 +14,7 @@ const SET_DATE_OF_BIRTH = 'SET_DATE_OF_BIRTH'
 const SET_GENDER = 'SET_GENDER'
 const SET_MARITAL_STATUS = 'SET_MARITAL_STATUS'
 const SET_SECRET_KEY = 'SET_SECRET_KEY'
+const RESET_USER_DATA = 'RESET_USER_DATA'
 
 const SET_EXISTING_USER_ERROR = 'SET_EXISTING_USER_ERROR'
 const SET_MALE_SELECTED = 'SET_MALE_SELECTED'
@@ -22,6 +24,7 @@ const SET_MARRIED_SELECTED = 'SET_MARRIED_SELECTED'
 
 const startState = {
     successRegistrationStatus: false,
+    registerPreloader: false,
     currentStep: 1,
     userData: {
         firstName: '',
@@ -35,7 +38,7 @@ const startState = {
         dateOfBirth: '',
         gender: '',
         maritalStatus: '',
-        secretKey: ''
+        secretKey: '',
     },
     existingUserError: null,
     maleSelected: false,
@@ -57,6 +60,12 @@ export const registerReducer = (state = startState, action) => {
             return {
                 ...state,
                 currentStep: action.currentStep
+            }
+        }
+        case SET_REGISTER_PRELOADER: {
+            return {
+                ...state,
+                registerPreloader: action.status
             }
         }
         case SET_FIRST_NAME: {
@@ -167,6 +176,26 @@ export const registerReducer = (state = startState, action) => {
                 }
             }
         }
+        case RESET_USER_DATA: {
+            return {
+                ...state,
+                userData: {
+                    ...state.userData,
+                    firstName: '',
+                    lastName: '',
+                    email: '',
+                    password: '',
+                    secondPassword: '',
+                    country: '',
+                    city: '',
+                    phone: '',
+                    dateOfBirth: '',
+                    gender: '',
+                    maritalStatus: '',
+                    secretKey: ''
+                }
+            }
+        }
         case SET_EXISTING_USER_ERROR: {
             return {
                 ...state,
@@ -210,6 +239,11 @@ export const setSuccessRegistrationStatus = (status) => ({
 export const setCurrentStep = (currentStep) => ({
     type: SET_CURRENT_STEP,
     currentStep
+})
+
+export const setRegisterPreloader = (status) => ({
+    type: SET_REGISTER_PRELOADER,
+    status
 })
 
 export const setFirstName = (firstName) => ({
@@ -272,6 +306,11 @@ export const setSecretKey = (secretKey) => ({
     type: SET_SECRET_KEY,
     secretKey
 })
+
+export const resetUserData = () => ({
+    type: RESET_USER_DATA
+})
+
 
 export const setExistingUserError = (error) => ({
     type: SET_EXISTING_USER_ERROR,

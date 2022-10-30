@@ -1,34 +1,57 @@
-const SET_SOMETHING = 'SET_SOMETHING'
+const SET_PROFILE_DATA = 'SET_SET_PROFILE_DATA'
+const SET_PROFILE_PRELOADER = 'SET_PROFILE_PRELOADER'
+const SET_PROFILE_ERROR = 'SET_PROFILE_ERROR'
 
 const startState = {
-    profile: {
-        id: 1,
-        firstName: 'Альберт',
-        lastName: 'Рахманкулов',
-        status: 'Йоу',
-        dateOfBirthday: '10.08.1998',
-        maritalStatus: 'Не женат',
-        city: 'Сертолово',
-        phone: '89992354738',
-        email: 'albiqus@bk.ru',
-        password: 'mypassword'
-    }
+    
+    profileData: {
+        firstName: '',
+        lastName: '',
+        status: '',
+        city: '',
+        dateOfBirthday: '',
+        maritalStatus: '',
+    },
+    profilePreloader: false,
+    profileError: false
 }
-
 
 export const profileReducer = (state = startState, action) => {
     switch (action.type) {
-        case SET_SOMETHING: {
+        case SET_PROFILE_DATA: {
             return {
                 ...state,
+                profileData: action.data
             }
         }
-        default:
-            return state;
+        case SET_PROFILE_PRELOADER: {
+            return {
+                ...state,
+                profilePreloader: action.status
+            }
+        }
+        case SET_PROFILE_ERROR: {
+            return {
+                ...state,
+                profileError: action.text
+            }
+        }
+    default:
+        return state;
     }
 }
 
-export const setSomething = (something) => ({
-    type: SET_SOMETHING,
-    something
+export const setProfileData = (data) => ({
+    type: SET_PROFILE_DATA,
+    data
+})
+
+export const setProfilePreloader = (status) => ({
+    type: SET_PROFILE_PRELOADER,
+    status
+})
+
+export const setProfileError = (text) => ({
+    type: SET_PROFILE_ERROR,
+    text
 })

@@ -1,5 +1,5 @@
 .stepTwo {
-    margin-left: 10px;
+    margin: 0 auto;
     background-color: rgb(158, 158, 158);
     width: 700px;
     height: 800px;
@@ -59,6 +59,10 @@
 
 .stepTwo input::placeholder {
     color: rgba(0, 0, 0, 0.3)
+}
+
+.dateOfBirth:hover{
+    cursor: pointer;
 }
 
 .buttonBox {

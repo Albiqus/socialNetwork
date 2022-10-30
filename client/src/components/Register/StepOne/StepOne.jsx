@@ -5,10 +5,10 @@ import { useState } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { compose } from 'redux';
-import { setCurrentStep, setEmail, setFirstName, setLastName, setPassword,  setPhone, setSecondPassword } from '../../../store/register-reducer';
+import { setCurrentStep, setEmail, setExistingUserError, setFirstName, setLastName, setPassword,  setPhone, setSecondPassword } from '../../../store/register-reducer';
 import { checkExistingUser } from '../../../thunks/checkExistingUser';
-import { format } from '../../../utils/format';
-import { validate } from '../../../utils/validate/validateStepOne';
+import { format } from '../../../utils/register-utils/format';
+import { validate } from '../../../utils/register-utils/validate/validateStepOne';
 import classes from './StepOne.module.css';
 
 const StepOne = (props) => {
@@ -52,6 +52,7 @@ const StepOne = (props) => {
     }
 
     const onEmailChange = (e) => {
+        props.setExistingUserError(null)
         setEmailError(null)
         const value = e.target.value;
         const formattedValue = format(value, 'email')
@@ -71,6 +72,7 @@ const StepOne = (props) => {
 
     const onSecondPasswordChange = (e) => {
         setPasswordError(null)
+
         const value = e.target.value;
         props.setSecondPassword(value)
     }
@@ -81,11 +83,13 @@ const StepOne = (props) => {
 
     const onNextStepButtonClick = (e) => {
         e.preventDefault()
+
         let errors = validate(props.userData.firstName, props.userData.lastName, props.userData.email, props.userData.password, props.userData.secondPassword)
         setFirstNameError(errors.firstNameError)
         setLastNameError(errors.lastNameError)
         setEmailError(errors.emailError)
         setPasswordError(errors.passwordError)
+
         if (!errors.errorStatus) {
             props.checkExistingUser(props.userData.email)
         }
@@ -114,6 +118,7 @@ const StepOne = (props) => {
 
                 <label>Пароль<span title='обязательное поле'>*</span></label>
                 <input onChange={onPasswordChange} value={props.userData.password} type={!firstPasswordVisibility ? 'password' : 'text'} required></input>
+
                 <FontAwesomeIcon onClick={onFirstEyeIconClick} className={classes.firstEyeIcon} icon={firstPasswordVisibility ? faEye : faEyeSlash} />
                 <div className={classes.passwordLevelBox}>
                     <div className={passwordLevel}></div>
@@ -143,8 +148,10 @@ export default compose(connect(mapStateToProps, {
     setCurrentStep,
     setFirstName,
     setLastName,
-    setPhone, setEmail,
+    setPhone,
+    setEmail,
     setPassword,
     setSecondPassword,
-    checkExistingUser
+    checkExistingUser,
+    setExistingUserError
 }))(StepOne)

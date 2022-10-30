@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { compose } from 'redux';
 import { setCity, setCountry, setCurrentStep, setDateOfBirth, setFemaleSelected, setGender, setMaleSelected, setMaritalStatus, setMarriedSelected, setPhone, setUnmarriedSelected } from '../../../store/register-reducer';
-import { format } from '../../../utils/format';
-import { validate } from '../../../utils/validate/validateStepTwo';
+import { format } from '../../../utils/register-utils/format';
+import { validate } from '../../../utils/register-utils/validate/validateStepTwo'
 import classes from './StepTwo.module.css';
 
 export const StepTwo = (props) => {
@@ -56,28 +56,28 @@ export const StepTwo = (props) => {
         setGenderError(null)
         props.setFemaleSelected(false)
         props.setMaleSelected(true)
-        props.setGender('мужской')
+        props.setGender('Мужской')
     }
 
     const onFemaleRadioClick = () => {
         setGenderError(null)
         props.setMaleSelected(false)
         props.setFemaleSelected(true)
-        props.setGender('женский')
+        props.setGender('Женский')
     }
 
     const onUnmarriedRadioClick = () => {
         setMaritalStatusError(null)
         props.setMarriedSelected(false)
         props.setUnmarriedSelected(true)
-        props.setMaritalStatus('холост')
+        props.setMaritalStatus(props.maleSelected ? 'Холост' : 'Не замужем')
     }
 
     const onMarriedRadioClick = () => {
         setMaritalStatusError(null)
         props.setUnmarriedSelected(false)
         props.setMarriedSelected(true)
-        props.setMaritalStatus('женат')
+        props.setMaritalStatus(props.femaleSelected ? 'Замужем' : 'Женат')
     }
 
     const onPrevStepButtonClick = () => {
@@ -118,7 +118,7 @@ export const StepTwo = (props) => {
                 <input onChange={onPhoneChange} value={props.userData.phone} placeholder='+71234567890'></input>
 
                 <label>Дата рождения</label>
-                <input onChange={onDateOfBirthChange} value={props.userData.dateOfBirth} type='date'></input>
+                <input onChange={onDateOfBirthChange} value={props.userData.dateOfBirth} type='date' className={classes.dateOfBirth}></input>
 
                 <label>Пол<span title='обязательное поле'>*</span></label>
                 <div className={classes.radioBox}>
@@ -148,8 +148,8 @@ export const StepTwo = (props) => {
                 </div>
 
                 <div className={classes.buttonBox}>
-                    <button onClick={onPrevStepButtonClick}>Назад</button>
-                    <button onClick={onNextStepButtonClick} >Дальше</button>
+                    <button onClick={onPrevStepButtonClick} type="button">Назад</button>
+                    <button onClick={onNextStepButtonClick} type='submit'>Дальше</button>
                 </div>
             </form >
             <p className={classes.description}>Уже зарегистрированы? <NavLink to='/login'>Войдите</NavLink></p>

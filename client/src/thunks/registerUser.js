@@ -1,7 +1,12 @@
-import { setSuccessRegistrationStatus } from "../store/register-reducer";
+import {
+    setCurrentStep,
+    setRegisterPreloader,
+    setSuccessRegistrationStatus
+} from "../store/register-reducer";
 
 export const registerUser = (userData) => {
     return (dispatch) => {
+        dispatch(setRegisterPreloader(true))
         fetch("http://localhost:4000/api/register", {
             method: 'POST',
             headers: {
@@ -12,8 +17,10 @@ export const registerUser = (userData) => {
             return response.json();
         }).then(function (response) {
             if (response.statusCode === 1) {
-                    dispatch(setSuccessRegistrationStatus(true))
+                dispatch(setSuccessRegistrationStatus(true))
             }
+            dispatch(setRegisterPreloader(false))
+            dispatch(setCurrentStep(1))
         })
     }
 }
