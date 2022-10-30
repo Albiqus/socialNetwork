@@ -1,4 +1,3 @@
-
 .profileBox {
     display: flex;
     flex-direction: row;
@@ -26,6 +25,11 @@
 }
 
 .infoBox {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: space-between;
     margin-top: 30px;
     margin-left: 30px;
     width: 440px;
@@ -38,7 +42,6 @@
     flex-direction: column;
     align-items: flex-start;
     height: 88px;
-    margin-top: 50px;
 }
 
 .moreInfo p {
@@ -64,6 +67,60 @@
     height: 21px;
     width: 440px;
     font-style: italic;
+}
+
+.status:hover {
+    cursor: pointer;
+}
+
+.statusForm {
+    position: relative;
+    display: flex;
+    height: 25px;
+    width: 300px;
+}
+
+.statusForm input {
+    width: 300px;
+    height: 25px;
+    border-radius: 13px;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    font-size: 17px;
+    padding-left: 10px;
+    padding-right: 30px;
+    background-color: rgb(136, 136, 136);
+}
+
+.statusForm input::placeholder {
+    color: rgb(184, 184, 184);
+}
+
+.statusForm button {
+    position: absolute;
+    right: 0;
+    height: 25px;
+    width: 25px;
+    border-radius: 13px;
+    border: none;
+    background-color: rgb(136, 136, 136);
+    background-image: url(../../../public/icons/send.png);
+}
+
+.statusForm button:hover {
+    cursor: pointer;
+}
+
+.statusPrompt {
+    margin: 0;
+    height: 21px;
+    width: 120px;
+    text-decoration: underline;
+}
+
+.statusPrompt:hover {
+    cursor: pointer;
 }
 
 .panelsBox {
@@ -102,7 +159,7 @@
     width: 100%;
 }
 
-.profileError p{
+.profileError p {
     text-align: center;
     margin: 0 auto;
     font-size: 20px;

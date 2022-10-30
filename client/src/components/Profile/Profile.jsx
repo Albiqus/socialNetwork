@@ -1,13 +1,29 @@
-import { useEffect} from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withAuthRedirect } from '../../hocs/withAuthRedirect';
 import { withRouter } from '../../hocs/withRouter';
+import { setProfileStatus } from '../../store/profile-reducer';
 import { getAndSetProfileData } from '../../thunks/getAndSetProfileData';
+import { updateStatus } from '../../thunks/updateStatus';
 import { Preloader } from '../Common/Preloader/Preloader';
 import classes from './Profile.module.css';
 
+
+
 export const Profile = (props) => {
+  
+    const [statusInputStatus, setStatusInputStatus] = useState(false)
+    const [newStatusText, setNewStatusText] = useState(props.profileData.status)
+
+    const currentId = props.router.params.userId
+    const authUserId = localStorage.getItem('id')
+
+    useEffect(() => {
+        setNewStatusText(props.profileData.status)
+    }, [props.profileData.status]);
+
     useEffect(() => {
         let userId = props.router.params.userId
         if (!userId) {
@@ -16,7 +32,23 @@ export const Profile = (props) => {
         props.getAndSetProfileData(userId)
     }, [props.router.params.userId]);
 
+    const onAddStatusClick = () => {
+        setStatusInputStatus(true)
+    }
 
+    const onStatusClick = () => {
+        setStatusInputStatus(true)
+    }
+
+    const onStatusChange = (e) => {
+        setNewStatusText(e.target.value)
+    }
+
+    const onSetStatusClick = () => {
+        props.updateStatus(authUserId, newStatusText)
+        setStatusInputStatus(false)
+    }
+    
 
     return (
         <div>
@@ -40,7 +72,18 @@ export const Profile = (props) => {
                     <div className={classes.infoBox}>
                         <div className={classes.mainInfo}>
                             <p className={classes.name}>{props.profileData.firstName} {props.profileData.lastName}</p>
-                            <p className={classes.status}>{props.profileData.status}</p>
+                            {currentId === authUserId
+                                ? props.profileData.status === ''
+                                    ? !statusInputStatus && <p onClick={onAddStatusClick} className={classes.statusPrompt}>добавьте статус</p>
+                                    : !statusInputStatus && <p onClick={onStatusClick} className={classes.status}>{props.profileData.status}</p>
+                                : <p className={classes.status}>{props.profileData.status}</p>
+                            }
+                            { statusInputStatus &&
+                                <form className={classes.statusForm}>
+                                    <input onChange={onStatusChange} placeholder='напишите что-нибудь..' value={newStatusText} autoFocus></input>
+                                    <button onClick={onSetStatusClick}></button>
+                                </form>
+                            }
                         </div>
                         <div className={classes.moreInfo}>
                             <p>{props.profileData.city !== '' && <span className={classes.title}>Город: </span>}<span className={classes.data}>{props.profileData.city}</span></p>
@@ -68,4 +111,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default compose(connect(mapStateToProps, { getAndSetProfileData }), withRouter, withAuthRedirect)(Profile)
+export default compose(connect(mapStateToProps, { getAndSetProfileData, setProfileStatus, updateStatus }), withRouter, withAuthRedirect)(Profile)

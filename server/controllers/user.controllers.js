@@ -162,6 +162,19 @@ class UserControllers {
             })
         }
     }
+    async setUserStatus(req, res) {
+        const status = req.body.status
+        const id = req.body.id
+
+        const user = await db.query(`UPDATE users set status = $1 where id = $2 RETURNING *`, [status, id])
+        res.json({
+            statusCode: 1,
+            message: 'статус обновлён',
+            data: {
+                status
+            }
+        })
+    }
 }
 
 module.exports = new UserControllers()

@@ -1,9 +1,10 @@
 const SET_PROFILE_DATA = 'SET_SET_PROFILE_DATA'
 const SET_PROFILE_PRELOADER = 'SET_PROFILE_PRELOADER'
 const SET_PROFILE_ERROR = 'SET_PROFILE_ERROR'
+const SET_PROFILE_STATUS = 'SET_PROFILE_STATUS'
 
 const startState = {
-    
+
     profileData: {
         firstName: '',
         lastName: '',
@@ -36,6 +37,15 @@ export const profileReducer = (state = startState, action) => {
                 profileError: action.text
             }
         }
+        case SET_PROFILE_STATUS: {
+            return {
+                ...state,
+                profileData: {
+                    ...state.profileData,
+                    status: action.text
+                }
+            }
+        }
     default:
         return state;
     }
@@ -55,3 +65,9 @@ export const setProfileError = (text) => ({
     type: SET_PROFILE_ERROR,
     text
 })
+
+export const setProfileStatus = (text) => ({
+    type: SET_PROFILE_STATUS,
+    text
+})
+

@@ -66,7 +66,7 @@
     height: 30px;
     border-radius: 15px;
     background-color: rgb(136, 136, 136);
-    background-image: url(../../../public/loupe/loupe.png);
+    background-image: url(../../../public/icons/loupe.png);
     border: none;
     right: 0;
     top: 30px;
@@ -186,7 +186,7 @@
 .status {
     margin: 0;
     margin-left: 20px;
-    margin-top: 10px;
+    margin-top: 5px;
     width: 330px;
     height: 20px;
     font-size: 18px;

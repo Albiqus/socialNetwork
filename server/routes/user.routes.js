@@ -7,6 +7,7 @@ router.get('/users', userControllers.getTenUsers) //10 пользователе�
 router.post('/register', userControllers.registerUser) //зарегистрируйся
 router.get('/login', userControllers.login) //логинизируйся
 router.get('/profile', userControllers.getProfileData) //дай данные профиля
+router.put('/status', userControllers.setUserStatus) //обнови статус пользователя
 
 router.get('/postman', userControllers.getAllUsers) //дай всех пользователей
 module.exports = router
