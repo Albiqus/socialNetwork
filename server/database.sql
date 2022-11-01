@@ -11,5 +11,8 @@ create table users (
     gender VARCHAR(7) NOT NULL,
     marital_status VARCHAR(10) NOT NULL,
     secret_key VARCHAR(20) NOT NULL,
-    status VARCHAR(150)
+    status VARCHAR(150),
+    avatar_big VARCHAR(300),
+    avatar_average VARCHAR(300),
+    avatar_small VARCHAR(300)
 );

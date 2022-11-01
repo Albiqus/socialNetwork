@@ -1,4 +1,5 @@
 const db = require('../data-base')
+const multer = require("multer");
 
 class UserControllers {
     async getAllUsers(req, res) {
@@ -32,6 +33,7 @@ class UserControllers {
         } else {
             currentUserPosition = Number(String(currentPage) + '0') - 10
         }
+        
         const usersResult = await db.query(`SELECT * FROM users OFFSET ${currentUserPosition} LIMIT 10`)
         const tenUsers = usersResult.rows.map((user) => {
             return {
@@ -40,10 +42,11 @@ class UserControllers {
                 last_name: user.last_name,
                 status: user.status,
                 country: user.country,
-                date_of_birth: user.date_of_birth
+                date_of_birth: user.date_of_birth,
+                avatar_average: user.avatar_average
             }
         })
-        console.log(1)
+
         if (tenUsers.length === 0) {
             res.json({
                 statusCode: 0,
@@ -75,6 +78,9 @@ class UserControllers {
             secretKey
         } = req.body
         const status = ''
+        const avatarBig = ''
+        const avatarAverage = ''
+        const avatarSmall = ''
         dateOfBirth = dateOfBirth.replace('-', '.').replace('-', '.')
 
         const existingUser = await db.query(`SELECT * FROM users WHERE email=$1`, [email])
@@ -85,7 +91,7 @@ class UserControllers {
                 message: 'Пользователь с такой почтой уже зарегистрирован'
             })
         } else {
-            const newUser = await db.query('INSERT INTO users (first_name, last_name, status, email, password, country, city, phone, date_of_birth, gender, marital_status, secret_key) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *',
+            const newUser = await db.query('INSERT INTO users (first_name, last_name, status, email, password, country, city, phone, date_of_birth, gender, marital_status, secret_key, avatar_big, avatar_average, avatar_small) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING *',
                 [
                     firstName,
                     lastName,
@@ -98,7 +104,10 @@ class UserControllers {
                     dateOfBirth,
                     gender,
                     maritalStatus,
-                    secretKey
+                    secretKey,
+                    avatarBig,
+                    avatarAverage,
+                    avatarSmall
                 ])
             res.json({
                 statusCode: 1,
@@ -141,6 +150,7 @@ class UserControllers {
         const user = await db.query(`SELECT * FROM users WHERE id=$1`, [userId])
 
         if (user.rows[0]) {
+
             let profileData = {
                 id: user.rows[0].id,
                 firstName: user.rows[0].first_name,
@@ -148,7 +158,10 @@ class UserControllers {
                 status: user.rows[0].status,
                 city: user.rows[0].city,
                 dateOfBirthday: user.rows[0].date_of_birth,
-                maritalStatus: user.rows[0].marital_status
+                maritalStatus: user.rows[0].marital_status,
+                avatarBig: user.rows[0].avatar_big,
+                avatarAverage: user.rows[0].avatar_average,
+                avatarSmall: user.rows[0].avatar_small
             }
             res.json({
                 statusCode: 1,
@@ -172,6 +185,18 @@ class UserControllers {
             message: 'статус обновлён',
             data: {
                 status
+            }
+        })
+    }
+    async uploadAvatar(req, res, next) {
+        const avatarAverage = `http://localhost:4000/images/${req.file.filename}`
+        const userId = req.query.userId
+        const user = db.query(`UPDATE users set avatar_average = $1 where id = $2 RETURNING *`, [avatarAverage, userId])
+        res.json({
+            statusCode: 1,
+            message: 'автар обновлён',
+            data: {
+                avatarAverage
             }
         })
     }

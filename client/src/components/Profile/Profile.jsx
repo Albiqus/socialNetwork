@@ -6,14 +6,14 @@ import { withAuthRedirect } from '../../hocs/withAuthRedirect';
 import { withRouter } from '../../hocs/withRouter';
 import { setProfileStatus } from '../../store/profile-reducer';
 import { getAndSetProfileData } from '../../thunks/getAndSetProfileData';
+import { setAvatar } from '../../thunks/setAvatar';
 import { updateStatus } from '../../thunks/updateStatus';
 import { Preloader } from '../Common/Preloader/Preloader';
 import classes from './Profile.module.css';
 
 
-
 export const Profile = (props) => {
-  
+
     const [statusInputStatus, setStatusInputStatus] = useState(false)
     const [newStatusText, setNewStatusText] = useState(props.profileData.status)
 
@@ -48,7 +48,18 @@ export const Profile = (props) => {
         props.updateStatus(authUserId, newStatusText)
         setStatusInputStatus(false)
     }
-    
+
+    const onAvatarChange = (e) => {
+        const data = new FormData()
+        const img = e.target.files[0]
+        data.append('avatar', img)
+
+        props.setAvatar(data, authUserId)
+    }
+
+    // const onAvatarDefaultClick = (e) => {
+    //     console.log(e.target)
+    // }
 
     return (
         <div>
@@ -67,7 +78,17 @@ export const Profile = (props) => {
             {!props.profilePreloader && !props.profileError &&
                 <div className={classes.profileBox}>
                     <div className={classes.avatarBox}>
-                        <div className={classes.avatar}></div>
+                        {props.profileData.avatarAverage === ''
+                            ? <div>
+                                <label for="avatar">
+                                    <div className={classes.avatarDefault}>
+                                        <p>добавьте аватар</p>
+                                    </div>
+                                </label>
+                                <input onChange={onAvatarChange} type="file" id="avatar" />
+                            </div>
+                            : <img className={classes.avatar} src={props.profileData.avatarAverage} alt='аватар' ></img>
+                        }
                     </div>
                     <div className={classes.infoBox}>
                         <div className={classes.mainInfo}>
@@ -78,7 +99,7 @@ export const Profile = (props) => {
                                     : !statusInputStatus && <p onClick={onStatusClick} className={classes.status}>{props.profileData.status}</p>
                                 : <p className={classes.status}>{props.profileData.status}</p>
                             }
-                            { statusInputStatus &&
+                            {statusInputStatus &&
                                 <form className={classes.statusForm}>
                                     <input onChange={onStatusChange} placeholder='напишите что-нибудь..' value={newStatusText} autoFocus></input>
                                     <button onClick={onSetStatusClick}></button>
@@ -86,9 +107,9 @@ export const Profile = (props) => {
                             }
                         </div>
                         <div className={classes.moreInfo}>
-                            <p>{props.profileData.city !== '' && <span className={classes.title}>Город: </span>}<span className={classes.data}>{props.profileData.city}</span></p>
-                            <p>{props.profileData.dateOfBirthday !== '' && <span className={classes.title}>Дата рождения: </span>}<span className={classes.data}>{props.profileData.dateOfBirthday}</span></p>
-                            <p>{props.profileData.maritalStatus !== '' && <span className={classes.title}>Семейное положение: </span>}<span className={classes.data}>{props.profileData.maritalStatus}</span></p>
+                            {props.profileData.city !== '' && <p><span className={classes.title}>Город: </span><span className={classes.data}>{props.profileData.city}</span></p>}
+                            {props.profileData.dateOfBirthday !== '' && <p><span className={classes.title}>Дата рождения: </span><span className={classes.data}>{props.profileData.dateOfBirthday}</span></p>}
+                            {props.profileData.maritalStatus !== '' && <p><span className={classes.title}>Семейное положение: </span><span className={classes.data}>{props.profileData.maritalStatus}</span></p>}
                         </div>
                     </div>
                     <div className={classes.panelsBox}>
@@ -111,4 +132,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default compose(connect(mapStateToProps, { getAndSetProfileData, setProfileStatus, updateStatus }), withRouter, withAuthRedirect)(Profile)
+export default compose(connect(mapStateToProps, { getAndSetProfileData, setProfileStatus, updateStatus, setAvatar }), withRouter, withAuthRedirect)(Profile)

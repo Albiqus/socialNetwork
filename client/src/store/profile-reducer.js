@@ -2,6 +2,7 @@ const SET_PROFILE_DATA = 'SET_SET_PROFILE_DATA'
 const SET_PROFILE_PRELOADER = 'SET_PROFILE_PRELOADER'
 const SET_PROFILE_ERROR = 'SET_PROFILE_ERROR'
 const SET_PROFILE_STATUS = 'SET_PROFILE_STATUS'
+const SET_PROFILE_AVATAR_AVERAGE = 'SET_PROFILE_AVATAR_AVERAGE'
 
 const startState = {
 
@@ -12,6 +13,9 @@ const startState = {
         city: '',
         dateOfBirthday: '',
         maritalStatus: '',
+        avatarBig: '',
+        avatarAverage: '',
+        avatarSmall: '',
     },
     profilePreloader: false,
     profileError: false
@@ -46,8 +50,18 @@ export const profileReducer = (state = startState, action) => {
                 }
             }
         }
-    default:
-        return state;
+        case SET_PROFILE_AVATAR_AVERAGE: {
+            return {
+                ...state,
+                profileData: {
+                    ...state.profileData,
+                    avatarAverage: action.avatarAverageName
+                }
+            }
+        }
+
+        default:
+            return state;
     }
 }
 
@@ -71,3 +85,7 @@ export const setProfileStatus = (text) => ({
     text
 })
 
+export const setProfileAvatarAverage = (avatarAverageName) => ({
+    type: SET_PROFILE_AVATAR_AVERAGE,
+    avatarAverageName
+})

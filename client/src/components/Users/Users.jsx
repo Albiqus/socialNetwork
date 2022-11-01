@@ -25,10 +25,13 @@ export const Users = (props) => {
     const usersItems = props.users?.map((user) => {
         return (
             <NavLink to={`/profile/${user.id}`} className={classes.userItem} key={user.id} id={user.id}>
-                <div className={classes.avatar}></div>
+                <div className={classes.avatarBox}>
+                    {user.avatar_average === '' && <div className={classes.avatarDefault}></div>}
+                    {user.avatar_average !== '' && <img className={classes.avatar} src={user.avatar_average} alt='аватар'></img>}
+                </div>
                 <div className={classes.mainInfo}>
                     <p className={classes.fullname}><span>{user.first_name}</span> <span>{user.last_name}</span></p>
-                    <p  className={classes.status}>{user.status}</p>
+                    <p className={classes.status}>{user.status}</p>
                 </div>
                 <div className={classes.moreInfo}>
                     <p className={classes.age}>
