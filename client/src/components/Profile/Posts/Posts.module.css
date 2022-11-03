@@ -1,0 +1,59 @@
+.postsBox {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-content: flex-start;
+    height: 400px;
+    width: 410px;
+    margin-top: 20px;
+    margin-left: 30px;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.border {
+    height: 30px;
+    width: 410px;
+    background-color: rgb(136, 136, 136);
+    border-radius: 10px 10px 0px 0px;
+}
+
+.postsHeader {
+    margin: 0;
+    padding-left: 15px;
+    padding-top: 3px;
+    font-weight: bold;
+}
+
+.postsBox textarea {
+    width: 410px;
+    box-sizing: border-box;
+    border-radius: 0px 0px 0px 10px;
+    background-color: rgb(136, 136, 136);
+    margin-top: 5px;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-left: 15px;
+    padding-top: 5px;
+    resize: none;
+    outline: none;
+    border: none;
+
+}
+
+.postsBox textarea::placeholder {
+    color: rgb(184, 184, 184);
+
+}
+
+.postsBox button {
+    height: 30px;
+    border-radius: 0px 0px 10px 10px;
+    background-color: rgb(136, 136, 136);
+    margin-top: 5px;
+    border: none;
+    outline: none;
+}
+
+.postsBox button:hover {
+    cursor: pointer;
+}

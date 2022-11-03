@@ -18,7 +18,6 @@ export const getAndSetTenUsers = (currentPage) => {
         }).then(function (response) {
             if (response.statusCode === 0) {
                 dispatch(setIsNoUsers(true))
-                console.log('пользователей нет уёба')
             } else {
                 localStorage.setItem('pagesCount', response.data.pagesCount)
                 dispatch(setPagesCount(response.data.pagesCount))

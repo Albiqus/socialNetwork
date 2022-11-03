@@ -1,0 +1,39 @@
+.avatarBox {
+    margin-left: 30px;
+    margin-top: 30px;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    overflow: hidden;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.avatarBox input {
+    display: none;
+}
+
+.avatarDefault {
+    height: 200px;
+    width: 200px;
+    background-image: url(../../../images/incognito/incognito-large.png);
+    background-color: rgb(136, 136, 136);
+}
+
+.avatarDefault p {
+    margin: 0;
+    text-align: center;
+    padding-top: 160px;
+    text-decoration: underline;
+}
+
+.avatarDefault:hover {
+    cursor: pointer;
+}
+
+.avatar {
+    object-fit: cover;
+    display: block;
+    height: 100%;
+    width: 100%;
+
+}

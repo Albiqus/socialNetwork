@@ -1,0 +1,52 @@
+.pagesNavBox {
+    display: flex;
+    justify-content: flex-end;
+    width: 250px;
+    height: 30px;
+    margin-top: 30px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.pagesBox {
+    display: flex;
+    justify-content: center;
+    width: 200px;
+    height: 30px;
+}
+
+.page,
+.left,
+.right,
+.gap {
+    width: 25px;
+    height: 30px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.pagesNavBox p {
+    margin: 0;
+    text-align: center;
+    margin-top: 3px;
+    font-weight: bold;
+}
+
+.page:hover,
+.left:hover,
+.right:hover {
+    cursor: pointer;
+    background-color: rgb(136, 136, 136);
+}
+
+.hidden {
+    display: none;
+}
+
+.currentPage {
+    background-color: rgb(136, 136, 136);
+}

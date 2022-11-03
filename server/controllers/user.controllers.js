@@ -27,6 +27,7 @@ class UserControllers {
         const pagesCount = Math.ceil(usersCount / 10)
 
         const currentPage = req.query.page
+  
         let currentUserPosition;
         if (currentPage === '1') {
             currentUserPosition = 0

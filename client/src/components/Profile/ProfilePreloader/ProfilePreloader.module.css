@@ -9,5 +9,16 @@
     border-radius: 10px 10px 10px 10px;
 }
 
+.preloader {
+    width: 500px;
+    height: 500px;
+    display: flex;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+}
 
-
+.preloader img {
+    width: 100px;
+    height: 100px;
+}

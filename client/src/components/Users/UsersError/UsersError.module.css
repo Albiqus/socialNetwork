@@ -1,12 +1,13 @@
 .usersBox {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-content: flex-start;
     background-color: rgb(158, 158, 158);
     width: 700px;
     height: 1200px;
     border-radius: 10px 10px 10px 10px;
 }
 
-
+.noUsersText {
+    margin: 0;
+    text-align: center;
+    padding-top: 30px;
+    font-size: 20px;
+}

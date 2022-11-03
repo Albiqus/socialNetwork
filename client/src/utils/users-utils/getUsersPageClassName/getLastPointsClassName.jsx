@@ -1,4 +1,4 @@
-import classes from '../../../components/Users/Users.module.css';
+import classes from '../../../components/Users/PagesNavigation/PagesNavigation.module.css';
 
 export const getLastPointsClassName = (gap, pagesCount) => {
     let lastPointsClassName = classes.gap

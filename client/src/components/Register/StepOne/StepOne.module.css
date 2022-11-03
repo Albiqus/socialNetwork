@@ -133,19 +133,19 @@
 }
 
 .empty {
-    background-image: url(../../../../public/password_strength/empty.png);
+    background-image: url(../../../images/password_strength/empty.png);
 }
 
 .low {
-    background-image: url(../../../../public/password_strength/low.png);
+    background-image: url(../../../images/password_strength/low.png);
 }
 
 .average {
-    background-image: url(../../../../public/password_strength/average.png);
+    background-image: url(../../../images/password_strength/average.png);
 }
 
 .strong {
-    background-image: url(../../../../public/password_strength/strong.png);
+    background-image: url(../../../images/password_strength/strong.png);
 }
 
 /* icons */

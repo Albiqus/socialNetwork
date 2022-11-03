@@ -1,8 +1,9 @@
+import preloader from '../../../images/preloaders/preloader.svg'
 
 export const Preloader = () => {
     return (
         <div>
-            <img src="preloaders/preloader.svg" alt="загрузка" />
+            <img src={preloader} alt="загрузка" />
         </div>
     )
 }

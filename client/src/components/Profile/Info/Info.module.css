@@ -1,0 +1,99 @@
+.infoBox {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: space-between;
+    margin-top: 30px;
+    margin-left: 30px;
+    width: 440px;
+    height: 200px;
+}
+
+.moreInfo {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 88px;
+}
+
+.moreInfo p {
+    margin: 0;
+    padding-top: 10px;
+}
+
+.moreInfo .title {
+    color: rgb(63, 63, 63);
+}
+
+.moreInfo .data {
+    margin-left: 5px;
+}
+
+.name {
+    margin: 0;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.status {
+    margin: 0;
+    height: 21px;
+    display: inline;
+    font-style: italic;
+}
+
+.status:hover {
+    cursor: pointer;
+}
+
+.statusForm {
+    position: relative;
+    display: flex;
+    height: 25px;
+    width: 300px;
+}
+
+.statusForm input {
+    width: 300px;
+    height: 25px;
+    border-radius: 13px;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    font-size: 17px;
+    padding-left: 10px;
+    padding-right: 30px;
+    background-color: rgb(136, 136, 136);
+}
+
+.statusForm input::placeholder {
+    color: rgb(184, 184, 184);
+}
+
+.statusForm button {
+    position: absolute;
+    right: 0;
+    height: 25px;
+    width: 25px;
+    border-radius: 13px;
+    border: none;
+    background-color: rgb(136, 136, 136);
+    background-image: url(../../../images/icons/send.png);
+}
+
+.statusForm button:hover {
+    cursor: pointer;
+}
+
+.statusPrompt {
+    margin: 0;
+    height: 21px;
+    width: 120px;
+    text-decoration: underline;
+}
+
+.statusPrompt:hover {
+    cursor: pointer;
+}

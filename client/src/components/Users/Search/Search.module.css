@@ -1,0 +1,40 @@
+.searchBox {
+    position: relative;
+    width: 300px;
+    height: 30px;
+    margin-left: 50px;
+}
+
+.search {
+    width: 300px;
+    height: 30px;
+    font-size: 20px;
+    border-radius: 15px;
+    margin-top: 30px;
+    padding-left: 20px;
+    padding-right: 40px;
+    box-sizing: border-box;
+    background-color: rgb(136, 136, 136);
+    border: none;
+    outline: none;
+}
+
+.search::placeholder {
+    color: rgb(184, 184, 184);
+}
+
+.searchBox button {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: rgb(136, 136, 136);
+    background-image: url(../../../images/icons/loupe.png);
+    border: none;
+    right: 0;
+    top: 30px;
+}
+
+.searchBox button:hover {
+    cursor: pointer;
+}

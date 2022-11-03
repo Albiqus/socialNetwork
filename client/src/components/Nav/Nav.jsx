@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { setNavVisible } from '../../store/nav-reducer';
 import { getAndSetTenUsers } from '../../thunks/getAndSetTenUsers';
-import { resetUsersSettings, setCurrentPage } from '../../store/users-reducer';
+import { resetUsersSettings } from '../../store/users-reducer';
 
 
 const Nav = (props) => {
@@ -44,4 +44,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default compose(connect(mapStateToProps, { setNavVisible, getAndSetTenUsers, setCurrentPage, resetUsersSettings }))(Nav)
+export default compose(connect(mapStateToProps, { setNavVisible, getAndSetTenUsers, resetUsersSettings }))(Nav)
