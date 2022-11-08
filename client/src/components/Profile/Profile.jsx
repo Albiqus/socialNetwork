@@ -4,17 +4,18 @@ import { compose } from 'redux';
 import { withAuthRedirect } from '../../hocs/withAuthRedirect';
 import { withRouter } from '../../hocs/withRouter';
 import { setProfileStatus } from '../../store/profile-reducer';
+import { getAndSetPosts } from '../../thunks/getAndSetPosts';
 import { getAndSetProfileData } from '../../thunks/getAndSetProfileData';
 import { setAvatar } from '../../thunks/setAvatar';
 import Avatar from './Avatar/Avatar';
 import Info from './Info/Info';
 import { Panels } from './Panels/Panels';
-import { Posts } from './Posts/Posts';
+import Posts  from './Posts/Posts';
 import classes from './Profile.module.css';
 import ProfileError from './ProfileError/ProfileError';
 import { ProfilePreloader } from './ProfilePreloader/ProfilePreloader';
 
-export const Profile = ({ router, getAndSetProfileData, profilePreloader, profileError }) => {
+export const Profile = ({ router, getAndSetProfileData, getAndSetPosts, profilePreloader, profileError }) => {
 
     useEffect(() => {
         let userId = router.params.userId
@@ -22,14 +23,14 @@ export const Profile = ({ router, getAndSetProfileData, profilePreloader, profil
             userId = localStorage.getItem('id')
         }
         getAndSetProfileData(userId)
-
+        getAndSetPosts(userId)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [router.params.userId]);
 
     return (
         <div>
             {profilePreloader && <ProfilePreloader />}
             {profileError && <ProfileError />}
-
             {!profilePreloader && !profileError &&
                 <div className={classes.profileBox}>
                     <Avatar />
@@ -48,4 +49,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default compose(connect(mapStateToProps, { getAndSetProfileData, setProfileStatus, setAvatar }), withRouter, withAuthRedirect)(Profile)
+export default compose(connect(mapStateToProps, { getAndSetProfileData, getAndSetPosts, setProfileStatus, setAvatar }), withRouter, withAuthRedirect)(Profile)

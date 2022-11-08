@@ -46,6 +46,7 @@
 
 .status:hover {
     cursor: pointer;
+    text-decoration: underline;
 }
 
 .statusForm {
@@ -80,7 +81,7 @@
     border-radius: 13px;
     border: none;
     background-color: rgb(136, 136, 136);
-    background-image: url(../../../images/icons/send.png);
+    background-image: url(../../../images/icons/create-status.png);
 }
 
 .statusForm button:hover {

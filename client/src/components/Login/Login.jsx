@@ -6,8 +6,8 @@ import { setInvalidAuthError } from '../../store/login-reducer';
 import { setSuccessRegistrationStatus } from '../../store/register-reducer';
 import { signIn } from '../../thunks/signIn';
 import { validate } from '../../utils/login-utils/validateLogin';
-import { Preloader } from '../Common/Preloader/Preloader';
 import classes from './Login.module.css';
+import preloader from '../../images/preloaders/ellipsis-preloader.svg'
 
 const Login = (props) => {
 
@@ -44,9 +44,6 @@ const Login = (props) => {
     }
     return (
         <div className={classes.loginBox}>
-            {props.loginPreloader &&
-                <div className={classes.preloader}><Preloader />
-                </div>}
             {!props.loginPreloader &&
                 <div className={classes.login}>
                     {localStorage.getItem('id') && <Navigate to={`/profile/${localStorage.getItem('id')}`} />}
@@ -61,7 +58,8 @@ const Login = (props) => {
                         <label>Пароль</label>
                         <input onChange={onPasswordChange} value={password} type="password" />
                         <div className={classes.buttonBox}>
-                            <button onClick={onSignInButtonClick}>Войти</button>
+                            {!props.loginPreloader && <button onClick={onSignInButtonClick}>Войти</button>}
+                            {props.loginPreloader && <button disabled><img src={preloader} alt=''></img></button>}
                         </div>
                     </form>
                     <p className={classes.description}>Нет учётной записи? <NavLink to='/register'>Зарегистрируйтесь</NavLink></p>

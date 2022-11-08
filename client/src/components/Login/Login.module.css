@@ -75,9 +75,10 @@
 }
 
 .loginBox button {
+    display: flex;
     margin: 0 auto;
-    margin-top: 20px;
     display: block;
+    margin-top: 20px;
     width: 200px;
     height: 30px;
     font-size: 18px;
@@ -90,6 +91,14 @@
     cursor: pointer;
 }
 
+.loginBox img {
+    margin: 0 auto;
+    height: 30px;
+    width: 180px;
+    outline: none;
+    box-sizing: border-box;
+}
+
 .description {
     margin: 0;
     text-align: center;
@@ -97,20 +106,6 @@
 
 .loginBox a {
     text-decoration: none;
-}
-
-.preloader {
-    width: 500px;
-    height: 500px;
-    display: flex;
-    margin: 0 auto;
-    align-items: center;
-    justify-content: center;
-}
-
-.preloader img {
-    width: 100px;
-    height: 100px;
 }
 
 /* errors */

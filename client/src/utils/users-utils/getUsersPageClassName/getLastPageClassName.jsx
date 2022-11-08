@@ -1,4 +1,4 @@
-import classes from '../../../components/Users/PagesNavigation/PagesNavigation.module.css';
+import classes from '../../../components/Users/UsersNavigation/UsersNavigation.module.css';
 
 export const getLastPageClassName = (currentPage, pagesCount) => {
     let lastPageClassName = classes.page

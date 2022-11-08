@@ -16,3 +16,20 @@ create table users (
     avatar_average VARCHAR(300),
     avatar_small VARCHAR(300)
 );
+
+create table posts (
+    id BIGSERIAL NOT NULL PRIMARY KEY,
+    user_id VARCHAR(10) NOT NULL,
+    post_text VARCHAR(500),
+    image VARCHAR(300),
+    date VARCHAR(30) NOT NULL
+);
+
+create table comments (
+    id BIGSERIAL NOT NULL PRIMARY KEY,
+    user_id VARCHAR(10) NOT NULL,
+    post_id VARCHAR(10) NOT NULL,
+    comment_text VARCHAR(500),
+    image VARCHAR(300),
+    date VARCHAR(30) NOT NULL
+);

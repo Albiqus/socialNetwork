@@ -1,14 +1,22 @@
-
+import { compose } from 'redux';
 import classes from './Posts.module.css';
+import { withRouter } from '../../../hocs/withRouter';
+import { PostsHeader } from './PostsHeader/PostsHeader';
+import PostsForm from './PostsForm/PostsForm';
+import PostsItems from './PostsItems/PostsItems';
 
-export const Posts = (props) => {
+const Posts = (props) => {
+
+    const currentId = props.router.params.userId
+    const authUserId = localStorage.getItem('id')
+
     return (
         <div className={classes.postsBox} >
-            <div className={classes.border}>
-                <p className={classes.postsHeader}>блог</p>
-            </div>
-            <textarea placeholder='Что у вас нового?' rows='2'></textarea>
-            <button>Опубликовать</button>
+            <PostsHeader />
+            {currentId === authUserId && <PostsForm />}
+            <PostsItems/>
         </div>
     )
 }
+
+export default compose(withRouter)(Posts)

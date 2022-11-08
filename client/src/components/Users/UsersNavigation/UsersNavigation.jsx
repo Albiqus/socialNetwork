@@ -7,13 +7,13 @@ import { getLastPointsClassName } from '../../../utils/users-utils/getUsersPageC
 import { getSecondGapClassName } from '../../../utils/users-utils/getUsersPageClassName/getSecondGapClassName';
 import { getThirdGapClassName } from '../../../utils/users-utils/getUsersPageClassName/getThirdGapClassName';
 import { getCurrentGaps } from '../../../utils/users-utils/getCurrentGaps';
-import classes from './PagesNavigation.module.css';
+import classes from './UsersNavigation.module.css';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { setGaps } from '../../../store/users-reducer';
 import { getAndSetTenUsers } from '../../../thunks/getAndSetTenUsers';
 
-const PagesNavigation = ({ gaps, setGaps, getAndSetTenUsers }) => {
+const UsersNavigation = ({ gaps, setGaps, getAndSetTenUsers }) => {
 
     const pagesCount = Number(localStorage.getItem('pagesCount'))
     let currentPage = Number(localStorage.getItem('currentUsersPage'))
@@ -101,4 +101,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default compose(connect(mapStateToProps, { setGaps, getAndSetTenUsers }))(PagesNavigation)
+export default compose(connect(mapStateToProps, { setGaps, getAndSetTenUsers }))(UsersNavigation)

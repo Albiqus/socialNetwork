@@ -3,6 +3,9 @@ const SET_PROFILE_PRELOADER = 'SET_PROFILE_PRELOADER'
 const SET_PROFILE_ERROR = 'SET_PROFILE_ERROR'
 const SET_PROFILE_STATUS = 'SET_PROFILE_STATUS'
 const SET_PROFILE_AVATAR_AVERAGE = 'SET_PROFILE_AVATAR_AVERAGE'
+const SET_POSTS = 'SET_POSTS'
+const SET_NEW_POST_PRELOADER = 'SET_NEW_POST_PRELOADER'
+const DELETE_POST_PRELOADER = 'DELETE_POST_PRELOADER'
 
 const startState = {
 
@@ -17,8 +20,14 @@ const startState = {
         avatarAverage: '',
         avatarSmall: '',
     },
+    posts: null,
+    newPostPreloader: false,
+    deletePostPreloader: {
+        status: false,
+        postId: null
+    },
     profilePreloader: false,
-    profileError: false
+    profileError: false,
 }
 
 export const profileReducer = (state = startState, action) => {
@@ -59,7 +68,27 @@ export const profileReducer = (state = startState, action) => {
                 }
             }
         }
-
+        case SET_POSTS: {
+            return {
+                ...state,
+                posts: action.posts
+            }
+        }
+        case SET_NEW_POST_PRELOADER: {
+            return {
+                ...state,
+                newPostPreloader: action.status
+            }
+        }
+        case DELETE_POST_PRELOADER: {
+            return {
+                ...state,
+                deletePostPreloader: {
+                    status: action.status,
+                    postId: action.postId
+                }
+            }
+        }
         default:
             return state;
     }
@@ -88,4 +117,20 @@ export const setProfileStatus = (text) => ({
 export const setProfileAvatarAverage = (avatarAverageName) => ({
     type: SET_PROFILE_AVATAR_AVERAGE,
     avatarAverageName
+})
+
+export const setPosts = (posts) => ({
+    type: SET_POSTS,
+    posts
+})
+
+export const setNewPostPreloader = (status) => ({
+    type: SET_NEW_POST_PRELOADER,
+    status
+})
+
+export const setDeletePostPreloader = (status, postId) => ({
+    type: DELETE_POST_PRELOADER,
+    status,
+    postId
 })

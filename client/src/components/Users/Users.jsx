@@ -4,10 +4,10 @@ import { withAuthRedirect } from '../../hocs/withAuthRedirect';
 import { getAndSetTenUsers } from '../../thunks/getAndSetTenUsers';
 import classes from './Users.module.css';
 import { UsersPreloader } from './UsersPreloader/UsersPreloader';
-import { Search } from './Search/Search';
-import PagesNavigation  from './PagesNavigation/PagesNavigation';
+import UsersNavigation from './UsersNavigation/UsersNavigation';
 import UsersItems from './UsersItems/UsersItems';
 import { UsersError } from './UsersError/UsersError';
+import { UsersForm } from './UsersForm/UsersForm';
 
 export const Users = (props) => {
 
@@ -27,10 +27,10 @@ export const Users = (props) => {
 
             {!props.usersPreloader && !props.isNoUsers &&
                 <div className={classes.usersBox}>
-                    <Search />
-                    <PagesNavigation />
+                    <UsersForm />
+                    <UsersNavigation />
                     <UsersItems />
-                    <PagesNavigation  />
+                    <UsersNavigation  />
                 </div >
             }
 

@@ -1,7 +1,6 @@
 const db = require('../data-base')
-const multer = require("multer");
 
-class UserControllers {
+class UsersControllers {
     async getAllUsers(req, res) {
         const users = await db.query(`SELECT * FROM users`)
         res.json(users.rows)
@@ -203,4 +202,4 @@ class UserControllers {
     }
 }
 
-module.exports = new UserControllers()
+module.exports = new UsersControllers()

@@ -1,0 +1,100 @@
+.postsForm {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+
+}
+
+.postsForm textarea {
+    width: 410px;
+    height: 50px;
+    box-sizing: border-box;
+    border-radius: 0px 0px 0px 10px;
+    background-color: rgb(136, 136, 136);
+    margin-top: 5px;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-left: 15px;
+    padding-top: 5px;
+    resize: none;
+    outline: none;
+    border: none;
+
+}
+
+.postsForm textarea::placeholder {
+    color: rgb(184, 184, 184);
+
+}
+
+.buttonsBox {
+    display: flex;
+    margin-top: 5px;
+}
+
+.hidden {
+    display: none
+}
+
+.uploadImageBox {
+    height: 40px;
+    width: 40px;
+    display: flex;
+    overflow: hidden;
+}
+
+.uploadImage {
+    object-fit: cover;
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.uploadImageText {
+    width: 205px;
+    margin: 0;
+    text-align: center;
+    margin-top: 7px;
+    color: green;
+}
+
+.postsForm input[type="file"] {
+    display: none;
+}
+
+.postsForm label {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+}
+
+.postsForm label img {
+    margin: 0 auto;
+    margin-top: 3.5px;
+    width: 33px;
+    height: 33px;
+}
+
+.postsForm label:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.3)
+}
+
+.postsForm button {
+    height: 40px;
+    width: 120px;
+    border: 0;
+    border-radius: 0px 0px 10px 10px;
+    color: rgba(255, 255, 255, 0.644);
+    background-color: rgb(136, 136, 136);
+}
+
+.postsForm button:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.2)
+}
+
+.postsForm button img {
+    width: 40px;
+}

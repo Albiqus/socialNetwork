@@ -1,4 +1,4 @@
-import classes from '../../../components/Users/PagesNavigation/PagesNavigation.module.css';
+import classes from '../../../components/Users/UsersNavigation/UsersNavigation.module.css';
 
 export const getSecondGapClassName = (currentPage, gap, pagesCount) => {
     let secondGapClassName = classes.page;

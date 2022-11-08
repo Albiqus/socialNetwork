@@ -11,7 +11,7 @@ export const signIn = (login, password) => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8'
-            },
+            }
         }).then(function (response) {
             return response.json();
         }).then(function (response) {

@@ -1,6 +1,6 @@
-import classes from './Search.module.css';
+import classes from './UsersForm.module.css';
 
-export const Search = () => {
+export const UsersForm = () => {
     
     return (
         <form className={classes.searchBox}>
