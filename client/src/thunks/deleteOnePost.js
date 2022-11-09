@@ -1,9 +1,10 @@
 import {
+    deletePost,
     setDeletePostPreloader,
     setPosts,
 } from "../store/profile-reducer";
 
-export const deletePost = (userId, postId) => {
+export const deleteOnePost = (userId, postId) => {
     return (dispatch) => {
         dispatch(setDeletePostPreloader(true, postId))
         fetch(`http://localhost:4000/api/deletePost?userId=${userId}&postId=${postId}`, {
@@ -15,7 +16,7 @@ export const deletePost = (userId, postId) => {
             return response.json();
         }).then(function (response) {
             if (response.statusCode === 1) {
-                dispatch(setPosts(response.data.posts))
+                dispatch(deletePost(response.data.postId))
             }
             dispatch(setDeletePostPreloader(false, null))
         })

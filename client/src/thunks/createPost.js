@@ -1,6 +1,6 @@
 import {
-    setNewPostPreloader,
-    setPosts
+    setNewPost,
+    setNewPostPreloader
 } from "../store/profile-reducer";
 
 export const updatePost = (data, userId, postId) => {
@@ -12,7 +12,7 @@ export const updatePost = (data, userId, postId) => {
             return response.json();
         }).then(function (response) {
             if (response.statusCode === 1) {
-                dispatch(setPosts(response.data.posts))
+                 dispatch(setNewPost(response.data.newPost))
             }
             dispatch(setNewPostPreloader(false))
         })
@@ -40,7 +40,7 @@ export const createPost = (userId, postText, data, date, imageStatus) => {
                 dispatch(updatePost(data, userId, response.data.postId))
             }
             if (response.statusCode === 1 && !response.data.imageStatus) {
-                dispatch(setPosts(response.data.posts))
+                dispatch(setNewPost(response.data.newPost))
                 dispatch(setNewPostPreloader(false))
             }
         })

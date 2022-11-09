@@ -22,7 +22,14 @@ create table posts (
     user_id VARCHAR(10) NOT NULL,
     post_text VARCHAR(500),
     image VARCHAR(300),
-    date VARCHAR(30) NOT NULL
+    date VARCHAR(30) NOT NULL,
+    likes varchar (10)
+);
+
+create table users_likes (
+    auth_user_id VARCHAR(10) NOT NULL,
+    user_id VARCHAR(10) NOT NULL,
+    post_id VARCHAR(10) NOT NULL
 );
 
 create table comments (

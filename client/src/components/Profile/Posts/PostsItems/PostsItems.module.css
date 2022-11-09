@@ -131,3 +131,76 @@
     height: 100%;
     width: 100%;
 }
+
+.communicationBox {
+    display: flex;
+    justify-content: flex-start;
+    height: 50px;
+    width: 410px;
+    background-color: rgb(136, 136, 136);
+    border-top: 2px solid rgb(158, 158, 158)
+}
+
+.likesBox {
+    display: flex;
+    justify-content: center;
+    height: 30px;
+    width: auto;
+    margin-top: 10px;
+    margin-left: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    background-color: rgb(172, 172, 172);
+    border-radius: 15px 15px 15px 15px;
+}
+
+.likesBox:hover {
+    cursor: pointer;
+}
+
+.likesBox img {
+    height: 20px;
+    margin-top: 5px;
+}
+
+.likesBox p {
+    margin: 0;
+    height: 20px;
+    margin-top: 3px;
+    margin-left: 4px;
+}
+
+.commentsBox {
+    display: flex;
+    justify-content: center;
+    height: 30px;
+    width: auto;
+    margin-top: 10px;
+    margin-left: 10px;
+    background-color: rgb(172, 172, 172);
+    border-radius: 15px 15px 15px 15px;
+}
+
+.commentsBox:hover {
+    cursor: pointer;
+}
+
+.commentsBox img {
+    height: 20px;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.commentsBox p {
+    margin: 0;
+    height: 20px;
+    margin-top: 3px;
+    margin-left: 4px;
+    margin-right: 10px;
+}
+
+.noPostsText{
+    margin: 0 auto;
+   margin-top: 30px;
+   color: rgba(255, 255, 255, 0.644);
+}
