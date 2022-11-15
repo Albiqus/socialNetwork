@@ -1,0 +1,104 @@
+.commentForm {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    width: 380px;
+    margin-left: 20px;
+}
+
+.avatarBox {
+    width: 40px;
+    height: 40px;
+    margin-top: 10px;
+    display: flex;
+    overflow: hidden;
+    border-radius: 10px 10px 10px 10px;
+    margin-right: 10px;
+}
+
+.avatar {
+    object-fit: cover;
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.commentForm textarea {
+    width: 245px;
+    height: 40px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px 10px 10px 10px;
+    padding-left: 5px;
+    padding-top: 5px;
+    background-color: rgb(172, 172, 172);
+    font-size: 16px;
+    font-family: Arial,
+        Helvetica,
+        sans-serif;
+    resize: none;
+    outline: none;
+    border: none;
+}
+
+.commentForm label {
+    display: flex;
+    margin-top: 10px;
+    margin-left: 5px;
+    width: 40px;
+    height: 40px;
+}
+
+.commentForm label img {
+    margin: 0 auto;
+    margin-top: 5px;
+    width: 30px;
+    height: 30px;
+}
+
+.commentForm label:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.144)
+}
+
+.sendCommentButton {
+    width: 30px;
+    height: 30px;
+    margin-top: 10px;
+    padding: 5px 5px 5px 5px;
+}
+
+.sendCommentButton:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.144)
+}
+
+.commentForm input[type="file"] {
+    display: none;
+}
+
+.uploadImageText {
+    width: 205px;
+    margin: 0;
+    margin-top: 7px;
+    text-align: center;
+    color: green;
+}
+
+.uploadImageBox {
+    height: 40px;
+    width: 40px;
+    margin-left: 50px;
+    margin-bottom: 10px;
+    display: flex;
+    overflow: hidden;
+}
+
+.uploadImage {
+    object-fit: cover;
+    display: block;
+    height: 100%;
+    width: 100%;
+}

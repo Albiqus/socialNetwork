@@ -1,0 +1,9 @@
+.commentItem {
+    display: flex;
+    flex-wrap: wrap;
+    width: 390px;
+    overflow: auto;
+    margin-top: 10px;
+    background-color: rgb(172, 172, 172);
+    border-radius: 10px 10px 10px 10px;
+}

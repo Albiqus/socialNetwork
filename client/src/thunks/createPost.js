@@ -1,4 +1,5 @@
 import {
+    setIsPostCreation,
     setNewPost,
     setNewPostPreloader
 } from "../store/profile-reducer";
@@ -15,6 +16,7 @@ export const updatePost = (data, userId, postId) => {
                  dispatch(setNewPost(response.data.newPost))
             }
             dispatch(setNewPostPreloader(false))
+            dispatch(setIsPostCreation(false))
         })
     }
 }
@@ -42,6 +44,7 @@ export const createPost = (userId, postText, data, date, imageStatus) => {
             if (response.statusCode === 1 && !response.data.imageStatus) {
                 dispatch(setNewPost(response.data.newPost))
                 dispatch(setNewPostPreloader(false))
+                dispatch(setIsPostCreation(false))
             }
         })
     }

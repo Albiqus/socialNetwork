@@ -4,7 +4,7 @@ import { withRouter } from '../../../hocs/withRouter';
 import { setAvatar } from '../../../thunks/setAvatar';
 import classes from './Avatar.module.css';
 
-const Avatar = ({ setAvatar, avatarAverage, router }) => {
+const Avatar = ({ setAvatar, avatar, router }) => {
 
     const currentId = router.params.userId
     const authUserId = localStorage.getItem('id')
@@ -19,7 +19,7 @@ const Avatar = ({ setAvatar, avatarAverage, router }) => {
 
     return (
         <div className={classes.avatarBox}>
-            {avatarAverage === '' && <div>
+            {avatar === '' && <div>
                 <label htmlFor="avatar">
                     <div className={classes.avatarDefault}>
                         {currentId === authUserId && <p>добавьте аватар</p>}
@@ -27,14 +27,14 @@ const Avatar = ({ setAvatar, avatarAverage, router }) => {
                 </label>
                 {currentId === authUserId && <input onChange={onAvatarChange} type="file" id="avatar" />}
             </div>}
-            {avatarAverage !== '' && <img className={classes.avatar} src={avatarAverage} alt='аватар' ></img>}
+            {avatar !== '' && <img className={classes.avatar} src={avatar} alt='аватар' ></img>}
         </div>
     )
 }
 
 const mapStateToProps = (state) => {
     return {
-        avatarAverage: state.profilePage.profileData.avatarAverage,
+        avatar: state.profilePage.profileData.avatar,
     }
 }
 

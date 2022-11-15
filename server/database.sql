@@ -12,21 +12,20 @@ create table users (
     marital_status VARCHAR(10) NOT NULL,
     secret_key VARCHAR(20) NOT NULL,
     status VARCHAR(150),
-    avatar_big VARCHAR(300),
-    avatar_average VARCHAR(300),
-    avatar_small VARCHAR(300)
+    avatar VARCHAR(300)
 );
 
 create table posts (
     id BIGSERIAL NOT NULL PRIMARY KEY,
     user_id VARCHAR(10) NOT NULL,
-    post_text VARCHAR(500),
+    text VARCHAR(500),
     image VARCHAR(300),
     date VARCHAR(30) NOT NULL,
-    likes varchar (10)
+    likes_count VARCHAR(10),
+    comments_count VARCHAR(10)
 );
 
-create table users_likes (
+create table user_posts_likes (
     auth_user_id VARCHAR(10) NOT NULL,
     user_id VARCHAR(10) NOT NULL,
     post_id VARCHAR(10) NOT NULL
@@ -34,9 +33,19 @@ create table users_likes (
 
 create table comments (
     id BIGSERIAL NOT NULL PRIMARY KEY,
-    user_id VARCHAR(10) NOT NULL,
     post_id VARCHAR(10) NOT NULL,
-    comment_text VARCHAR(500),
+    user_id VARCHAR(10) NOT NULL,
+    first_name VARCHAR(15) NOT NULL,
+    last_name VARCHAR(25) NOT NULL,
+    text VARCHAR(500),
+    avatar VARCHAR(300),
     image VARCHAR(300),
-    date VARCHAR(30) NOT NULL
+    date VARCHAR(30) NOT NULL,
+    likes_count VARCHAR(10)
+);
+
+create table user_comments_likes (
+    auth_user_id VARCHAR(10) NOT NULL,
+    user_id VARCHAR(10) NOT NULL,
+    comment_id VARCHAR(10) NOT NULL
 );

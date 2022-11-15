@@ -1,0 +1,35 @@
+.commentContent {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: flex-start;
+    width: 410px;
+    overflow: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+    padding: 0px 10px 0px 60px;
+}
+
+
+.commentContent p {
+    margin: 0;
+    font-size: 16px;
+    font-family: Arial,
+        Helvetica,
+        sans-serif;
+}
+
+.commentContent div {
+    margin-top: 10px;
+    width: 200px;
+    height: 200px;
+    display: block;
+    overflow: hidden;
+}
+
+.commentContent div img {
+    object-fit: cover;
+    display: block;
+    height: 100%;
+    width: 100%;
+}

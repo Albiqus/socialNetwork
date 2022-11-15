@@ -1,0 +1,71 @@
+.communicationBox {
+    display: flex;
+    justify-content: flex-start;
+    height: 50px;
+    width: 410px;
+    background-color: rgb(136, 136, 136);
+    border-top: 2px solid rgb(158, 158, 158)
+}
+
+/* ================================= likes button box ================================= */
+
+.likesButtonBox {
+    display: flex;
+    justify-content: center;
+    height: 30px;
+    width: auto;
+    margin-top: 10px;
+    margin-left: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    background-color: rgb(172, 172, 172);
+    border-radius: 15px 15px 15px 15px;
+}
+
+.likesButtonBox:hover {
+    cursor: pointer;
+}
+
+.likesButtonBox img {
+    height: 20px;
+    margin-top: 5px;
+}
+
+.likesButtonBox p {
+    margin: 0;
+    height: 20px;
+    margin-top: 3px;
+    margin-left: 4px;
+}
+
+/* ================================= comments button box ================================= */
+
+.commentsButtonBox {
+    display: flex;
+    justify-content: center;
+    height: 30px;
+    width: auto;
+    margin-top: 10px;
+    margin-left: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    background-color: rgb(172, 172, 172);
+    border-radius: 15px 15px 15px 15px;
+}
+
+.commentsButtonBox:hover {
+    cursor: pointer;
+}
+
+.commentsButtonBox img {
+    height: 20px;
+    margin-top: 5px;
+}
+
+.commentsButtonBox p {
+    margin: 0;
+    height: 20px;
+    margin-top: 3px;
+    margin-left: 4px;
+}
+

@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import { withAuthRedirect } from '../../hocs/withAuthRedirect';
 import { withRouter } from '../../hocs/withRouter';
 import { setProfileStatus } from '../../store/profile-reducer';
+import { getAndSetAuthUserData } from '../../thunks/getAndSetAuthUserData';
 import { getAndSetAuthUserLikes } from '../../thunks/getAndSetAuthUserLikes';
 import { getAndSetPosts } from '../../thunks/getAndSetPosts';
 import { getAndSetProfileData } from '../../thunks/getAndSetProfileData';
@@ -16,17 +17,18 @@ import classes from './Profile.module.css';
 import ProfileError from './ProfileError/ProfileError';
 import { ProfilePreloader } from './ProfilePreloader/ProfilePreloader';
 
-export const Profile = ({ router, getAndSetProfileData, getAndSetPosts, getAndSetAuthUserLikes, profilePreloader, profileError }) => {
+export const Profile = ({ router, getAndSetProfileData, getAndSetPosts, getAndSetAuthUserLikes, getAndSetAuthUserData, profilePreloader, profileError }) => {
 
     const authUserId = localStorage.getItem('id')
 
     useEffect(() => {
         let userId = router.params.userId
         if (!userId) {
-            userId = localStorage.getItem('id')
+            userId = authUserId
         }
         getAndSetProfileData(userId)
         getAndSetPosts(userId)
+        getAndSetAuthUserData(authUserId)
         getAndSetAuthUserLikes(authUserId, userId)
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [router.params.userId]);
@@ -53,4 +55,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default compose(connect(mapStateToProps, { getAndSetProfileData, getAndSetPosts, getAndSetAuthUserLikes, setProfileStatus, setAvatar }), withRouter, withAuthRedirect)(Profile)
+export default compose(connect(mapStateToProps, { getAndSetProfileData, getAndSetPosts, getAndSetAuthUserLikes, setProfileStatus, getAndSetAuthUserData, setAvatar }), withRouter, withAuthRedirect)(Profile)

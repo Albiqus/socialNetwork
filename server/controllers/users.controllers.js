@@ -43,7 +43,7 @@ class UsersControllers {
                 status: user.status,
                 country: user.country,
                 date_of_birth: user.date_of_birth,
-                avatar_average: user.avatar_average
+                avatar: user.avatar
             }
         })
 
@@ -78,9 +78,7 @@ class UsersControllers {
             secretKey
         } = req.body
         const status = ''
-        const avatarBig = ''
-        const avatarAverage = ''
-        const avatarSmall = ''
+        const avatar = ''
         dateOfBirth = dateOfBirth.replace('-', '.').replace('-', '.')
 
         const existingUser = await db.query(`SELECT * FROM users WHERE email=$1`, [email])
@@ -91,7 +89,7 @@ class UsersControllers {
                 message: 'Пользователь с такой почтой уже зарегистрирован'
             })
         } else {
-            const newUser = await db.query('INSERT INTO users (first_name, last_name, status, email, password, country, city, phone, date_of_birth, gender, marital_status, secret_key, avatar_big, avatar_average, avatar_small) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING *',
+            const newUser = await db.query('INSERT INTO users (first_name, last_name, status, email, password, country, city, phone, date_of_birth, gender, marital_status, secret_key, avatar) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *',
                 [
                     firstName,
                     lastName,
@@ -105,9 +103,7 @@ class UsersControllers {
                     gender,
                     maritalStatus,
                     secretKey,
-                    avatarBig,
-                    avatarAverage,
-                    avatarSmall
+                    avatar
                 ])
             res.json({
                 statusCode: 1,
@@ -159,9 +155,7 @@ class UsersControllers {
                 city: user.rows[0].city,
                 dateOfBirthday: user.rows[0].date_of_birth,
                 maritalStatus: user.rows[0].marital_status,
-                avatarBig: user.rows[0].avatar_big,
-                avatarAverage: user.rows[0].avatar_average,
-                avatarSmall: user.rows[0].avatar_small
+                avatar: user.rows[0].avatar
             }
             res.json({
                 statusCode: 1,
@@ -179,7 +173,7 @@ class UsersControllers {
         const status = req.body.status
         const id = req.body.id
 
-        const user = await db.query(`UPDATE users set status = $1 where id = $2 RETURNING *`, [status, id])
+        await db.query(`UPDATE users set status = $1 where id = $2 RETURNING *`, [status, id])
         res.json({
             statusCode: 1,
             message: 'статус обновлён',
@@ -189,14 +183,14 @@ class UsersControllers {
         })
     }
     async uploadAvatar(req, res, next) {
-        const avatarAverage = `http://localhost:4000/images/${req.file.filename}`
+        const avatar = `http://localhost:4000/images/${req.file.filename}`
         const userId = req.query.userId
-        const user = db.query(`UPDATE users set avatar_average = $1 where id = $2 RETURNING *`, [avatarAverage, userId])
+        db.query(`UPDATE users set avatar = $1 where id = $2 RETURNING *`, [avatar, userId])
         res.json({
             statusCode: 1,
             message: 'автар обновлён',
             data: {
-                avatarAverage
+                avatar
             }
         })
     }

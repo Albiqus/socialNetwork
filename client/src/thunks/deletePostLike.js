@@ -3,9 +3,9 @@ import {
     updatePost
 } from "../store/profile-reducer";
 
-export const deleteLike = (authUserId, currentId, postId, newLikesCount) => {
+export const deletePostLike = (authUserId, currentId, postId, newLikesCount) => {
     return (dispatch) => {
-        fetch(`http://localhost:4000/api/deleteLike`, {
+        fetch(`http://localhost:4000/api/deletePostLike`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8'
@@ -20,7 +20,7 @@ export const deleteLike = (authUserId, currentId, postId, newLikesCount) => {
             return response.json();
         }).then(function (response) {
             if (response.statusCode === 1) {
-                dispatch(updatePost(response.data.newPost))
+                dispatch(updatePost(response.data.updatedPost))
                 dispatch(deleteLikedPostId(response.data.deletedlikedPostsId))
             }
         })

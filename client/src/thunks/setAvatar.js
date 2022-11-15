@@ -1,4 +1,6 @@
-import { setProfileAvatarAverage } from "../store/profile-reducer";
+import {
+    setProfileAvatar
+} from "../store/profile-reducer";
 
 export const setAvatar = (data, id) => {
     return (dispatch) => {
@@ -8,7 +10,8 @@ export const setAvatar = (data, id) => {
         }).then(function (response) {
             return response.json();
         }).then(function (response) {
-            dispatch(setProfileAvatarAverage(response.data.avatarAverage))
+            console.log(response.data)
+            dispatch(setProfileAvatar(response.data.avatar))
         })
     }
 }

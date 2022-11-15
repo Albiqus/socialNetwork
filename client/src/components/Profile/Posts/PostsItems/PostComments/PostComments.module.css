@@ -1,0 +1,13 @@
+.commentsBox {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 410px;
+    overflow: auto;
+    background-color: rgb(136, 136, 136);
+    border-top: 2px solid rgb(158, 158, 158);
+}
+
+
+
+

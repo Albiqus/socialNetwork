@@ -9,7 +9,9 @@ export const getDateFormat = (date) => {
     const month = MONTHS[periods[1]]
     const year = periods[2]
     const hours = periods[3]
-    const minutes = periods[4]
-
+    let minutes = periods[4]
+    if (minutes.length === 1) {
+        minutes = `0${minutes}`
+    }
     return `${day} ${month} ${year} в ${hours}:${minutes}`
 }

@@ -9,18 +9,16 @@ import classes from './PostsForm.module.css';
 
 import uploadPostImageIMG from '../../../../images/icons/upload-post-image.png'
 import ellipsisPreloader from '../../../../images/preloaders/ellipsis-preloader.svg'
+import { setIsPostCreation } from '../../../../store/profile-reducer';
 
 
-const PostsForm = ({ createPost, newPostPreloader }) => {
+const PostsForm = ({ createPost, newPostPreloader, setIsPostCreation, isPostCreation }) => {
 
     const authUserId = localStorage.getItem('id')
     const [newPostText, setNewPostText] = useState('')
-    const [isPostCreation, setIsPostCreation] = useState(false)
     const [uploadIMG, setUploadIMG] = useState(null)
 
     const formRef = useRef()
-
-
 
     useEffect(() => {
         const handleClick = (e) => {
@@ -36,7 +34,7 @@ const PostsForm = ({ createPost, newPostPreloader }) => {
         return () => {
             document.removeEventListener('click', handleClick)
         }
-    }, [isPostCreation])
+    }, [isPostCreation, setIsPostCreation])
 
 
     const onFormFocus = () => {
@@ -70,7 +68,7 @@ const PostsForm = ({ createPost, newPostPreloader }) => {
             e.target[1].value = null
         }
     }
-
+    
     return (
         <form ref={formRef} onFocus={onFormFocus} onSubmit={onFormSubmit} className={classes.postsForm}>
             <textarea onChange={onTextareaChange} placeholder='Что у вас нового?' rows='2' value={newPostText}></textarea>
@@ -89,10 +87,11 @@ const PostsForm = ({ createPost, newPostPreloader }) => {
 const mapStateToProps = (state) => {
     return {
         newPostPreloader: state.profilePage.newPostPreloader,
+        isPostCreation: state.profilePage.isPostCreation
     }
 }
 
-export default compose(connect(mapStateToProps, { createPost }))(PostsForm)
+export default compose(connect(mapStateToProps, { createPost, setIsPostCreation }))(PostsForm)
 
 
 

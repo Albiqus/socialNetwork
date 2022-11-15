@@ -1,4 +1,5 @@
 import {
+    setLikedCommentsIds,
     setLikedPostsIds
 } from "../store/profile-reducer";
 
@@ -13,6 +14,7 @@ export const getAndSetAuthUserLikes = (authUserId, currentUserId) => {
             return response.json();
         }).then(function (response) {
             dispatch(setLikedPostsIds(response.data.likedPostsIds))
+            dispatch(setLikedCommentsIds(response.data.likedCommentsIds))
         })
 
     }

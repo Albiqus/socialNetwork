@@ -1,0 +1,74 @@
+.InfoBox {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: flex-start;
+    width: 410px;
+    height: 50px;
+    background-color: rgb(136, 136, 136);
+    border-radius: 10px 10px 10px 10px;
+    padding: 10px 10px 10px 10px;
+}
+
+.avatarBox {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    overflow: hidden;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.avatar {
+    object-fit: cover;
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.fullName {
+    height: 20px;
+    margin: 0;
+    margin-left: 10px;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+}
+
+.fullName:hover {
+    text-decoration: underline;
+}
+
+.date {
+    height: 20px;
+    margin: 0;
+    margin-left: 10px;
+    margin-top: 5px;
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.616);
+}
+
+.deleteIcon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 18px;
+    height: 18px;
+    display: none;
+}
+
+.deleteIcon:hover {
+    cursor: pointer;
+}
+
+.deletePostPreloader {
+    position: absolute;
+    right: 30px;
+    top: 0;
+    width: 50px;
+    height: 40px;
+}
+
+.visible {
+    display: block;
+}

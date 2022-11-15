@@ -1,8 +1,11 @@
-import {  setNewLikedPostsId, updatePost } from "../store/profile-reducer";
+import {
+    setNewLikedPostsId,
+    updatePost
+} from "../store/profile-reducer";
 
-export const createLike = (authUserId, currentId, postId, newLikesCount) => {
+export const createPostLike = (authUserId, currentId, postId, newLikesCount) => {
     return (dispatch) => {
-        fetch(`http://localhost:4000/api/createLike`, {
+        fetch(`http://localhost:4000/api/createPostLike`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8'
@@ -18,7 +21,7 @@ export const createLike = (authUserId, currentId, postId, newLikesCount) => {
         }).then(function (response) {
             if (response.statusCode === 1) {
                 dispatch(setNewLikedPostsId(response.data.newLikedPostsId))
-                dispatch(updatePost(response.data.newPost))
+                dispatch(updatePost(response.data.updatedPost))
             }
         })
 

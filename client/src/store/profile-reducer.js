@@ -2,22 +2,33 @@ const SET_PROFILE_DATA = 'SET_SET_PROFILE_DATA'
 const SET_PROFILE_PRELOADER = 'SET_PROFILE_PRELOADER'
 const SET_PROFILE_ERROR = 'SET_PROFILE_ERROR'
 const SET_PROFILE_STATUS = 'SET_PROFILE_STATUS'
-const SET_PROFILE_AVATAR_AVERAGE = 'SET_PROFILE_AVATAR_AVERAGE'
+const SET_PROFILE_AVATAR = 'SET_PROFILE_AVATAR'
 
+
+const SET_IS_POST_CREATION = 'SET_IS_POST_CREATION'
 const SET_POSTS = 'SET_POSTS'
 const SET_NEW_POST = 'SET_NEW_POST'
 const UPDATE_POST = 'UPDATE_POST'
 const DELETE_POST = 'DELETE_POST'
-
 const SET_LIKED_POSTS_IDS = 'SET_LIKED_POSTS_IDS'
 const SET_NEW_LIKED_POSTS_ID = 'SET_NEW_LIKED_POSTS_ID'
 const DELETE_LIKED_POST_ID = 'DELETE_LIKED_POST_ID'
+
+
+const SET_COMMENTS = 'SET_COMMENTS'
+const SET_NEW_COMMENT = 'SET_NEW_COMMENT'
+const UPDATE_COMMENT = 'UPDATE_COMMENT'
+const DELETE_COMMENT = 'DELETE_COMMENT'
+const SET_LIKED_COMMENTS_IDS = 'SET_LIKED_COMMENTS_IDS'
+const SET_NEW_LIKED_COMMENT_ID = 'SET_NEW_LIKED_COMMENT_ID'
+const DELETE_LIKED_COMMENT_ID = 'DELETE_LIKED_COMMENT_ID'
+const SET_NEW_OPEN_COMMENTS_POST_ID = 'SET_NEW_OPEN_COMMENTS_POST_ID'
+const SET_COMMENTS_PRELOADER = 'SET_COMMENTS_PRELOADER'
 
 const SET_NEW_POST_PRELOADER = 'SET_NEW_POST_PRELOADER'
 const DELETE_POST_PRELOADER = 'DELETE_POST_PRELOADER'
 
 const startState = {
-
     profileData: {
         firstName: '',
         lastName: '',
@@ -25,17 +36,23 @@ const startState = {
         city: '',
         dateOfBirthday: '',
         maritalStatus: '',
-        avatarBig: '',
-        avatarAverage: '',
-        avatarSmall: '',
+        avatar: ''
     },
-    posts: null,
+
+    isPostCreation: false,
+    posts: [],
     likedPostsIds: null,
     newPostPreloader: false,
     deletePostPreloader: {
         status: false,
         postId: null
     },
+
+    comments: {},
+    likedCommentsIds: null,
+    openСommentsPostsIds: [],
+    commentsPreloader: false,
+
     profilePreloader: false,
     profileError: false,
 }
@@ -69,13 +86,19 @@ export const profileReducer = (state = startState, action) => {
                 }
             }
         }
-        case SET_PROFILE_AVATAR_AVERAGE: {
+        case SET_PROFILE_AVATAR: {
             return {
                 ...state,
                 profileData: {
                     ...state.profileData,
-                    avatarAverage: action.avatarAverageName
+                    avatar: action.avatarName
                 }
+            }
+        }
+        case SET_IS_POST_CREATION: {
+            return {
+                ...state,
+                isPostCreation: action.status
             }
         }
         case SET_POSTS: {
@@ -130,23 +153,107 @@ export const profileReducer = (state = startState, action) => {
                 likedPostsIds: newLikedPostsIds
             }
         }
-    case SET_NEW_POST_PRELOADER: {
-        return {
-            ...state,
-            newPostPreloader: action.status
-        }
-    }
-    case DELETE_POST_PRELOADER: {
-        return {
-            ...state,
-            deletePostPreloader: {
-                status: action.status,
-                postId: action.postId
+        case SET_COMMENTS: {
+            let newComments = {
+                ...state.comments
+            }
+            if (!action.isNoComments) {
+                const postId = action.comments[0].postId
+                newComments[postId] = action.comments
+            }
+            if (action.isNoComments) {
+                newComments[action.comments.postId] = []
+            }
+            return {
+                ...state,
+                comments: newComments
             }
         }
-    }
-    default:
-        return state;
+        case SET_NEW_COMMENT: {
+            let newComments = {
+                ...state.comments
+            }
+            newComments[action.comment.postId].push(action.comment)
+            return {
+                ...state,
+                comments: newComments
+            }
+        }
+        case UPDATE_COMMENT: {
+            const newComments = {
+                ...state.comments
+            }
+            newComments[action.postId] = newComments[action.postId].map((comment) => {
+                if (comment.id === action.updatedComment.id) {
+                    return action.updatedComment
+                }
+                return comment
+            })
+            return {
+                ...state,
+                comments: newComments
+            }
+        }
+        case DELETE_COMMENT: {
+            const comments = {
+                ...state.comments
+            }
+            const newComments = comments[action.postId].filter((comment) => comment.id !== action.deletedCommentId)
+            comments[action.postId] = newComments
+            return {
+                ...state,
+                comments: comments
+            }
+        }
+        case SET_LIKED_COMMENTS_IDS: {
+            return {
+                ...state,
+                likedCommentsIds: action.commentsIds
+            }
+        }
+        case SET_NEW_LIKED_COMMENT_ID: {
+            return {
+                ...state,
+                likedCommentsIds: [...state.likedCommentsIds, action.commentId]
+            }
+        }
+        case DELETE_LIKED_COMMENT_ID: {
+            const newLikedCommentsIds = [...state.likedCommentsIds].filter(commentId => commentId !== action.deletedLikedCommentId)
+            return {
+                ...state,
+                likedCommentsIds: newLikedCommentsIds
+            }
+        }
+        case SET_NEW_OPEN_COMMENTS_POST_ID: {
+            const newOpenСommentsPostsIds = [...state.openСommentsPostsIds, action.postId]
+            return {
+                ...state,
+                openСommentsPostsIds: newOpenСommentsPostsIds
+            }
+        }
+        case SET_COMMENTS_PRELOADER: {
+            return {
+                ...state,
+                commentsPreloader: action.status
+            }
+        }
+        case SET_NEW_POST_PRELOADER: {
+            return {
+                ...state,
+                newPostPreloader: action.status
+            }
+        }
+        case DELETE_POST_PRELOADER: {
+            return {
+                ...state,
+                deletePostPreloader: {
+                    status: action.status,
+                    postId: action.postId
+                }
+            }
+        }
+        default:
+            return state;
     }
 }
 
@@ -167,13 +274,16 @@ export const setProfileStatus = (text) => ({
     type: SET_PROFILE_STATUS,
     text
 })
-export const setProfileAvatarAverage = (avatarAverageName) => ({
-    type: SET_PROFILE_AVATAR_AVERAGE,
-    avatarAverageName
+export const setProfileAvatar = (avatarName) => ({
+    type: SET_PROFILE_AVATAR,
+    avatarName
 })
 
 
-
+export const setIsPostCreation = (status) => ({
+    type: SET_IS_POST_CREATION,
+    status
+})
 export const setPosts = (posts) => ({
     type: SET_POSTS,
     posts
@@ -190,8 +300,6 @@ export const deletePost = (deletedPostId) => ({
     type: DELETE_POST,
     deletedPostId
 })
-
-
 export const setLikedPostsIds = (postsIds) => ({
     type: SET_LIKED_POSTS_IDS,
     postsIds
@@ -205,6 +313,47 @@ export const deleteLikedPostId = (deletedLikedPostId) => ({
     deletedLikedPostId
 })
 
+
+export const setComments = (comments, isNoComments) => ({
+    type: SET_COMMENTS,
+    comments,
+    isNoComments
+})
+export const setNewComment = (comment) => ({
+    type: SET_NEW_COMMENT,
+    comment
+})
+export const updateComment = (updatedComment, postId) => ({
+    type: UPDATE_COMMENT,
+    updatedComment,
+    postId
+})
+export const deleteComment = (deletedCommentId, postId) => ({
+    type: DELETE_COMMENT,
+    deletedCommentId,
+    postId
+})
+export const setLikedCommentsIds = (commentsIds) => ({
+    type: SET_LIKED_COMMENTS_IDS,
+    commentsIds
+})
+export const setNewLikedCommentId = (commentId) => ({
+    type: SET_NEW_LIKED_COMMENT_ID,
+    commentId
+})
+export const deleteLikedCommentId = (deletedLikedCommentId) => ({
+    type: DELETE_LIKED_COMMENT_ID,
+    deletedLikedCommentId
+})
+
+export const setNewOpenCommentsPostId = (postId) => ({
+    type: SET_NEW_OPEN_COMMENTS_POST_ID,
+    postId
+})
+export const setCommentsPreloader = (status) => ({
+    type: SET_COMMENTS_PRELOADER,
+    status
+})
 
 
 export const setNewPostPreloader = (status) => ({

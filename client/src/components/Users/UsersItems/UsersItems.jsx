@@ -10,8 +10,8 @@ const UsersItems = ({users}) => {
         return (
             <NavLink to={`/profile/${user.id}`} className={classes.userItem} key={user.id} id={user.id}>
                 <div className={classes.avatarBox}>
-                    {user.avatar_average === '' && <div className={classes.avatarDefault}></div>}
-                    {user.avatar_average !== '' && <img className={classes.avatar} src={user.avatar_average} alt='аватар'></img>}
+                    {user.avatar === '' && <div className={classes.avatarDefault}></div>}
+                    {user.avatar !== '' && <img className={classes.avatar} src={user.avatar} alt='аватар'></img>}
                 </div>
                 <div className={classes.mainInfo}>
                     <p className={classes.fullname}><span>{user.first_name}</span> <span>{user.last_name}</span></p>
