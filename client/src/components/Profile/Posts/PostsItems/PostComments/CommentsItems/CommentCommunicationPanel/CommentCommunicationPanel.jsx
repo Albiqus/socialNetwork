@@ -7,7 +7,7 @@ import like from '../../../../../../../images/icons/like.png'
 import { createCommentLike } from '../../../../../../../thunks/createCommentLike';
 import { deleteCommentLike } from '../../../../../../../thunks/deleteCommentLike';
 
-const CommentCommunicationPanel = ({ post, comment, likedCommentsIds, createCommentLike, deleteCommentLike, isHoverCommentId, router }) => {
+const CommentCommunicationPanel = ({ post, comment, likedCommentsIds, createCommentLike, deleteCommentLike, isHoverCommentId, router, authUserData }) => {
 
     const currentId = router.params.userId
     const authUserId = localStorage.getItem('id')
@@ -22,7 +22,7 @@ const CommentCommunicationPanel = ({ post, comment, likedCommentsIds, createComm
         }
         if (!likedCommentsIds.includes(commentId)) {
             const newLikesCount = Number(comment.likesCount) + 1
-            createCommentLike(authUserId, currentId, commentId, newLikesCount, post.id)
+            createCommentLike(authUserId, currentId, commentId, newLikesCount, post.id, authUserData.firstName, authUserData.lastName, authUserData.avatar)
         }
     }
 
@@ -45,6 +45,7 @@ const CommentCommunicationPanel = ({ post, comment, likedCommentsIds, createComm
 const mapStateToProps = (state) => {
     return {
         likedCommentsIds: state.profilePage.likedCommentsIds,
+        authUserData: state.authUserReducer.authUserData
     }
 }
 

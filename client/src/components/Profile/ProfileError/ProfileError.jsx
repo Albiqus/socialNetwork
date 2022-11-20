@@ -4,7 +4,6 @@ import { compose } from 'redux';
 import classes from './ProfileError.module.css';
 
 const ProfileError = ({ profileError }) => {
-    console.log(profileError)
     return (
         <div className={classes.profileBox}>
             <div className={classes.profileError}>

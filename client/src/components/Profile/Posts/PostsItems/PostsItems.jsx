@@ -6,7 +6,6 @@ import { PostContent } from './PostContent/PostContent';
 import PostCommunicationPanel from './PostCommunicationPanel/PostCommunicationPanel';
 import {PostComments} from './PostComments/PostComments';
 
-
 const PostsItems = ({ posts, openСommentsPostsIds }) => {
 
     const [deletePostButtonPostId, setdeletePostButtonPostId] = useState(null)

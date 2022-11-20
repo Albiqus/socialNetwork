@@ -3,7 +3,7 @@ import {
     updatePost
 } from "../store/profile-reducer";
 
-export const createPostLike = (authUserId, currentId, postId, newLikesCount) => {
+export const createPostLike = (userId, authorId, postId, newLikesCount, firstName, lastName, avatar) => {
     return (dispatch) => {
         fetch(`http://localhost:4000/api/createPostLike`, {
             method: 'POST',
@@ -11,10 +11,13 @@ export const createPostLike = (authUserId, currentId, postId, newLikesCount) => 
                 'Content-Type': 'application/json; charset=utf-8'
             },
             body: JSON.stringify({
-                authUserId,
-                currentId,
+                userId,
+                authorId,
                 postId,
-                newLikesCount
+                newLikesCount,
+                firstName,
+                lastName,
+                avatar
             })
         }).then(function (response) {
             return response.json();

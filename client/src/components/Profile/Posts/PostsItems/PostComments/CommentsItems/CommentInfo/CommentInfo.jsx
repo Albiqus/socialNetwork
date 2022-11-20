@@ -8,7 +8,7 @@ import deleteIcon from '../../../../../../../images/icons/delete-post.png'
 import classes from './CommentInfo.module.css';
 
 const CommentInfo = ({ post, comment, router, deleteOneComment, deleteCommentButtonPostId }) => {
-    
+
     const currentId = router.params.userId
     const authUserId = localStorage.getItem('id')
 
@@ -30,8 +30,8 @@ const CommentInfo = ({ post, comment, router, deleteOneComment, deleteCommentBut
     return (
         <div className={classes.commentInfo}>
             <div className={classes.commentAvatarBox}>
-                {comment.avatar === '' && <img className={classes.commentAvatar} src={require('../../../../../../../images/incognito/incognito-small.png')} alt='аватар'></img>}
-                {comment.avatar !== '' && <img className={classes.commentAvatar} src={comment.avatar} alt='аватар'></img>}
+                {comment.avatar === '' && <NavLink to={`/profile/${comment.userId}`}><img className={classes.commentAvatar} src={require('../../../../../../../images/incognito/incognito-small.png')} alt='аватар'></img></NavLink>}
+                {comment.avatar !== '' && <NavLink to={`/profile/${comment.userId}`}><img className={classes.commentAvatar} src={comment.avatar} alt='аватар'></img></NavLink>}
             </div>
             <NavLink to={`/profile/${comment.userId}`} className={classes.fullName}>{comment.firstName} {comment.lastName}</NavLink>
             <p className={classes.date}>{dateFormat}</p>

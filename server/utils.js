@@ -27,6 +27,33 @@ module.exports = {
         })
         return formatedPosts
     },
+    formatPostLikesUsers: function (postLikesUsers) {
+        const formatedPostLikesUsers = postLikesUsers.map((postLikesUser) => {
+            return {
+                postId: postLikesUser.post_id,
+                userId: postLikesUser.user_id,
+                firstName: postLikesUser.first_name,
+                lastName: postLikesUser.last_name,
+                avatar: postLikesUser.avatar
+            }
+        })
+
+        return formatedPostLikesUsers
+    },
+    sortComments: function (comments) {
+        let counter = 1;
+        for (let i = 0; i < comments.length; i++) {
+            for (let j = counter; j < comments.length; j++) {
+                if (Number(comments[i].id) > Number(comments[j].id)) {
+                    let saver = comments[i]
+                    comments[i] = comments[j]
+                    comments[j] = saver
+                }
+            }
+            counter++
+        }
+        return comments
+    },
     formatComments: function (comments) {
         const formatedComments = comments.map((comment) => {
             return {

@@ -1,7 +1,8 @@
 const db = require('../data-base')
 const {
     sortPosts,
-    formatPosts
+    formatPosts,
+    formatPostLikesUsers
 } = require('../utils')
 
 class PostsControllers {
@@ -16,7 +17,7 @@ class PostsControllers {
         const postsResult = await db.query(`SELECT * FROM posts WHERE user_id=$1`, [userId])
 
         const posts = formatPosts(sortPosts(postsResult.rows))
-  
+
         res.json({
             statusCode: 1,
             message: 'Отдаю все посты',
@@ -96,17 +97,21 @@ class PostsControllers {
     }
 
     async createPostLike(req, res) {
-        const authUserId = req.body.authUserId
-        const currentId = req.body.currentId
+        const userId = req.body.userId
+        const authorId = req.body.authorId
         const postId = req.body.postId
         const newLikesCount = req.body.newLikesCount
+        const firstName = req.body.firstName
+        const lastName = req.body.lastName
+        const avatar = req.body.avatar
+
 
         const updatedPostResult = await db.query('UPDATE posts set likes_count=$1 WHERE id=$2 RETURNING *', [newLikesCount, postId])
         const updatedPost = formatPosts(updatedPostResult.rows)[0]
 
-        const userLikesResult = await db.query(`INSERT INTO user_posts_likes (auth_user_id, user_id, post_id) values ($1, $2, $3) RETURNING *`, [authUserId, currentId, postId])
+        const userLikesResult = await db.query(`INSERT INTO posts_likes (user_id, author_id, post_id, first_name, last_name, avatar) values ($1, $2, $3, $4, $5, $6) RETURNING *`,
+            [userId, authorId, postId, firstName, lastName, avatar])
         const newLikedPostsId = userLikesResult.rows[0].post_id
-
 
         res.json({
             statusCode: 1,
@@ -127,8 +132,7 @@ class PostsControllers {
         const updatedPostResult = await db.query('UPDATE posts set likes_count=$1 WHERE id=$2 RETURNING *', [newLikesCount, postId])
         const updatedPost = formatPosts(updatedPostResult.rows)[0]
 
-        await db.query(`DELETE FROM user_posts_likes WHERE auth_user_id=$1 AND user_id=$2 AND post_id=$3`, [authUserId, currentId, postId])
-
+        await db.query(`DELETE FROM posts_likes WHERE user_id=$1 AND author_id=$2 AND post_id=$3`, [authUserId, currentId, postId])
 
         res.json({
             statusCode: 1,
@@ -136,6 +140,20 @@ class PostsControllers {
             data: {
                 updatedPost,
                 deletedlikedPostsId: postId
+            }
+        })
+    }
+    async getPostLikesUsers(req, res) {
+        const postId = req.query.postId
+        const postLikesResult = await db.query(`SELECT * FROM posts_likes WHERE post_id=$1`, [postId])
+
+        const postLikesUsers = formatPostLikesUsers(postLikesResult.rows).reverse()
+        
+        res.json({
+            statusCode: 1,
+            message: `Отдаю трёх последних пользователей лайкнувших, пост id=${postId}`,
+            data: {
+                postLikesUsers
             }
         })
     }

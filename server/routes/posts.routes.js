@@ -10,6 +10,7 @@ postsRouter.delete('/deletePost', postsControllers.deletePost) //удали 1 п
 postsRouter.get('/getPosts', postsControllers.getPosts) // дай посты конкретного пользователя
 postsRouter.post('/createPostLike', postsControllers.createPostLike) //добавь 1 лайк к посту
 postsRouter.post('/deletePostLike', postsControllers.deletePostLike) //удали 1 лайк у поста
+postsRouter.get('/getPostLikesUsers', postsControllers.getPostLikesUsers) // дай список лайкнувших определённый пост
 
 postsRouter.get('/getAllPosts', postsControllers.getAllPosts) //дай все посты
 

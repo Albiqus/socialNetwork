@@ -5,7 +5,7 @@ const fileMiddleware = require('../middleware/file')
 const commentsRouter = new Router()
 
 commentsRouter.post('/createComment', commentsControllers.createComment) // создай новый комментарий без изображения
-commentsRouter.put('/updateComment', fileMiddleware.single('commentImage'), commentsControllers.updateComment) //создай новый пост с фоткой
+commentsRouter.put('/updateComment', fileMiddleware.single('commentImage'), commentsControllers.updateComment) //создай новый комментарий с изображением
 commentsRouter.delete('/deleteComment', commentsControllers.deleteComment) // удали комментарий
 commentsRouter.get('/getComments', commentsControllers.getComments) // дай комменты определённого поста
 

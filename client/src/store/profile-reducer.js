@@ -13,6 +13,9 @@ const DELETE_POST = 'DELETE_POST'
 const SET_LIKED_POSTS_IDS = 'SET_LIKED_POSTS_IDS'
 const SET_NEW_LIKED_POSTS_ID = 'SET_NEW_LIKED_POSTS_ID'
 const DELETE_LIKED_POST_ID = 'DELETE_LIKED_POST_ID'
+const SET_POST_LIKES_USERS = 'SET_POST_LIKES_USERS'
+const RESET_POST_LIKES_USERS = 'RESET_POST_LIKES_USERS'
+const SET_POST_LIKES_MODAL_STATUS = 'SET_POST_LIKES_MODAL_STATUS'
 
 
 const SET_COMMENTS = 'SET_COMMENTS'
@@ -24,6 +27,7 @@ const SET_NEW_LIKED_COMMENT_ID = 'SET_NEW_LIKED_COMMENT_ID'
 const DELETE_LIKED_COMMENT_ID = 'DELETE_LIKED_COMMENT_ID'
 const SET_NEW_OPEN_COMMENTS_POST_ID = 'SET_NEW_OPEN_COMMENTS_POST_ID'
 const SET_COMMENTS_PRELOADER = 'SET_COMMENTS_PRELOADER'
+
 
 const SET_NEW_POST_PRELOADER = 'SET_NEW_POST_PRELOADER'
 const DELETE_POST_PRELOADER = 'DELETE_POST_PRELOADER'
@@ -39,6 +43,7 @@ const startState = {
         avatar: ''
     },
 
+
     isPostCreation: false,
     posts: [],
     likedPostsIds: null,
@@ -47,6 +52,8 @@ const startState = {
         status: false,
         postId: null
     },
+    postLikesUsers: null,
+    postLikesModalStatus: false,
 
     comments: {},
     likedCommentsIds: null,
@@ -151,6 +158,24 @@ export const profileReducer = (state = startState, action) => {
             return {
                 ...state,
                 likedPostsIds: newLikedPostsIds
+            }
+        }
+        case SET_POST_LIKES_USERS: {
+            return {
+                ...state,
+                postLikesUsers: action.postLikesUsers
+            }
+        }
+        case RESET_POST_LIKES_USERS: {
+            return {
+                ...state,
+                postLikesUsers: null
+            }
+        }
+        case SET_POST_LIKES_MODAL_STATUS: {
+            return {
+                ...state,
+                postLikesModalStatus: action.status
             }
         }
         case SET_COMMENTS: {
@@ -312,6 +337,17 @@ export const deleteLikedPostId = (deletedLikedPostId) => ({
     type: DELETE_LIKED_POST_ID,
     deletedLikedPostId
 })
+export const setPostLikesUsers = (postLikesUsers) => ({
+    type: SET_POST_LIKES_USERS,
+    postLikesUsers
+})
+export const resetPostLikesUsers = () => ({
+    type: RESET_POST_LIKES_USERS
+})
+export const setPostLikesModalStatus = (status) => ({
+    type: SET_POST_LIKES_MODAL_STATUS,
+    status
+}) 
 
 
 export const setComments = (comments, isNoComments) => ({
@@ -345,7 +381,6 @@ export const deleteLikedCommentId = (deletedLikedCommentId) => ({
     type: DELETE_LIKED_COMMENT_ID,
     deletedLikedCommentId
 })
-
 export const setNewOpenCommentsPostId = (postId) => ({
     type: SET_NEW_OPEN_COMMENTS_POST_ID,
     postId

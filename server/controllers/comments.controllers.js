@@ -1,7 +1,8 @@
 const db = require('../data-base')
 const {
     formatComments,
-    formatPosts
+    formatPosts,
+    sortComments
 } = require('../utils')
 
 class commentsControllers {
@@ -105,7 +106,7 @@ class commentsControllers {
     async getComments(req, res) {
         const postId = req.query.postId
         const commentsResult = await db.query('SELECT * FROM comments WHERE post_id = $1', [postId])
-        const comments = formatComments(commentsResult.rows)
+        const comments = sortComments(formatComments(commentsResult.rows))
 
         if (comments.length === 0) {
             res.json({
@@ -131,13 +132,17 @@ class commentsControllers {
         const currentId = req.body.currentId
         const commentId = req.body.commentId
         const newLikesCount = req.body.newLikesCount
+        const firstName = req.body.firstName
+        const lastName = req.body.lastName
+        const avatar = req.body.avatar
+
 
         const updatedCommentResult = await db.query('UPDATE comments set likes_count=$1 WHERE id=$2 RETURNING *', [newLikesCount, commentId])
         const updatedComment = formatComments(updatedCommentResult.rows)[0]
 
-        const userLikesResult = await db.query(`INSERT INTO user_comments_likes (auth_user_id, user_id, comment_id) values ($1, $2, $3) RETURNING *`, [authUserId, currentId, commentId])
+        const userLikesResult = await db.query(`INSERT INTO comments_likes (user_id, author_id, comment_id, first_name, last_name, avatar) values ($1, $2, $3, $4, $5, $6) RETURNING *`,
+            [authUserId, currentId, commentId, firstName, lastName, avatar])
         const newLikedCommentId = userLikesResult.rows[0].comment_id
-
 
         res.json({
             statusCode: 1,
@@ -154,11 +159,11 @@ class commentsControllers {
         const currentId = req.body.currentId
         const commentId = req.body.commentId
         const newLikesCount = req.body.newLikesCount
-
+        
         const updatedCommentResult = await db.query('UPDATE comments set likes_count=$1 WHERE id=$2 RETURNING *', [newLikesCount, commentId])
         const updatedComment = formatComments(updatedCommentResult.rows)[0]
 
-        await db.query(`DELETE FROM user_comments_likes WHERE auth_user_id=$1 AND user_id=$2 AND comment_id=$3`, [authUserId, currentId, commentId])
+        await db.query(`DELETE FROM comments_likes WHERE user_id=$1 AND author_id=$2 AND comment_id=$3`, [authUserId, currentId, commentId])
 
         res.json({
             statusCode: 1,
