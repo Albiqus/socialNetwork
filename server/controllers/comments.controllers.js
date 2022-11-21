@@ -2,7 +2,8 @@ const db = require('../data-base')
 const {
     formatComments,
     formatPosts,
-    sortComments
+    sortComments,
+    formatCommentLikesUsers
 } = require('../utils')
 
 class commentsControllers {
@@ -159,7 +160,7 @@ class commentsControllers {
         const currentId = req.body.currentId
         const commentId = req.body.commentId
         const newLikesCount = req.body.newLikesCount
-        
+
         const updatedCommentResult = await db.query('UPDATE comments set likes_count=$1 WHERE id=$2 RETURNING *', [newLikesCount, commentId])
         const updatedComment = formatComments(updatedCommentResult.rows)[0]
 
@@ -171,6 +172,20 @@ class commentsControllers {
             data: {
                 updatedComment,
                 deletedLikedCommentId: commentId
+            }
+        })
+    }
+    async getCommentLikesUsers(req, res) {
+        const commentId = req.query.commentId
+        const commentLikesResult = await db.query(`SELECT * FROM comments_likes WHERE comment_id=$1`, [commentId])
+
+        const commentLikesUsers = formatCommentLikesUsers(commentLikesResult.rows).reverse()
+
+        res.json({
+            statusCode: 1,
+            message: `Отдаю трёх последних пользователей лайкнувших, комментарий id=${commentId}`,
+            data: {
+                commentLikesUsers
             }
         })
     }

@@ -6,8 +6,9 @@ import PostsForm from './PostsForm/PostsForm';
 import PostsItems from './PostsItems/PostsItems';
 import PostLikesInfoModal from './PostsItems/PostCommunicationPanel/PostLikesInfoModal/PostLikesInfoModal';
 import { connect } from 'react-redux';
+import CommentLikesInfoModal from './PostsItems/PostComments/CommentsItems/CommentCommunicationPanel/CommentLikesInfoModal/CommentLikesInfoModal';
 
-const Posts = ({ router, postLikesModalStatus }) => {
+const Posts = ({ router, postLikesModalStatus, commentLikesModalStatus }) => {
 
     const currentId = router.params.userId
     const authUserId = localStorage.getItem('id')
@@ -18,13 +19,15 @@ const Posts = ({ router, postLikesModalStatus }) => {
             {currentId === authUserId && <PostsForm />}
             <PostsItems />
             {postLikesModalStatus && <PostLikesInfoModal />}
+            {commentLikesModalStatus && <CommentLikesInfoModal /> }
         </div>
     )
 }
 
 const mapStateToProps = (state) => {
     return {
-        postLikesModalStatus: state.profilePage.postLikesModalStatus
+        postLikesModalStatus: state.profilePage.postLikesModalStatus,
+        commentLikesModalStatus: state.profilePage.commentLikesModalStatus
     }
 }
 

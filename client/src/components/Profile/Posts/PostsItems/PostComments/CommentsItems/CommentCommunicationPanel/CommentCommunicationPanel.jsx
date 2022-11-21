@@ -6,8 +6,24 @@ import likeEmpty from '../../../../../../../images/icons/like-empty.png'
 import like from '../../../../../../../images/icons/like.png'
 import { createCommentLike } from '../../../../../../../thunks/createCommentLike';
 import { deleteCommentLike } from '../../../../../../../thunks/deleteCommentLike';
+import { useEffect, useState } from 'react';
+import { getCommentLikesUsers } from '../../../../../../../thunks/getCommentLikesUsers';
+import { resetCommentLikesUsers, setCommentLikesModalStatus } from '../../../../../../../store/profile-reducer';
 
-const CommentCommunicationPanel = ({ post, comment, likedCommentsIds, createCommentLike, deleteCommentLike, isHoverCommentId, router, authUserData }) => {
+const CommentCommunicationPanel = ({
+    post,
+    comment,
+    likedCommentsIds,
+    createCommentLike,
+    deleteCommentLike,
+    isHoverCommentId,
+    router,
+    authUserData,
+    commentLikesUsers,
+    getCommentLikesUsers,
+    resetCommentLikesUsers,
+    setCommentLikesModalStatus,
+    commentLikesModalStatus }) => {
 
     const currentId = router.params.userId
     const authUserId = localStorage.getItem('id')
@@ -31,9 +47,73 @@ const CommentCommunicationPanel = ({ post, comment, likedCommentsIds, createComm
         likeButtonBoxClassName += ` ${classes.visible}`
     }
 
+
+    const [mouseEnterTimerId, setMouseEnterTimerId] = useState(null)
+
+    const onLikesButtonBoxMouseEnter = () => {
+        const cb = () => {
+            getCommentLikesUsers(comment.id)
+        }
+        const timerId = setTimeout(cb, 500);
+        setMouseEnterTimerId(timerId)
+        for (var i = 0; i < timerId; i++) {
+            clearTimeout(i);
+        }
+    }
+
+    const onLikesButtonBoxMouseLeave = () => {
+        clearTimeout(mouseEnterTimerId);
+        const cb = () => {
+            resetCommentLikesUsers()
+
+        }
+        setTimeout(cb, 1000);
+    }
+
+
+    const onTooltipEnter = () => {
+        let id = setTimeout(function () { }, 0);
+        while (id--) {
+            clearTimeout(id)
+        }
+    }
+
+    const onTooltipLeave = () => {
+        const cb = () => {
+            if (!commentLikesModalStatus) resetCommentLikesUsers()
+        }
+        setTimeout(cb, 1000);
+    }
+
+    useEffect(() => {
+        if (mouseEnterTimerId) getCommentLikesUsers(comment.id)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [comment.likesCount]);
+
+    const onTooltipClick = () => {
+        setCommentLikesModalStatus(true)
+    }
+
+    const usersItems = []
+    if (commentLikesUsers) {
+        for (let i = 0; i < 3; i++) {
+            if (!commentLikesUsers[i]) break
+            usersItems.push(
+                <div className={classes.userItem} key={commentLikesUsers[i].userId}>
+                    {commentLikesUsers[i].avatar === '' && <img className={classes.avatar} src={require('../../../../../../../images/incognito/incognito-small.png')} alt='аватар'></img>}
+                    {commentLikesUsers[i].avatar !== '' && <img className={classes.avatar} src={commentLikesUsers[i].avatar} alt='аватар'></img>}
+                </div>
+            )
+        }
+    }
+
     return (
         <div className={classes.communicationBox}>
-            <div className={likeButtonBoxClassName}>
+            {commentLikesUsers && comment.id === commentLikesUsers[0]?.commentId &&
+                <div onClick={onTooltipClick} onMouseEnter={onTooltipEnter} onMouseLeave={onTooltipLeave} className={classes.tooltip}>
+                    {usersItems}
+                </div>}
+            <div className={likeButtonBoxClassName} onMouseEnter={onLikesButtonBoxMouseEnter} onMouseLeave={onLikesButtonBoxMouseLeave}>
                 {likedCommentsIds?.includes(comment.id) && <img onClick={onLikeClick} src={like} id={comment.id} alt="убрать лайк" />}
                 {!likedCommentsIds?.includes(comment.id) && <img onClick={onLikeClick} src={likeEmpty} id={comment.id} alt="лайкнуть" />}
                 {comment.likesCount !== '0' && <p>{comment.likesCount}</p>}
@@ -45,8 +125,10 @@ const CommentCommunicationPanel = ({ post, comment, likedCommentsIds, createComm
 const mapStateToProps = (state) => {
     return {
         likedCommentsIds: state.profilePage.likedCommentsIds,
-        authUserData: state.authUserReducer.authUserData
+        authUserData: state.authUserReducer.authUserData,
+        commentLikesUsers: state.profilePage.commentLikesUsers,
+        commentLikesModalStatus: state.profilePage.commentLikesModalStatus
     }
 }
 
-export default compose(connect(mapStateToProps, { createCommentLike, deleteCommentLike }), withRouter)(CommentCommunicationPanel)
+export default compose(connect(mapStateToProps, { createCommentLike, deleteCommentLike, getCommentLikesUsers, resetCommentLikesUsers, setCommentLikesModalStatus }), withRouter)(CommentCommunicationPanel)

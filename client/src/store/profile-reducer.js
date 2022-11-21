@@ -27,6 +27,9 @@ const SET_NEW_LIKED_COMMENT_ID = 'SET_NEW_LIKED_COMMENT_ID'
 const DELETE_LIKED_COMMENT_ID = 'DELETE_LIKED_COMMENT_ID'
 const SET_NEW_OPEN_COMMENTS_POST_ID = 'SET_NEW_OPEN_COMMENTS_POST_ID'
 const SET_COMMENTS_PRELOADER = 'SET_COMMENTS_PRELOADER'
+const SET_COMMENT_LIKES_USERS = 'SET_COMMENT_LIKES_USERS'
+const RESET_COMMENT_LIKES_USERS = 'RESET_COMMENT_LIKES_USERS'
+const SET_COMMENT_LIKES_MODAL_STATUS = 'SET_COMMENT_LIKES_MODAL_STATUS'
 
 
 const SET_NEW_POST_PRELOADER = 'SET_NEW_POST_PRELOADER'
@@ -55,10 +58,14 @@ const startState = {
     postLikesUsers: null,
     postLikesModalStatus: false,
 
+
     comments: {},
     likedCommentsIds: null,
     openСommentsPostsIds: [],
     commentsPreloader: false,
+    commentLikesUsers: null,
+    commentLikesModalStatus: false,
+
 
     profilePreloader: false,
     profileError: false,
@@ -262,6 +269,24 @@ export const profileReducer = (state = startState, action) => {
                 commentsPreloader: action.status
             }
         }
+        case SET_COMMENT_LIKES_USERS: {
+            return {
+                ...state,
+                commentLikesUsers: action.commentLikesUsers
+            }
+        }
+        case RESET_COMMENT_LIKES_USERS: {
+            return {
+                ...state,
+                commentLikesUsers: null
+            }
+        }
+        case SET_COMMENT_LIKES_MODAL_STATUS: {
+            return {
+                ...state,
+                commentLikesModalStatus: action.status
+            }
+        }
         case SET_NEW_POST_PRELOADER: {
             return {
                 ...state,
@@ -347,7 +372,7 @@ export const resetPostLikesUsers = () => ({
 export const setPostLikesModalStatus = (status) => ({
     type: SET_POST_LIKES_MODAL_STATUS,
     status
-}) 
+})
 
 
 export const setComments = (comments, isNoComments) => ({
@@ -387,6 +412,17 @@ export const setNewOpenCommentsPostId = (postId) => ({
 })
 export const setCommentsPreloader = (status) => ({
     type: SET_COMMENTS_PRELOADER,
+    status
+})
+export const setCommentLikesUsers = (commentLikesUsers) => ({
+    type: SET_COMMENT_LIKES_USERS,
+    commentLikesUsers
+})
+export const resetCommentLikesUsers = () => ({
+    type: RESET_COMMENT_LIKES_USERS
+})
+export const setCommentLikesModalStatus = (status) => ({
+    type: SET_COMMENT_LIKES_MODAL_STATUS,
     status
 })
 

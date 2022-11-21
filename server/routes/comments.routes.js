@@ -12,4 +12,6 @@ commentsRouter.get('/getComments', commentsControllers.getComments) // дай к
 commentsRouter.post('/createCommentLike', commentsControllers.createCommentLike) //добавь 1 лайк к комменту
 commentsRouter.post('/deleteCommentLike', commentsControllers.deleteCommentLike) //удали 1 лайк у коммента
 
+commentsRouter.get('/getCommentLikesUsers', commentsControllers.getCommentLikesUsers) // дай список лайкнувших определённый коммент
+
 module.exports = commentsRouter

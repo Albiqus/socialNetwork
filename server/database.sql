@@ -46,3 +46,12 @@ create table comments (
     date VARCHAR(30) NOT NULL,
     likes_count VARCHAR(10)
 );
+
+create table comments_likes (
+    author_id VARCHAR(10) NOT NULL,
+    comment_id VARCHAR(10) NOT NULL,
+    user_id VARCHAR(10) NOT NULL,
+    first_name VARCHAR(15) NOT NULL,
+    last_name VARCHAR(25) NOT NULL,
+    avatar VARCHAR(300)
+);

@@ -70,5 +70,18 @@ module.exports = {
             }
         })
         return formatedComments
-    }
+    },
+    formatCommentLikesUsers: function (commentLikesUsers) {
+        const formatedCommentLikesUsers = commentLikesUsers.map((commentLikesUser) => {
+            return {
+                commentId: commentLikesUser.comment_id,
+                userId: commentLikesUser.user_id,
+                firstName: commentLikesUser.first_name,
+                lastName: commentLikesUser.last_name,
+                avatar: commentLikesUser.avatar
+            }
+        })
+
+        return formatedCommentLikesUsers
+    },
 };
