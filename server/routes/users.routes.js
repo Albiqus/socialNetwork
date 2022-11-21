@@ -10,7 +10,9 @@ usersRouter.post('/register', usersControllers.registerUser) //зарегист�
 usersRouter.get('/login', usersControllers.login) //логинизируйся
 usersRouter.get('/profile', usersControllers.getProfileData) //дай данные профиля
 usersRouter.put('/status', usersControllers.setUserStatus) //обнови статус пользователя
+
 usersRouter.post('/uploadAvatar', fileMiddleware.single('avatar'), usersControllers.uploadAvatar) //обнови аватар пользователя
+usersRouter.delete('/deleteAvatar', usersControllers.deleteAvatar) //удали аватар пользователя
 
 usersRouter.get('/postman', usersControllers.getAllUsers) //дай всех пользователей
 

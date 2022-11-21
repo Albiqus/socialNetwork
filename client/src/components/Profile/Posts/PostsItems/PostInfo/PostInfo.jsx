@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { withRouter } from '../../../../../hocs/withRouter';
 import { deleteOnePost } from '../../../../../thunks/deleteOnePost';
 import { getDateFormat } from '../../../../../utils/profile-utils/getFormatDate';
-import deleteIcon from '../../../../../images/icons/delete-post.png'
+import deleteIcon from '../../../../../images/icons/delete.png'
 import preloader from '../../../../../images/preloaders/ellipsis-preloader.svg'
 
 import classes from './PostInfo.module.css';

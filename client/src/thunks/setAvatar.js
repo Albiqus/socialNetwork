@@ -10,9 +10,9 @@ export const setAvatar = (data, id) => {
         }).then(function (response) {
             return response.json();
         }).then(function (response) {
-            dispatch(setProfileAvatar(response.data.avatar))
+            if (response.statusCode === 1) {
+                dispatch(setProfileAvatar(response.data.avatar))
+            }
         })
     }
 }
-
-

@@ -1,6 +1,88 @@
-.avatarBox {
+.mainBox {
+    display: flex;
+    flex-wrap: wrap;
+    height: 230px;
+    width: 200px;
     margin-left: 30px;
-    margin-top: 30px;
+}
+
+.mainBox:hover .settingsBox img {
+    display: block;
+}
+
+/* ================================== settingsBox ================================== */
+
+.settingsBox {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    height: 30px;
+    width: 200px;
+}
+
+.settingsBox img {
+    width: 18px;
+    height: 18px;
+    margin-bottom: 4px;
+    margin-left: 5px;
+    display: none;
+}
+
+.settingsBox img:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.updateAvatarButton:hover~.updateAvatarTooltip {
+    display: block;
+}
+
+.deleteAvatarButton:hover~.deleteAvatarTooltip {
+    display: block;
+}
+
+.updateAvatarTooltip {
+    position: absolute;
+    height: auto;
+    width: auto;
+    top: 30px;
+    right: 30px;
+    padding: 5px 5px 5px 5px;
+    background-color: rgb(0, 0, 0);
+    border-radius: 10px 0px 10px 10px;
+    display: none;
+}
+
+.updateAvatarTooltip p {
+    color: white;
+    margin: 0;
+}
+
+.deleteAvatarTooltip {
+    position: absolute;
+    height: auto;
+    width: auto;
+    top: 30px;
+    right: 12px;
+    padding: 5px 5px 5px 5px;
+    background-color: rgb(0, 0, 0);
+    border-radius: 10px 0px 10px 10px;
+    display: none;
+}
+
+.deleteAvatarTooltip p {
+    color: white;
+    margin: 0;
+}
+
+.settingsBox input {
+    display: none;
+}
+
+/* ================================== avatarBox ================================== */
+
+.avatarBox {
     width: 200px;
     height: 200px;
     display: flex;
@@ -19,6 +101,10 @@
     background-color: rgb(136, 136, 136);
 }
 
+.avatarDefault:hover {
+    cursor: pointer;
+}
+
 .avatarDefault p {
     margin: 0;
     text-align: center;
@@ -26,13 +112,13 @@
     text-decoration: underline;
 }
 
-.avatarDefault:hover {
-    cursor: pointer;
-}
-
 .avatar {
     object-fit: cover;
     display: block;
     height: 100%;
     width: 100%;
+}
+
+.avatar:hover {
+    cursor: pointer;
 }

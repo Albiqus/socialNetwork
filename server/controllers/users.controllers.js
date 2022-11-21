@@ -26,14 +26,14 @@ class UsersControllers {
         const pagesCount = Math.ceil(usersCount / 10)
 
         const currentPage = req.query.page
-  
+
         let currentUserPosition;
         if (currentPage === '1') {
             currentUserPosition = 0
         } else {
             currentUserPosition = Number(String(currentPage) + '0') - 10
         }
-        
+
         const usersResult = await db.query(`SELECT * FROM users OFFSET ${currentUserPosition} LIMIT 10`)
         const tenUsers = usersResult.rows.map((user) => {
             return {
@@ -185,10 +185,32 @@ class UsersControllers {
     async uploadAvatar(req, res, next) {
         const avatar = `http://localhost:4000/images/${req.file.filename}`
         const userId = req.query.userId
+
         db.query(`UPDATE users set avatar = $1 where id = $2 RETURNING *`, [avatar, userId])
+        db.query(`UPDATE comments set avatar = $1 where user_id = $2 RETURNING *`, [avatar, userId])
+        db.query(`UPDATE posts_likes set avatar = $1 where user_id = $2 RETURNING *`, [avatar, userId])
+        db.query(`UPDATE comments_likes set avatar = $1 where user_id = $2 RETURNING *`, [avatar, userId])
+
         res.json({
             statusCode: 1,
             message: 'автар обновлён',
+            data: {
+                avatar
+            }
+        })
+    }
+    async deleteAvatar(req, res) {
+        const userId = req.query.userId
+        const avatar = ''
+
+        db.query(`UPDATE users set avatar = $1 where id = $2 RETURNING *`, [avatar, userId])
+        db.query(`UPDATE comments set avatar = $1 where user_id = $2 RETURNING *`, [avatar, userId])
+        db.query(`UPDATE posts_likes set avatar = $1 where user_id = $2 RETURNING *`, [avatar, userId])
+        db.query(`UPDATE comments_likes set avatar = $1 where user_id = $2 RETURNING *`, [avatar, userId])
+
+        res.json({
+            statusCode: 1,
+            message: 'автар удалён',
             data: {
                 avatar
             }

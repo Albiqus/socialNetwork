@@ -82,6 +82,7 @@
     border: none;
     background-color: rgb(136, 136, 136);
     background-image: url(../../../images/icons/create-status.png);
+    outline: 5px solid rgb(158, 158, 158);
 }
 
 .statusForm button:hover {

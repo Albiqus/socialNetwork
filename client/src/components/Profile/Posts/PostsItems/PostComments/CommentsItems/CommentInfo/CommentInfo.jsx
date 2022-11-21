@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { withRouter } from '../../../../../../../hocs/withRouter';
 import { deleteOneComment } from '../../../../../../../thunks/deleteOneComment';
 import { getDateFormat } from '../../../../../../../utils/profile-utils/getFormatDate';
-import deleteIcon from '../../../../../../../images/icons/delete-post.png'
+import deleteIcon from '../../../../../../../images/icons/delete.png'
 import classes from './CommentInfo.module.css';
 
 const CommentInfo = ({ post, comment, router, deleteOneComment, deleteCommentButtonPostId }) => {
