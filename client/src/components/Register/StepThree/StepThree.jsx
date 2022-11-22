@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 import { compose } from 'redux';
 import { resetUserData, setCurrentStep, setSecretKey } from '../../../store/register-reducer';
 import { registerUser } from '../../../thunks/registerUser';
-import { format } from '../../../utils/register-utils/format';
+import { format } from '../../../utils/common-utils/format';
 import { validate } from '../../../utils/register-utils/validate/validateStepThree';
 import { Preloader } from '../../Common/Preloader/Preloader';
 import classes from './StepThree.module.css';

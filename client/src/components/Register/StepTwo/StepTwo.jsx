@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { compose } from 'redux';
 import { setCity, setCountry, setCurrentStep, setDateOfBirth, setFemaleSelected, setGender, setMaleSelected, setMaritalStatus, setMarriedSelected, setPhone, setUnmarriedSelected } from '../../../store/register-reducer';
-import { format } from '../../../utils/register-utils/format';
+import { format } from '../../../utils/common-utils/format';
 import { validate } from '../../../utils/register-utils/validate/validateStepTwo'
 import classes from './StepTwo.module.css';
 
@@ -134,7 +134,6 @@ export const StepTwo = (props) => {
 
                 <label>Семейное положение<span title='обязательное поле'>*</span></label>
                 <div className={classes.radioBox}>
-
                     <div onClick={onUnmarriedRadioClick} className={classes.radio}>
                         {props.unmarriedSelected && <div className={classes.selected}></div>}
                     </div>
@@ -144,7 +143,6 @@ export const StepTwo = (props) => {
                         {props.marriedSelected && <div className={classes.selected}></div>}
                     </div>
                     <label onClick={onMarriedRadioClick}>{props.maleSelected ? 'женат' : 'замужем'}</label>
-
                 </div>
 
                 <div className={classes.buttonBox}>

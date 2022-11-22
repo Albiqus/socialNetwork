@@ -1,0 +1,53 @@
+.sectionsPanelsBox {
+    display: flex;
+    width: 700px;
+    height: 50px;
+}
+
+.sectionsPanelsBox p {
+    margin: 0;
+    margin-top: 10px;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    font-weight: lighter;
+}
+
+.data {
+    width: 233px;
+    height: 50px;
+    background-color: rgb(136, 136, 136);
+    border-right: 2px solid rgb(110, 110, 110);
+}
+
+.data:hover {
+    cursor: pointer;
+    background-color: rgb(158, 158, 158);
+}
+
+.privacy {
+    width: 234px;
+    height: 50px;
+    background-color: rgb(136, 136, 136);
+}
+
+.privacy:hover {
+    cursor: pointer;
+    background-color: rgb(158, 158, 158);
+}
+
+.safety {
+    width: 233px;
+    height: 50px;
+    background-color: rgb(136, 136, 136);
+    border-left: 2px solid rgb(110, 110, 110);
+}
+
+.safety:hover {
+    cursor: pointer;
+    background-color: rgb(158, 158, 158);
+}
+
+.currentSection {
+    background-color: rgb(158, 158, 158);
+}

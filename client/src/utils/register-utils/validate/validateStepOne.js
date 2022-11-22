@@ -1,9 +1,5 @@
-import {
-    MIN_FIRST_NAME_LENGTH,
-    MIN_LAST_NAME_LENGTH,
-    MIN_PASSWORD_LENGTH,
-    REGISTRATION_ERRORS
-} from "../../../data/register-data";
+import { REGISTRATION_ERRORS } from "../../../data/errors";
+import { MIN_FIRST_NAME_LENGTH, MIN_LAST_NAME_LENGTH, MIN_PASSWORD_LENGTH } from "../../../data/lengths";
 
 
 const validateFirstName = (firstName) => {

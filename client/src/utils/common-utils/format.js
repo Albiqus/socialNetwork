@@ -6,8 +6,7 @@ import {
     MAX_LAST_NAME_LENGTH,
     MAX_SECRET_KEY_LENGTH,
     PHONE_LENGTH
-}
-from "../../data/register-data";
+} from "../../data/lengths";
 
 export const format = (value, type) => {
     let formattedValue = '';
@@ -31,8 +30,8 @@ export const format = (value, type) => {
                 if (i !== 0 && value[i - 1] !== '-') formattedValue += value[i].toLowerCase()
             }
             return formattedValue
-        }    
-            
+        }
+
         case 'email': {
             for (let i = 0; i < value.length; i++) {
                 if (i === MAX_EMAIL_LENGTH) break
@@ -43,7 +42,7 @@ export const format = (value, type) => {
             }
             return formattedValue
         }
-            
+
         case 'phone': {
             for (let i = 0; i < value.length; i++) {
                 if (i === PHONE_LENGTH) break
@@ -59,7 +58,7 @@ export const format = (value, type) => {
             }
             return formattedValue
         }
-            
+
         case 'secretKey': {
             for (let i = 0; i < value.length; i++) {
                 if (i === MAX_SECRET_KEY_LENGTH) break
@@ -68,6 +67,7 @@ export const format = (value, type) => {
             }
             return formattedValue
         }
-        default: break
+        default:
+            break
     }
 }

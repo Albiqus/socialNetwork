@@ -1,6 +1,7 @@
 .settings {
     background-color: rgb(158, 158, 158);
     width: 700px;
-    height: 500px;
+    height: auto;
+    margin-bottom: 20px;
     border-radius: 10px 10px 10px 10px;
 }

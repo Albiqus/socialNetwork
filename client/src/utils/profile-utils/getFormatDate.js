@@ -1,6 +1,5 @@
-import {
-    MONTHS
-} from "../../data/profile-data"
+import { MONTHS } from "../../data/months"
+
 
 export const getDateFormat = (date) => {
     const periods = date.split(' ')

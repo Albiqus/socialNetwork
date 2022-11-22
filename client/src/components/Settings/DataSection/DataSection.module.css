@@ -1,0 +1,139 @@
+.dataSectionBox form {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    margin: 0 auto;
+    width: 500px;
+    height: auto;
+    padding-bottom: 50px;
+    position: relative;
+}
+
+.dataSectionBox label {
+    width: 300px;
+    height: 30px;
+    margin: 0;
+    margin-left: 150px;
+    margin-top: 25px;
+    font-size: 20px;
+}
+
+.dataSectionBox span {
+    color: red;
+}
+
+.dataSectionBox input {
+    width: 200px;
+    height: 30px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    background-color: rgb(136, 136, 136);
+    font-size: 20px;
+}
+
+.dataSectionBox input::placeholder {
+    color: rgba(0, 0, 0, 0.3)
+}
+
+.dateOfBirth:hover {
+    cursor: pointer;
+}
+
+.buttonBox {
+    display: flex;
+    width: 500px;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.buttonBox button {
+    margin: 0 auto;
+    margin-top: 20px;
+    display: block;
+    width: 200px;
+    height: 30px;
+    font-size: 18px;
+    background-color: rgb(136, 136, 136);
+    border: none;
+    border-radius: 20px;
+}
+
+.buttonBox button:hover {
+    cursor: pointer;
+}
+
+/* ================================== radio ================================== */
+
+.radioBox {
+    margin-left: 150px;
+    margin-top: 10px;
+    display: flex;
+    width: 650px;
+    height: 40px;
+}
+
+.radioBox label {
+    width: 120px;
+    height: 30px;
+    margin: 0;
+    margin-left: 5px;
+    font-size: 20px;
+}
+
+.radioBox label:hover {
+    cursor: pointer;
+}
+
+.radio {
+    display: flex;
+    background-color: rgb(109, 109, 109);
+    margin-top: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+}
+
+.selected {
+    margin: 0 auto;
+    background-color: rgb(158, 158, 158);
+    margin-top: 5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+}
+
+.radio:hover {
+    cursor: pointer;
+}
+
+/* errors */
+
+.error {
+    position: absolute;
+    color: red;
+    margin: 0;
+    width: 500px;
+    text-align: center;
+}
+
+.firstNameError {
+    top: 85px;
+}
+
+.lastNameError {
+    top: 170px;
+}
+
+.countryError {
+    top: 255px;
+}
+
+.cityError {
+    top: 340px;
+}
+
+.phoneError {
+    top: 425px;
+}

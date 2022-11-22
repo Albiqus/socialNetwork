@@ -1,0 +1,24 @@
+.sectionBox {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    background-color: rgb(158, 158, 158);
+    width: 700px;
+    height: 450px;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.preloader {
+    width: 500px;
+    height: 450px;
+    display: flex;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.preloader img {
+    width: 100px;
+    height: 100px;
+}

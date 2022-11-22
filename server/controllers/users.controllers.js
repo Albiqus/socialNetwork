@@ -216,6 +216,47 @@ class UsersControllers {
             }
         })
     }
+    async getUserData(req, res) {
+        const userId = req.query.userId
+        const userResult = await db.query(`SELECT * FROM users WHERE id=$1`, [userId])
+
+        res.json({
+            statusCode: 1,
+            data: {
+                firstName: userResult.rows[0].first_name,
+                lastName: userResult.rows[0].last_name,
+                gender: userResult.rows[0].gender,
+                dateOfBirth: userResult.rows[0].date_of_birth.replace('.', '-').replace('.', '-'),
+                country: userResult.rows[0].country,
+                city: userResult.rows[0].city,
+                maritalStatus: userResult.rows[0].marital_status,
+                phone: userResult.rows[0].phone
+            },
+        })
+
+    }
+    async updateUserData(req, res) {
+        const userId = req.body.userId
+        const firstName = req.body.firstName
+        const lastName = req.body.lastName
+        const country = req.body.country
+        const city = req.body.city
+        const phone = req.body.phone
+        const dateOfBirth = req.body.dateOfBirth.replace('-', '.').replace('-', '.')
+        const gender = req.body.gender
+        const maritalStatus = req.body.maritalStatus
+        
+        const newUserDataResult = await db.query(`UPDATE users set first_name = $1, last_name = $2, country = $3, city = $4, phone = $5, date_of_birth = $6, gender = $7, marital_status = $8 where id = $9 RETURNING *`,
+            [firstName, lastName, country, city, phone, dateOfBirth, gender, maritalStatus, userId])
+        db.query(`UPDATE comments set first_name = $1, last_name = $2 where user_id = $3 RETURNING *`, [firstName, lastName, userId])
+        db.query(`UPDATE posts_likes set first_name = $1, last_name = $2 where user_id = $3 RETURNING *`, [firstName, lastName, userId])
+        db.query(`UPDATE comments_likes set first_name = $1, last_name = $2 where user_id = $3 RETURNING *`, [firstName, lastName, userId])
+        
+           res.json({
+               statusCode: 1,
+               message: 'данные успешно обновлены',
+           })
+    }
 }
 
 module.exports = new UsersControllers()

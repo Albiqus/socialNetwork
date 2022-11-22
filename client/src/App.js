@@ -24,7 +24,7 @@ function App() {
             <Route path='/settings' element={<Settings />} />
             <Route path='/register' element={<Register/>}/>
             </Routes>
-          </div>
+        </div>
     </div>
         </BrowserRouter>
   );

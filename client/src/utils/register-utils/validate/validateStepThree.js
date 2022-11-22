@@ -1,9 +1,5 @@
-import {
-    MIN_SECRET_KEY_LENGTH,
-    REGISTRATION_ERRORS
-}
-from "../../../data/register-data";
-
+import { REGISTRATION_ERRORS } from "../../../data/errors";
+import { MIN_SECRET_KEY_LENGTH } from "../../../data/lengths";
 
 
 const validateSecretKey = (secretKey) => {

@@ -1,10 +1,5 @@
-import {
-    MIN_CITY_LENGTH,
-    MIN_COUNTRY_LENGTH,
-    PHONE_LENGTH,
-    REGISTRATION_ERRORS
-}
-from "../../../data/register-data";
+import { REGISTRATION_ERRORS } from "../../../data/errors";
+import { MIN_CITY_LENGTH, MIN_COUNTRY_LENGTH, PHONE_LENGTH } from "../../../data/lengths";
 
 
 const validateCountry = (country) => {

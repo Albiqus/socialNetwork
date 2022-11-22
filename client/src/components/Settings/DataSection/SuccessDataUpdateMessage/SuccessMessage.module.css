@@ -1,0 +1,12 @@
+.successMessageBox {
+    width: 700px;
+}
+
+.successMessage {
+    margin: 0;
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(0, 104, 0);
+}

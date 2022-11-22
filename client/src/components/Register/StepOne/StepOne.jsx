@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 import { compose } from 'redux';
 import { setCurrentStep, setEmail, setExistingUserError, setFirstName, setLastName, setPassword,  setPhone, setSecondPassword } from '../../../store/register-reducer';
 import { checkExistingUser } from '../../../thunks/checkExistingUser';
-import { format } from '../../../utils/register-utils/format';
+import { format } from '../../../utils/common-utils/format';
 import { validate } from '../../../utils/register-utils/validate/validateStepOne';
 import classes from './StepOne.module.css';
 
@@ -23,20 +23,12 @@ const StepOne = (props) => {
     let [secondPasswordVisibility, setSecondPasswordVisibility] = useState(false)
 
     let passwordLevel = classes.passwordLevel
-    if (passwordLength >= 1 && passwordLength < 6) {
-        passwordLevel += ` ${classes.empty}`
-    }
-    if (passwordLength >= 6 && passwordLength < 12) {
-        passwordLevel += ` ${classes.low}`
-    }
-    if (passwordLength >= 12 && passwordLength < 18) {
-        passwordLevel += ` ${classes.average}`
-    }
-    if (passwordLength >= 18) {
-        passwordLevel += ` ${classes.strong}`
-    }
-
-
+    if (passwordLength >= 1 && passwordLength < 6) passwordLevel += ` ${classes.empty}`
+    if (passwordLength >= 6 && passwordLength < 12) passwordLevel += ` ${classes.low}`
+    if (passwordLength >= 12 && passwordLength < 18) passwordLevel += ` ${classes.average}`
+    if (passwordLength >= 18) passwordLevel += ` ${classes.strong}`
+    
+    
     const onFirstNameChange = (e) => {
         setFirstNameError(null)
         const value = e.target.value

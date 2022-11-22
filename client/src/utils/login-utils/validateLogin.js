@@ -1,18 +1,14 @@
-import {
-    LOGIN_ERRORS,
-    MIN_LOGIN_LENGTH,
-    MIN_PASSWORD_LENGTH
-}
-from "../../data/login-data";
+import { LOGIN_ERRORS } from "../../data/errors";
+import { MIN_LOGIN_INPUT_LENGTH } from "../../data/lengths";
 
 
 const validateLogin = (login) => {
-    if (login.length < MIN_LOGIN_LENGTH) {
+    if (login.length < MIN_LOGIN_INPUT_LENGTH) {
         return LOGIN_ERRORS.login.empty
     }
 }
 const validatePassword = (password) => {
-    if (password.length < MIN_PASSWORD_LENGTH) {
+    if (password.length < MIN_LOGIN_INPUT_LENGTH) {
         return LOGIN_ERRORS.password.empty
     }
 }
