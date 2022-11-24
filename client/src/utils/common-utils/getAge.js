@@ -10,17 +10,10 @@ export const getAge = (dateOfBirth) => {
     let currentDay = Number(String(new Date().getDate()).padStart(2, '0'));
 
     let age = currentYear - yearOfBirth
-    if (currentMonth < monthOfBirth) {
-        age--
-    }
-    if (currentMonth === monthOfBirth) {
-        currentDay < dayOfBirth && age--
-    }
-
-    if (age < 0) {
-        return '0 лет'
-    }
-
+    if (currentMonth < monthOfBirth) age--
+    if (currentMonth === monthOfBirth) currentDay < dayOfBirth && age--
+    if (age < 0) return '0 лет'
+    
     let string = ''
     string += age
     if (string[string.length - 1] < 5 && string[string.length - 1] !== '0' && string[string.length - 1] !== '1' && string !== '12' && string !== '13' && string !== '14') {

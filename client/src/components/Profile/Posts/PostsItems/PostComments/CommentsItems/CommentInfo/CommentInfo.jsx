@@ -23,9 +23,8 @@ const CommentInfo = ({ post, comment, router, deleteOneComment, deleteCommentBut
     }
 
     let deleteIconClassName = classes.deleteIcon
-    if (deleteCommentButtonPostId === comment.id) {
-        deleteIconClassName += ` ${classes.visible}`
-    }
+    if (deleteCommentButtonPostId === comment.id) deleteIconClassName += ` ${classes.visible}`
+    
 
     return (
         <div className={classes.commentInfo}>

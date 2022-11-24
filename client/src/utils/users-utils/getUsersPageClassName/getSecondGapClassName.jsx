@@ -2,11 +2,10 @@ import classes from '../../../components/Users/UsersNavigation/UsersNavigation.m
 
 export const getSecondGapClassName = (currentPage, gap, pagesCount) => {
     let secondGapClassName = classes.page;
-    if (currentPage === gap) {
-        secondGapClassName += ` ${classes.currentPage}`
-    }
-    if (pagesCount < 3) {
-        secondGapClassName += ` ${classes.hidden}`
-    }
+
+    if (currentPage === gap) secondGapClassName += ` ${classes.currentPage}`
+    
+    if (pagesCount < 3) secondGapClassName += ` ${classes.hidden}`
+    
     return secondGapClassName
 }

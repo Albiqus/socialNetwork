@@ -11,7 +11,7 @@ import { format } from '../../../utils/common-utils/format';
 import { validate } from '../../../utils/register-utils/validate/validateStepOne';
 import classes from './StepOne.module.css';
 
-const StepOne = (props) => {
+const StepOne = ({ setFirstName, setLastName, setExistingUserError, setEmail, setPassword, setSecondPassword, userData, checkExistingUser, currentStep, existingUserError }) => {
               
     let [passwordLength, setPasswordLength] = useState(null)
 
@@ -33,28 +33,28 @@ const StepOne = (props) => {
         setFirstNameError(null)
         const value = e.target.value
         const formattedValue = format(value, 'first_name')
-        props.setFirstName(formattedValue)
+        setFirstName(formattedValue)
     }
 
     const onLastNameChange = (e) => {
         setLastNameError(null)
         const value = e.target.value;
         const formattedValue = format(value, 'last_name')
-        props.setLastName(formattedValue)
+        setLastName(formattedValue)
     }
 
     const onEmailChange = (e) => {
-        props.setExistingUserError(null)
+        setExistingUserError(null)
         setEmailError(null)
         const value = e.target.value;
         const formattedValue = format(value, 'email')
-        props.setEmail(formattedValue)
+        setEmail(formattedValue)
     }
 
     const onPasswordChange = (e) => {
         setPasswordError(null)
         const value = e.target.value;
-        props.setPassword(value)
+        setPassword(value)
         setPasswordLength(value.length)
     }
 
@@ -66,7 +66,7 @@ const StepOne = (props) => {
         setPasswordError(null)
 
         const value = e.target.value;
-        props.setSecondPassword(value)
+        setSecondPassword(value)
     }
 
     const onSecondEyeIconClick = () => {
@@ -76,40 +76,38 @@ const StepOne = (props) => {
     const onNextStepButtonClick = (e) => {
         e.preventDefault()
 
-        let errors = validate(props.userData.firstName, props.userData.lastName, props.userData.email, props.userData.password, props.userData.secondPassword)
+        let errors = validate(userData.firstName, userData.lastName, userData.email, userData.password, userData.secondPassword)
         setFirstNameError(errors.firstNameError)
         setLastNameError(errors.lastNameError)
         setEmailError(errors.emailError)
         setPasswordError(errors.passwordError)
 
-        if (!errors.errorStatus) {
-            props.checkExistingUser(props.userData.email)
-        }
+        if (!errors.errorStatus) checkExistingUser(userData.email)
     }
 
     return (
         <div className={classes.stepOne}>
             <p className={classes.header}>Регистрация</p>
-            <p className={classes.currentStepHeader} >Шаг {props.currentStep} из 3</p>
+            <p className={classes.currentStepHeader} >Шаг {currentStep} из 3</p>
             <form>
                 {firstNameError && <p className={`${classes.error} ${classes.firstNameError}`}>{firstNameError}</p>}
                 {lastNameError && <p className={`${classes.error} ${classes.lastNameError}`}>{lastNameError}</p>}
                 {emailError && <p className={`${classes.error} ${classes.emailError}`}>{emailError}</p>}
                 {passwordError && <p className={`${classes.error} ${classes.passwordError}`}> {passwordError}</p >}
                 {passwordError && <p className={`${classes.error} ${classes.secondPasswordError}`}> {passwordError}</p >}
-                {props.existingUserError && <p className={`${classes.error} ${classes.emailError}`}> {props.existingUserError}</p >}
+                {existingUserError && <p className={`${classes.error} ${classes.emailError}`}> {existingUserError}</p >}
                 
                 <label>Имя<span title='обязательное поле'>*</span></label>
-                <input onChange={onFirstNameChange} value={props.userData.firstName} placeholder='Иван' required></input>
+                <input onChange={onFirstNameChange} value={userData.firstName} placeholder='Иван' required></input>
 
                 <label>Фамилия<span title='обязательное поле'>*</span></label>
-                <input onChange={onLastNameChange} value={props.userData.lastName} placeholder='Иванов' required></input>
+                <input onChange={onLastNameChange} value={userData.lastName} placeholder='Иванов' required></input>
 
                 <label>Почта<span title='обязательное поле'>*</span></label>
-                <input onChange={onEmailChange} value={props.userData.email} placeholder='ivan123@email.com' required></input>
+                <input onChange={onEmailChange} value={userData.email} placeholder='ivan123@email.com' required></input>
 
                 <label>Пароль<span title='обязательное поле'>*</span></label>
-                <input onChange={onPasswordChange} value={props.userData.password} type={!firstPasswordVisibility ? 'password' : 'text'} required></input>
+                <input onChange={onPasswordChange} value={userData.password} type={!firstPasswordVisibility ? 'password' : 'text'} required></input>
 
                 <FontAwesomeIcon onClick={onFirstEyeIconClick} className={classes.firstEyeIcon} icon={firstPasswordVisibility ? faEye : faEyeSlash} />
                 <div className={classes.passwordLevelBox}>
@@ -117,7 +115,7 @@ const StepOne = (props) => {
                 </div>
 
                 <label>Повторите пароль<span title='обязательное поле'>*</span></label>
-                <input onChange={onSecondPasswordChange} value={props.userData.secondPassword} type={!secondPasswordVisibility ? 'password' : 'text'} required></input>
+                <input onChange={onSecondPasswordChange} value={userData.secondPassword} type={!secondPasswordVisibility ? 'password' : 'text'} required></input>
                 <FontAwesomeIcon onClick={onSecondEyeIconClick} className={classes.secondEyeIcon} icon={secondPasswordVisibility ? faEye : faEyeSlash} />
                 <div className={classes.buttonBox}>
                     <button onClick={onNextStepButtonClick}>Дальше</button>

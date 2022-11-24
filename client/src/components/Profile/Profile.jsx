@@ -22,9 +22,8 @@ export const Profile = ({ router, getProfileData, getAuthUserLikes, getPosts, ge
 
     useEffect(() => {
         let userId = router.params.userId
-        if (!userId) {
-            userId = authUserId
-        }
+        if (!userId) userId = authUserId
+        
         getProfileData(userId)
         getPosts(userId)
         getAuthUserData(authUserId)

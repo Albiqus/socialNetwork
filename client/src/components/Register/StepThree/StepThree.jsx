@@ -11,7 +11,7 @@ import { validate } from '../../../utils/register-utils/validate/validateStepThr
 import { Preloader } from '../../Common/Preloader/Preloader';
 import classes from './StepThree.module.css';
 
-export const StepThree = (props) => {
+export const StepThree = ({ setSecretKey, setCurrentStep, userData, resetUserData, registerUser, registerPreloader, currentStep }) => {
 
     let [secretKeyError, setSecretKeyError] = useState(null)
 
@@ -21,7 +21,7 @@ export const StepThree = (props) => {
         setSecretKeyError(null)
         const value = e.target.value;
         const formattedValue = format(value, 'secretKey')
-        props.setSecretKey(formattedValue)
+        setSecretKey(formattedValue)
     }
 
     const onFirstEyeIconClick = () => {
@@ -29,25 +29,25 @@ export const StepThree = (props) => {
     }
 
     const onPrevStepButtonClick = () => {
-        props.setCurrentStep(2)
+        setCurrentStep(2)
     }
 
     const onNextStepButtonClick = (e) => {
         e.preventDefault()
-        let errors = validate(props.userData.secretKey)
+        let errors = validate(userData.secretKey)
         setSecretKeyError(errors.secretKeyError)
         if (!errors.errorStatus) {
-            props.resetUserData()
-            props.registerUser(props.userData)
+            resetUserData()
+            registerUser(userData)
         }
     }
   
     return (
         <div className={classes.stepThree}>
-            {props.registerPreloader && <div className={classes.preloader}><Preloader /></div>}
-            {!props.registerPreloader && <div>
+            {registerPreloader && <div className={classes.preloader}><Preloader /></div>}
+            {!registerPreloader && <div>
                 <p className={classes.header}>Регистрация</p>
-                <p className={classes.currentStepHeader} >Шаг {props.currentStep} из 3</p>
+                <p className={classes.currentStepHeader} >Шаг {currentStep} из 3</p>
                 <p className={classes.secretCodeHeader} >Почти! Придумайте секретное слово, которое будет использоваться в дальнейшем при возникновении проблем с логинизацией:</p>
                 <div className={classes.ulBox}>
                     <ul>
@@ -61,7 +61,7 @@ export const StepThree = (props) => {
                     {secretKeyError && <p className={`${classes.error} ${classes.secretKeyError}`}>{secretKeyError}</p>}
 
                     <label>Секретный ключ</label>
-                    <input onChange={onSecretKeyChange} value={props.userData.secretKey} type={!secretKeyVisibility ? 'password' : 'text'} required></input>
+                    <input onChange={onSecretKeyChange} value={userData.secretKey} type={!secretKeyVisibility ? 'password' : 'text'} required></input>
                     <FontAwesomeIcon onClick={onFirstEyeIconClick} className={classes.eyeIcon} icon={secretKeyVisibility ? faEye : faEyeSlash} />
                     <div className={classes.buttonBox}>
                         <button onClick={onPrevStepButtonClick} type="button">Назад</button>

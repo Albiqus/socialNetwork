@@ -7,7 +7,25 @@ import { format } from '../../../utils/common-utils/format';
 import { validate } from '../../../utils/register-utils/validate/validateStepTwo'
 import classes from './StepTwo.module.css';
 
-export const StepTwo = (props) => {
+export const StepTwo = ({
+    setCountry,
+    setCity,
+    setPhone,
+    setDateOfBirth,
+    maleSelected,
+    femaleSelected,
+    unmarriedSelected,
+    marriedSelected,
+    setFemaleSelected,
+    setMaleSelected,
+    setGender,
+    setMarriedSelected,
+    setUnmarriedSelected,
+    setMaritalStatus,
+    setCurrentStep,
+    userData,
+    currentStep
+}) => {
 
     let [countryError, setCountryError] = useState(null)
     let [cityError, setCityError] = useState(null)
@@ -19,88 +37,88 @@ export const StepTwo = (props) => {
         setCountryError(null)
         const value = e.target.value;
         const formattedValue = format(value, 'country')
-        props.setCountry(formattedValue)
+        setCountry(formattedValue)
     }
 
     const onCityChange = (e) => {
         setCityError(null)
         const value = e.target.value;
         const formattedValue = format(value, 'city')
-        props.setCity(formattedValue)
+        setCity(formattedValue)
     }
 
     const onPhoneChange = (e) => {
         setPhoneError(null)
         const value = e.target.value;
         const formattedValue = format(value, 'phone')
-        props.setPhone(formattedValue)
+        setPhone(formattedValue)
     }
 
     const onDateOfBirthChange = (e) => {
         const value = e.target.value;
-        props.setDateOfBirth(value)
+        setDateOfBirth(value)
     }
 
     const genderStatuses = {
-        maleSelected: props.maleSelected,
-        femaleSelected: props.femaleSelected
+        maleSelected: maleSelected,
+        femaleSelected: femaleSelected
     }
 
     const maritalStatusStatuses = {
-        unmarriedSelected: props.unmarriedSelected,
-        marriedSelected: props.marriedSelected
+        unmarriedSelected: unmarriedSelected,
+        marriedSelected: marriedSelected
     }
 
 
     const onMaleRadioClick = () => {
         setGenderError(null)
-        props.setFemaleSelected(false)
-        props.setMaleSelected(true)
-        props.setGender('Мужской')
+        setFemaleSelected(false)
+        setMaleSelected(true)
+        setGender('Мужской')
     }
 
     const onFemaleRadioClick = () => {
         setGenderError(null)
-        props.setMaleSelected(false)
-        props.setFemaleSelected(true)
-        props.setGender('Женский')
+        setMaleSelected(false)
+        setFemaleSelected(true)
+        setGender('Женский')
     }
 
     const onUnmarriedRadioClick = () => {
         setMaritalStatusError(null)
-        props.setMarriedSelected(false)
-        props.setUnmarriedSelected(true)
-        props.setMaritalStatus(props.maleSelected ? 'Холост' : 'Не замужем')
+        setMarriedSelected(false)
+        setUnmarriedSelected(true)
+        setMaritalStatus(maleSelected ? 'Холост' : 'Не замужем')
     }
 
     const onMarriedRadioClick = () => {
         setMaritalStatusError(null)
-        props.setUnmarriedSelected(false)
-        props.setMarriedSelected(true)
-        props.setMaritalStatus(props.femaleSelected ? 'Замужем' : 'Женат')
+        setUnmarriedSelected(false)
+        setMarriedSelected(true)
+        setMaritalStatus(femaleSelected ? 'Замужем' : 'Женат')
     }
 
     const onPrevStepButtonClick = () => {
-        props.setCurrentStep(1)
+        setCurrentStep(1)
     }
 
     const onNextStepButtonClick = (e) => {
         e.preventDefault()
-        let errors = validate(props.userData.country, props.userData.city, props.userData.phone, genderStatuses, maritalStatusStatuses)
+        let errors = validate(userData.country, userData.city, userData.phone, genderStatuses, maritalStatusStatuses)
+
         setCountryError(errors.countryError)
         setCityError(errors.cityError)
         setPhoneError(errors.phoneError)
         setGenderError(errors.genderError)
         setMaritalStatusError(errors.maritalStatusError)
-        if (!errors.errorStatus) {
-            props.setCurrentStep(3)
-        }
+
+        if (!errors.errorStatus) setCurrentStep(3)
     }
 
     return (
         <div className={classes.stepTwo}>
             <p className={classes.header}>Регистрация</p>
-            <p className={classes.currentStepHeader} >Шаг {props.currentStep} из 3</p>
+            <p className={classes.currentStepHeader} >Шаг {currentStep} из 3</p>
             <form>
                 {countryError && <p className={`${classes.error} ${classes.countryError}`}>{countryError}</p>}
                 {cityError && <p className={`${classes.error} ${classes.cityError}`}>{cityError}</p>}
@@ -109,25 +127,25 @@ export const StepTwo = (props) => {
                 {maritalStatusError && <p className={`${classes.error} ${classes.maritalStatusError}`}>{maritalStatusError}</p>}
 
                 <label>Страна</label>
-                <input onChange={onCountryChange} value={props.userData.country} placeholder='Россия'></input>
+                <input onChange={onCountryChange} value={userData.country} placeholder='Россия'></input>
 
                 <label>Город</label>
-                <input onChange={onCityChange} value={props.userData.city} type='city' placeholder='Москва'></input>
+                <input onChange={onCityChange} value={userData.city} type='city' placeholder='Москва'></input>
 
                 <label>Номер телефона</label>
-                <input onChange={onPhoneChange} value={props.userData.phone} placeholder='+71234567890'></input>
+                <input onChange={onPhoneChange} value={userData.phone} placeholder='+71234567890'></input>
 
                 <label>Дата рождения</label>
-                <input onChange={onDateOfBirthChange} value={props.userData.dateOfBirth} type='date' className={classes.dateOfBirth}></input>
+                <input onChange={onDateOfBirthChange} value={userData.dateOfBirth} type='date' className={classes.dateOfBirth}></input>
 
                 <label>Пол<span title='обязательное поле'>*</span></label>
                 <div className={classes.radioBox}>
                     <div onClick={onMaleRadioClick} className={classes.radio}>
-                        {props.maleSelected && <div className={classes.selected}></div>}
+                        {maleSelected && <div className={classes.selected}></div>}
                     </div>
                     <label onClick={onMaleRadioClick}>мужской</label>
                     <div onClick={onFemaleRadioClick} className={classes.radio}>
-                        {props.femaleSelected && <div className={classes.selected}></div>}
+                        {femaleSelected && <div className={classes.selected}></div>}
                     </div>
                     <label onClick={onFemaleRadioClick}>женский</label>
                 </div>
@@ -135,14 +153,14 @@ export const StepTwo = (props) => {
                 <label>Семейное положение<span title='обязательное поле'>*</span></label>
                 <div className={classes.radioBox}>
                     <div onClick={onUnmarriedRadioClick} className={classes.radio}>
-                        {props.unmarriedSelected && <div className={classes.selected}></div>}
+                        {unmarriedSelected && <div className={classes.selected}></div>}
                     </div>
-                    <label onClick={onUnmarriedRadioClick}>{props.maleSelected ? 'холост' : 'не замужем'}</label>
+                    <label onClick={onUnmarriedRadioClick}>{maleSelected ? 'холост' : 'не замужем'}</label>
 
                     <div onClick={onMarriedRadioClick} className={classes.radio}>
-                        {props.marriedSelected && <div className={classes.selected}></div>}
+                        {marriedSelected && <div className={classes.selected}></div>}
                     </div>
-                    <label onClick={onMarriedRadioClick}>{props.maleSelected ? 'женат' : 'замужем'}</label>
+                    <label onClick={onMarriedRadioClick}>{maleSelected ? 'женат' : 'замужем'}</label>
                 </div>
 
                 <div className={classes.buttonBox}>

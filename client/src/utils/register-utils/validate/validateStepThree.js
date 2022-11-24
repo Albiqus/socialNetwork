@@ -13,10 +13,8 @@ export const validate = (secretKey) => {
     const secretKeyError = validateSecretKey(secretKey)
 
     let errorStatus = true
-    if (!secretKeyError) {
-        errorStatus = false
-    }
-
+    if (!secretKeyError) errorStatus = false
+    
     return ({
         secretKeyError,
         errorStatus

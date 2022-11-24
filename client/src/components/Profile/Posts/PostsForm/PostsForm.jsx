@@ -23,14 +23,9 @@ const PostsForm = ({ createPost, newPostPreloader, setIsPostCreation, isPostCrea
     useEffect(() => {
         const handleClick = (e) => {
             if (!formRef.current) return
-            if (!formRef.current.contains(e.target)) {
-                setIsPostCreation(false)
-            }
+            if (!formRef.current.contains(e.target)) setIsPostCreation(false)
         }
-
-        if (isPostCreation) {
-            document.addEventListener('click', handleClick)
-        }
+        if (isPostCreation) document.addEventListener('click', handleClick)
         return () => {
             document.removeEventListener('click', handleClick)
         }

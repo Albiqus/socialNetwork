@@ -2,11 +2,10 @@ import classes from '../../../components/Users/UsersNavigation/UsersNavigation.m
 
 export const getLastPageClassName = (currentPage, pagesCount) => {
     let lastPageClassName = classes.page
-    if (currentPage === pagesCount) {
-        lastPageClassName += ` ${classes.currentPage}`
-    }
-    if (pagesCount < 6) {
-        lastPageClassName += ` ${classes.hidden}`
-    }
+    
+    if (currentPage === pagesCount) lastPageClassName += ` ${classes.currentPage}`
+    
+    if (pagesCount < 6) lastPageClassName += ` ${classes.hidden}`
+    
     return lastPageClassName
 }

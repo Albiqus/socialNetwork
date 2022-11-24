@@ -2,8 +2,7 @@ import classes from '../../../components/Users/UsersNavigation/UsersNavigation.m
 
 export const getFirstPointsClassName = (gap, pagesCount) => {
     let firstPointsClassName = classes.gap;
-    if (gap === 2 || pagesCount < 7) {
-        firstPointsClassName += ` ${classes.hidden}`
-    }
+    if (gap === 2 || pagesCount < 7) firstPointsClassName += ` ${classes.hidden}`
+    
     return firstPointsClassName
 }

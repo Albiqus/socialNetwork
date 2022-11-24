@@ -39,18 +39,12 @@ const CommentsForm = ({ authUserData, post, createComment }) => {
     }
 
     const onFormKeyDown = (e) => {
-        if (e.code === 'ShiftLeft') {
-            setIsShiftPressed(true)
-        }
-        if (e.code === 'Enter' && !isShiftPressed) {
-            onSendCommentButtonClick()
-        }
+        if (e.code === 'ShiftLeft') setIsShiftPressed(true)
+        if (e.code === 'Enter' && !isShiftPressed)  onSendCommentButtonClick()
     }
 
     const onFormKeyUp = (e) => {
-        if (e.code === 'ShiftLeft') {
-            setIsShiftPressed(false)
-        }
+        if (e.code === 'ShiftLeft')  setIsShiftPressed(false)
     }
 
     const onFileInputChange = (e) => {

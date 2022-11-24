@@ -9,21 +9,21 @@ import UsersItems from './UsersItems/UsersItems';
 import { UsersError } from './UsersError/UsersError';
 import { UsersForm } from './UsersForm/UsersForm';
 
-export const Users = (props) => {
+export const Users = ({ pagesCount, isNoUsers, getAndSetTenUsers, usersPreloader }) => {
 
     let currentPage = Number(localStorage.getItem('currentUsersPage'))
     if (currentPage === 0) currentPage = 1
     
     
-    if (!props.pagesCount && !props.isNoUsers) props.getAndSetTenUsers(currentPage)
+    if (!pagesCount && !isNoUsers) getAndSetTenUsers(currentPage)
     
   
     return (
         <div >
-            {props.usersPreloader && <UsersPreloader />}
-            {!props.usersPreloader && props.isNoUsers && <UsersError />}
+            {usersPreloader && <UsersPreloader />}
+            {!usersPreloader && isNoUsers && <UsersError />}
 
-            {!props.usersPreloader && !props.isNoUsers &&
+            {!usersPreloader && !isNoUsers &&
                 <div className={classes.usersBox}>
                     <UsersForm />
                     <UsersNavigation />

@@ -44,10 +44,8 @@ const CommentCommunicationPanel = ({
     }
 
     let likeButtonBoxClassName = classes.likesButtonBox;
-    if (isHoverCommentId === comment.id || comment.likesCount !== '0') {
-        likeButtonBoxClassName += ` ${classes.visible}`
-    }
-
+    if (isHoverCommentId === comment.id || comment.likesCount !== '0') likeButtonBoxClassName += ` ${classes.visible}`
+    
 
     const [mouseEnterTimerId, setMouseEnterTimerId] = useState(null)
 

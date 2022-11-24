@@ -18,14 +18,11 @@ const UsersNavigation = ({ gaps, setGaps, getAndSetTenUsers }) => {
     const pagesCount = Number(localStorage.getItem('pagesCount'))
     let currentPage = Number(localStorage.getItem('currentUsersPage'))
 
-    if (currentPage === 0) {
-        currentPage = 1
-    }
+    if (currentPage === 0) currentPage = 1
 
     let currentGaps;
-    if (gaps) {
-        currentGaps = gaps
-    } else {
+    if (gaps) currentGaps = gaps
+    else {
         currentGaps = getCurrentGaps(currentPage, pagesCount)
         setGaps(currentGaps)
     }
@@ -44,12 +41,8 @@ const UsersNavigation = ({ gaps, setGaps, getAndSetTenUsers }) => {
         localStorage.setItem('currentUsersPage', newCurrentPage)
         getAndSetTenUsers(newCurrentPage)
 
-        if (e.target.outerText === '1') {
-            setGaps([2, 3, 4, 5])
-        }
-        if (e.target.outerText === String(pagesCount) && pagesCount > 6) {
-            setGaps([pagesCount - 4, pagesCount - 3, pagesCount - 2, pagesCount - 1])
-        }
+        if (e.target.outerText === '1') setGaps([2, 3, 4, 5])
+        if (e.target.outerText === String(pagesCount) && pagesCount > 6) setGaps([pagesCount - 4, pagesCount - 3, pagesCount - 2, pagesCount - 1])
     }
 
     const onPreviousPageClick = () => {

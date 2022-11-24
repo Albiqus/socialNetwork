@@ -6,22 +6,18 @@ import { setNavVisible } from '../../store/nav-reducer';
 import { resetUsersSettings } from '../../store/users-reducer';
 
 
-const Nav = (props) => {
+const Nav = ({ resetUsersSettings, setNavVisible, navVisible }) => {
     
     const onExitNavLinkClick = () => {
         localStorage.clear()
-        props.resetUsersSettings()
-        props.setNavVisible(false)
+        resetUsersSettings()
+        setNavVisible(false)
     }
 
     let navClassName = classes.navBox;
-    if (!props.navVisible) {
-        navClassName += ` ${classes.hidden}`
-    }
-    if (localStorage.getItem('id')) {
-        navClassName = classes.navBox;
-    }
-
+    if (!navVisible) navClassName += ` ${classes.hidden}`
+    if (localStorage.getItem('id')) navClassName = classes.navBox;
+    
     return (
         <div className={navClassName}>
             <div className={classes.nav}>

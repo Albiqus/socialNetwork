@@ -6,14 +6,13 @@ import StepThree from './StepThree/StepThree';
 import StepTwo from './StepTwo/StepTwo';
 
 
-export const Register = (props) => {
-    const currentStep = props.currentStep
+export const Register = ({ currentStep , successRegistrationStatus}) => {
     return (
         <>
             {currentStep === 1 && <StepOne />}
             {currentStep === 2 && <StepTwo />}
             {currentStep === 3 && <StepThree />}
-            {props.successRegistrationStatus && <Navigate to={'/login'} />}
+            {successRegistrationStatus && <Navigate to={'/login'} />}
         </>
     )
 }
