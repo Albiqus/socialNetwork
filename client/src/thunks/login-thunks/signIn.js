@@ -1,8 +1,8 @@
 import {
     setInvalidAuthError,
     setLoginPreloader
-} from "../store/login-reducer";
-import { setNavVisible } from "../store/nav-reducer";
+} from "../../store/login-reducer";
+import { setNavVisible } from "../../store/nav-reducer";
 
 export const signIn = (login, password) => {
     return (dispatch) => {

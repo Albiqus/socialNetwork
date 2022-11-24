@@ -2,7 +2,7 @@ import {
     setCurrentStep,
     setRegisterPreloader,
     setSuccessRegistrationStatus
-} from "../store/register-reducer";
+} from "../../store/register-reducer";
 
 export const registerUser = (userData) => {
     return (dispatch) => {

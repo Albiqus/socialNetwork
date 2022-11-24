@@ -27,9 +27,24 @@ module.exports = {
         })
         return formatedPosts
     },
+    sortPostLikesUsers: function (postLikesUsers) {
+        let counter = 1;
+        for (let i = 0; i < postLikesUsers.length; i++) {
+            for (let j = counter; j < postLikesUsers.length; j++) {
+                if (Number(postLikesUsers[i].id) < Number(postLikesUsers[j].id)) {
+                    let saver = postLikesUsers[i]
+                    postLikesUsers[i] = postLikesUsers[j]
+                    postLikesUsers[j] = saver
+                }
+            }
+            counter++
+        }
+        return postLikesUsers
+    },
     formatPostLikesUsers: function (postLikesUsers) {
         const formatedPostLikesUsers = postLikesUsers.map((postLikesUser) => {
             return {
+                id: postLikesUser.id,
                 postId: postLikesUser.post_id,
                 userId: postLikesUser.user_id,
                 firstName: postLikesUser.first_name,

@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { compose } from 'redux';
 import { withRouter } from '../../../../../../../hocs/withRouter';
-import { deleteOneComment } from '../../../../../../../thunks/deleteOneComment';
+import { deleteOneComment } from '../../../../../../../thunks/profile-thunks/deleteOneComment';
 import { getDateFormat } from '../../../../../../../utils/profile-utils/getFormatDate';
 import deleteIcon from '../../../../../../../images/icons/delete.png'
 import classes from './CommentInfo.module.css';
@@ -31,7 +31,7 @@ const CommentInfo = ({ post, comment, router, deleteOneComment, deleteCommentBut
         <div className={classes.commentInfo}>
             <div className={classes.commentAvatarBox}>
                 {comment.avatar === '' && <NavLink to={`/profile/${comment.userId}`}><img className={classes.commentAvatar} src={require('../../../../../../../images/incognito/incognito-small.png')} alt='аватар'></img></NavLink>}
-                {comment.avatar !== '' && <NavLink to={`/profile/${comment.userId}`}><img className={classes.commentAvatar} src={comment.avatar} alt='аватар'></img></NavLink>}
+                {comment.avatar !== '' && <NavLink to={`/profile/${comment.userId}`}><img className={classes.commentAvatar} src={`http://localhost:4000/images/${comment.avatar}`} alt='аватар'></img></NavLink>}
             </div>
             <NavLink to={`/profile/${comment.userId}`} className={classes.fullName}>{comment.firstName} {comment.lastName}</NavLink>
             <p className={classes.date}>{dateFormat}</p>

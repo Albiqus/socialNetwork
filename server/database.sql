@@ -26,6 +26,7 @@ create table posts (
 );
 
 create table posts_likes (
+    id BIGSERIAL NOT NULL PRIMARY KEY,
     author_id VARCHAR(10) NOT NULL,
     post_id VARCHAR(10) NOT NULL,
     user_id VARCHAR(10) NOT NULL,
@@ -48,6 +49,7 @@ create table comments (
 );
 
 create table comments_likes (
+    id BIGSERIAL NOT NULL PRIMARY KEY,
     author_id VARCHAR(10) NOT NULL,
     comment_id VARCHAR(10) NOT NULL,
     user_id VARCHAR(10) NOT NULL,

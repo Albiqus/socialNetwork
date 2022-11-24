@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { compose } from 'redux';
 import { setCurrentStep, setEmail, setExistingUserError, setFirstName, setLastName, setPassword,  setPhone, setSecondPassword } from '../../../store/register-reducer';
-import { checkExistingUser } from '../../../thunks/checkExistingUser';
+import { checkExistingUser } from '../../../thunks/register-thunks/checkExistingUser';
 import { format } from '../../../utils/common-utils/format';
 import { validate } from '../../../utils/register-utils/validate/validateStepOne';
 import classes from './StepOne.module.css';

@@ -1,10 +1,7 @@
-import {
-    setProfileData,
-    setProfileError,
-    setProfilePreloader
-} from "../store/profile-reducer";
+import { setProfileData, setProfileError, setProfilePreloader } from "../../store/profile-reducer";
 
-export const getAndSetProfileData = (userId) => {
+
+export const getProfileData = (userId) => {
     return (dispatch) => {
         dispatch(setProfilePreloader(true))
         fetch(`http://localhost:4000/api/profile?userId=${userId}`, {

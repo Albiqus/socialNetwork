@@ -1,7 +1,7 @@
 import {
     setNewLikedPostsId,
     updatePost
-} from "../store/profile-reducer";
+} from "../../store/profile-reducer";
 
 export const createPostLike = (userId, authorId, postId, newLikesCount, firstName, lastName, avatar) => {
     return (dispatch) => {
@@ -27,6 +27,5 @@ export const createPostLike = (userId, authorId, postId, newLikesCount, firstNam
                 dispatch(updatePost(response.data.updatedPost))
             }
         })
-
     }
 }

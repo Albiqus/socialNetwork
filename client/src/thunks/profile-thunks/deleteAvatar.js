@@ -1,10 +1,9 @@
-import { setAuthUserData } from "../store/auth-user-reducer";
+import { setProfileAvatar } from "../../store/profile-reducer";
 
-
-export const getAndSetAuthUserData = (authUserId) => {
+export const deleteAvatar = (userId) => {
     return (dispatch) => {
-        fetch(`http://localhost:4000/api/getAuthUserData/?authUserId=${authUserId}`, {
-            method: 'GET',
+        fetch(`http://localhost:4000/api/deleteAvatar?userId=${userId}`, {
+            method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8'
             }
@@ -12,9 +11,8 @@ export const getAndSetAuthUserData = (authUserId) => {
             return response.json();
         }).then(function (response) {
             if (response.statusCode === 1) {
-                dispatch(setAuthUserData(response.data))
+                dispatch(setProfileAvatar(response.data.avatar))
             }
         })
-
     }
 }

@@ -1,9 +1,9 @@
-import { setProfileAvatar } from "../store/profile-reducer";
+import { setCommentLikesUsers } from "../../store/profile-reducer"
 
-export const deleteAvatar = (userId) => {
+export const getCommentLikesUsers = (commentId) => {
     return (dispatch) => {
-        fetch(`http://localhost:4000/api/deleteAvatar?userId=${userId}`, {
-            method: 'DELETE',
+        fetch(`http://localhost:4000/api/getCommentLikesUsers?commentId=${commentId}`, {
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8'
             }
@@ -11,7 +11,7 @@ export const deleteAvatar = (userId) => {
             return response.json();
         }).then(function (response) {
             if (response.statusCode === 1) {
-                dispatch(setProfileAvatar(response.data.avatar))
+                dispatch(setCommentLikesUsers(response.data.commentLikesUsers))
             }
         })
     }

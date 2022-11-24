@@ -1,7 +1,7 @@
 import {
     deleteLikedPostId,
     updatePost
-} from "../store/profile-reducer";
+} from "../../store/profile-reducer";
 
 export const deletePostLike = (authUserId, currentId, postId, newLikesCount) => {
     return (dispatch) => {

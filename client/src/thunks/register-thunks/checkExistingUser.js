@@ -1,7 +1,7 @@
 import {
     setCurrentStep,
     setExistingUserError
-} from "../store/register-reducer";
+} from "../../store/register-reducer";
 
 export const checkExistingUser = (email) => {
     return (dispatch) => {

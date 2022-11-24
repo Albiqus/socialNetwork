@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
-import { createComment } from '../../../../../../thunks/createComment';
+import { createComment } from '../../../../../../thunks/profile-thunks/createComment';
 import { getDate } from '../../../../../../utils/common-utils/getTime';
 import classes from './CommentsForm.module.css';
 import uploadCommentImageIMG from '../../../../../../images/icons/upload-comment-image.png'
+import { validateText } from '../../../../../../utils/common-utils/validateText';
 
 const CommentsForm = ({ authUserData, post, createComment }) => {
 
@@ -19,7 +20,9 @@ const CommentsForm = ({ authUserData, post, createComment }) => {
     }
 
     const onSendCommentButtonClick = () => {
-        if (commentText !== '' || fileIMG !== null) {
+        const validatedText = validateText(commentText)
+
+        if (validatedText !== '' || fileIMG !== null) {
             const data = new FormData()
             data.append('commentImage', fileIMG)
 
@@ -60,7 +63,7 @@ const CommentsForm = ({ authUserData, post, createComment }) => {
         <form className={classes.commentForm} onKeyDown={onFormKeyDown} onKeyUp={onFormKeyUp}>
             <div className={classes.avatarBox}>
                 {authUserData.avatar === '' && <img className={classes.avatar} src={require('../../../../../../images/incognito/incognito-small.png')} alt='аватар'></img>}
-                {authUserData.avatar !== '' && <img className={classes.avatar} src={authUserData.avatar} alt='аватар'></img>}
+                {authUserData.avatar !== '' && <img className={classes.avatar} src={`http://localhost:4000/images/${authUserData.avatar}`} alt='аватар'></img>}
             </div>
             <textarea onChange={onTextareaChange} placeholder='Написать комментарий...' rows='2' value={commentText}></textarea>
             <label htmlFor={`commentImage${post.id}`}><img src={uploadCommentImageIMG} alt='загрузить изображение'></img></label>

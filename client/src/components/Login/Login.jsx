@@ -4,7 +4,7 @@ import { Navigate, NavLink } from 'react-router-dom';
 import { compose } from 'redux';
 import { setInvalidAuthError } from '../../store/login-reducer';
 import { setSuccessRegistrationStatus } from '../../store/register-reducer';
-import { signIn } from '../../thunks/signIn';
+import { signIn } from '../../thunks/login-thunks/signIn';
 import { validate } from '../../utils/login-utils/validateLogin';
 import classes from './Login.module.css';
 import preloader from '../../images/preloaders/ellipsis-preloader.svg'

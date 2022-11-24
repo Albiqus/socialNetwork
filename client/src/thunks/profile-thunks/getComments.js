@@ -1,10 +1,10 @@
 import {
     setComments,
     setCommentsPreloader
-} from "../store/profile-reducer";
+} from "../../store/profile-reducer";
 
 
-export const getAndSetComments = (postId) => {
+export const getComments = (postId) => {
     return (dispatch) => {
         dispatch(setCommentsPreloader(true))
         fetch(`http://localhost:4000/api/getComments?postId=${postId}`, {

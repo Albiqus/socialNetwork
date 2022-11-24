@@ -2,16 +2,15 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from '../../../../../hocs/withRouter';
-import { createPostLike } from '../../../../../thunks/createPostLike';
-import { deletePostLike } from '../../../../../thunks/deletePostLike';
+import { createPostLike } from '../../../../../thunks/profile-thunks/createPostLike';
+import { deletePostLike } from '../../../../../thunks/profile-thunks/deletePostLike';
 import likeEmpty from '../../../../../images/icons/like-empty.png'
 import like from '../../../../../images/icons/like.png'
 import comment from '../../../../../images/icons/comment.png'
-
 import classes from './PostCommunicationPanel.module.css';
-import { resetPostLikesUsers, setNewOpenCommentsPostId, setPostLikesModalStatus } from '../../../../../store/profile-reducer';
-import { getAndSetComments } from '../../../../../thunks/getAndSetComments';
-import { getPostLikesUsers } from '../../../../../thunks/getPostLikesUsers';
+import { resetCommentLikesUsers, resetPostLikesUsers, setNewOpenCommentsPostId, setPostLikesModalStatus } from '../../../../../store/profile-reducer';
+import { getComments } from '../../../../../thunks/profile-thunks/getComments';
+import { getPostLikesUsers } from '../../../../../thunks/profile-thunks/getPostLikesUsers';
 import { useEffect, useState } from 'react';
 
 const PostCommunicationPanel = ({
@@ -23,13 +22,14 @@ const PostCommunicationPanel = ({
     deletePostLike,
     setNewOpenCommentsPostId,
     openСommentsPostsIds,
-    getAndSetComments,
+    getComments,
     getPostLikesUsers,
     authUserData,
     postLikesUsers,
     resetPostLikesUsers,
     setPostLikesModalStatus,
-    postLikesModalStatus}) => {
+    postLikesModalStatus,
+    resetCommentLikesUsers}) => {
 
     const currentId = router.params.userId
     const authUserId = localStorage.getItem('id')
@@ -52,7 +52,7 @@ const PostCommunicationPanel = ({
         const postId = e.currentTarget.id
         if (!openСommentsPostsIds.includes(postId)) {
             setNewOpenCommentsPostId(postId)
-            getAndSetComments(postId)
+            getComments(postId)
         }
     }
 
@@ -62,6 +62,7 @@ const PostCommunicationPanel = ({
     const onLikeBoxMouseEnter = (time) => {
         if (time !== 0) time = 500
         const cb = () => {
+            resetCommentLikesUsers()
             getPostLikesUsers(post.id)
         }
         const timerId = setTimeout(cb, time);
@@ -108,7 +109,7 @@ const PostCommunicationPanel = ({
             usersItems.push(
                 <div className={classes.userItem} key={postLikesUsers[i].userId}>
                     {postLikesUsers[i].avatar === '' && <img className={classes.avatar} src={require('../../../../../images/incognito/incognito-small.png')} alt='аватар'></img>}
-                    {postLikesUsers[i].avatar !== '' && <img className={classes.avatar} src={postLikesUsers[i].avatar} alt='аватар'></img>}
+                    {postLikesUsers[i].avatar !== '' && <img className={classes.avatar} src={`http://localhost:4000/images/${postLikesUsers[i].avatar}`} alt='аватар'></img>}
                 </div>
             )
         }
@@ -150,8 +151,9 @@ export default compose(connect(mapStateToProps, {
     createPostLike,
     deletePostLike,
     setNewOpenCommentsPostId,
-    getAndSetComments,
+    getComments,
     getPostLikesUsers,
     resetPostLikesUsers,
-    setPostLikesModalStatus
+    setPostLikesModalStatus,
+    resetCommentLikesUsers
 }), withRouter)(PostCommunicationPanel)

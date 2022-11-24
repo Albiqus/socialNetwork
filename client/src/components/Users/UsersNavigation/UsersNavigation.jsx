@@ -11,7 +11,7 @@ import classes from './UsersNavigation.module.css';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { setGaps } from '../../../store/users-reducer';
-import { getAndSetTenUsers } from '../../../thunks/getAndSetTenUsers';
+import { getAndSetTenUsers } from '../../../thunks/users-thunks/getAndSetTenUsers';
 
 const UsersNavigation = ({ gaps, setGaps, getAndSetTenUsers }) => {
 

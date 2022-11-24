@@ -4,11 +4,11 @@ import { withRouter } from '../../../../../../../hocs/withRouter';
 import classes from './CommentCommunicationPanel.module.css';
 import likeEmpty from '../../../../../../../images/icons/like-empty.png'
 import like from '../../../../../../../images/icons/like.png'
-import { createCommentLike } from '../../../../../../../thunks/createCommentLike';
-import { deleteCommentLike } from '../../../../../../../thunks/deleteCommentLike';
+import { createCommentLike } from '../../../../../../../thunks/profile-thunks/createCommentLike';
+import { deleteCommentLike } from '../../../../../../../thunks/profile-thunks/deleteCommentLike';
 import { useEffect, useState } from 'react';
-import { getCommentLikesUsers } from '../../../../../../../thunks/getCommentLikesUsers';
-import { resetCommentLikesUsers, setCommentLikesModalStatus } from '../../../../../../../store/profile-reducer';
+import { getCommentLikesUsers } from '../../../../../../../thunks/profile-thunks/getCommentLikesUsers';
+import { resetCommentLikesUsers, resetPostLikesUsers, setCommentLikesModalStatus } from '../../../../../../../store/profile-reducer';
 
 const CommentCommunicationPanel = ({
     post,
@@ -23,7 +23,8 @@ const CommentCommunicationPanel = ({
     getCommentLikesUsers,
     resetCommentLikesUsers,
     setCommentLikesModalStatus,
-    commentLikesModalStatus }) => {
+    commentLikesModalStatus,
+    resetPostLikesUsers}) => {
 
     const currentId = router.params.userId
     const authUserId = localStorage.getItem('id')
@@ -52,6 +53,7 @@ const CommentCommunicationPanel = ({
 
     const onLikesButtonBoxMouseEnter = () => {
         const cb = () => {
+            resetPostLikesUsers()
             getCommentLikesUsers(comment.id)
         }
         const timerId = setTimeout(cb, 500);
@@ -101,7 +103,7 @@ const CommentCommunicationPanel = ({
             usersItems.push(
                 <div className={classes.userItem} key={commentLikesUsers[i].userId}>
                     {commentLikesUsers[i].avatar === '' && <img className={classes.avatar} src={require('../../../../../../../images/incognito/incognito-small.png')} alt='аватар'></img>}
-                    {commentLikesUsers[i].avatar !== '' && <img className={classes.avatar} src={commentLikesUsers[i].avatar} alt='аватар'></img>}
+                    {commentLikesUsers[i].avatar !== '' && <img className={classes.avatar} src={`http://localhost:4000/images/${commentLikesUsers[i].avatar}`} alt='аватар'></img>}
                 </div>
             )
         }
@@ -131,4 +133,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default compose(connect(mapStateToProps, { createCommentLike, deleteCommentLike, getCommentLikesUsers, resetCommentLikesUsers, setCommentLikesModalStatus }), withRouter)(CommentCommunicationPanel)
+export default compose(connect(mapStateToProps, { createCommentLike, deleteCommentLike, getCommentLikesUsers, resetCommentLikesUsers, setCommentLikesModalStatus, resetPostLikesUsers }), withRouter)(CommentCommunicationPanel)

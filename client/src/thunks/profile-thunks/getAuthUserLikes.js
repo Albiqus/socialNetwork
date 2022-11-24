@@ -1,9 +1,9 @@
 import {
     setLikedCommentsIds,
     setLikedPostsIds
-} from "../store/profile-reducer";
+} from "../../store/profile-reducer";
 
-export const getAndSetAuthUserLikes = (authUserId, currentUserId) => {
+export const getAuthUserLikes = (authUserId, currentUserId) => {
     return (dispatch) => {
         fetch(`http://localhost:4000/api/getAuthUserLikes/?authUserId=${authUserId}&currentUserId=${currentUserId}`, {
             method: 'GET',
@@ -16,6 +16,5 @@ export const getAndSetAuthUserLikes = (authUserId, currentUserId) => {
             dispatch(setLikedPostsIds(response.data.likedPostsIds))
             dispatch(setLikedCommentsIds(response.data.likedCommentsIds))
         })
-
     }
 }

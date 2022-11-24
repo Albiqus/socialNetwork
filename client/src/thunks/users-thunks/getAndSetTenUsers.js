@@ -3,7 +3,7 @@ import {
     setPagesCount,
     setUsers,
     setUsersPreloader
-} from "../store/users-reducer";
+} from "../../store/users-reducer";
 
 export const getAndSetTenUsers = (currentPage) => {
     return (dispatch) => {

@@ -1,7 +1,7 @@
 import {
     deletePost,
     setDeletePostPreloader,
-} from "../store/profile-reducer";
+} from "../../store/profile-reducer";
 
 export const deleteOnePost = (userId, postId) => {
     return (dispatch) => {

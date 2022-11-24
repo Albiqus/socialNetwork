@@ -1,8 +1,7 @@
-import {
-    setPosts
-} from "../store/profile-reducer";
+import { setPosts } from "../../store/profile-reducer";
 
-export const getAndSetPosts = (id) => {
+
+export const getPosts = (id) => {
     return (dispatch) => {
         fetch(`http://localhost:4000/api/getPosts?userId=${id}`, {
             method: 'GET',

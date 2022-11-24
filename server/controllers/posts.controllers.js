@@ -2,6 +2,7 @@ const db = require('../data-base')
 const {
     sortPosts,
     formatPosts,
+    sortPostLikesUsers,
     formatPostLikesUsers
 } = require('../utils')
 
@@ -147,8 +148,8 @@ class PostsControllers {
         const postId = req.query.postId
         const postLikesResult = await db.query(`SELECT * FROM posts_likes WHERE post_id=$1`, [postId])
 
-        const postLikesUsers = formatPostLikesUsers(postLikesResult.rows).reverse()
-        
+        const postLikesUsers = formatPostLikesUsers(sortPostLikesUsers(postLikesResult.rows))
+ 
         res.json({
             statusCode: 1,
             message: `Отдаю трёх последних пользователей лайкнувших, пост id=${postId}`,

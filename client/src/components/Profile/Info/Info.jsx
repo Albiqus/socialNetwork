@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from '../../../hocs/withRouter';
-import { updateStatus } from '../../../thunks/updateStatus';
+import { updateStatus } from '../../../thunks/profile-thunks/updateStatus';
 import classes from './Info.module.css';
 
 const Info = ({ profileData, router, updateStatus }) => {
@@ -27,7 +27,8 @@ const Info = ({ profileData, router, updateStatus }) => {
     }
 
     const onStatusChange = (e) => {
-        setNewStatusText(e.target.value)
+        const statusText = e.target.value
+        setNewStatusText(statusText)
     }
 
     const onSetStatusClick = () => {
@@ -42,7 +43,7 @@ const Info = ({ profileData, router, updateStatus }) => {
                 {currentId === authUserId
                      ? profileData.status === ''
                         ? !statusInputStatus && <p onClick={onAddStatusClick} className={classes.statusPrompt}>добавьте статус</p>
-                        : !statusInputStatus && <p onClick={onStatusClick} className={classes.status}>{profileData.status}</p>
+                        : !statusInputStatus && <p onClick={onStatusClick} className={classes.authUserStatus}>{profileData.status}</p>
                     : <p className={classes.status}>{profileData.status}</p>
                 }
                 {statusInputStatus &&

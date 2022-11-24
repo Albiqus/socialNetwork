@@ -11,7 +11,7 @@ const UsersItems = ({users}) => {
             <NavLink to={`/profile/${user.id}`} className={classes.userItem} key={user.id} id={user.id}>
                 <div className={classes.avatarBox}>
                     {user.avatar === '' && <div className={classes.avatarDefault}></div>}
-                    {user.avatar !== '' && <img className={classes.avatar} src={user.avatar} alt='аватар'></img>}
+                    {user.avatar !== '' && <img className={classes.avatar} src={`http://localhost:4000/images/${user.avatar}`} alt='аватар'></img>}
                 </div>
                 <div className={classes.mainInfo}>
                     <p className={classes.fullname}><span>{user.first_name}</span> <span>{user.last_name}</span></p>

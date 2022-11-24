@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withAuthRedirect } from '../../hocs/withAuthRedirect';
-import { getAndSetTenUsers } from '../../thunks/getAndSetTenUsers';
+import { getAndSetTenUsers } from '../../thunks/users-thunks/getAndSetTenUsers';
 import classes from './Users.module.css';
 import { UsersPreloader } from './UsersPreloader/UsersPreloader';
 import UsersNavigation from './UsersNavigation/UsersNavigation';
@@ -12,13 +12,11 @@ import { UsersForm } from './UsersForm/UsersForm';
 export const Users = (props) => {
 
     let currentPage = Number(localStorage.getItem('currentUsersPage'))
-    if (currentPage === 0) {
-        currentPage = 1
-    }
+    if (currentPage === 0) currentPage = 1
     
-    if (!props.pagesCount && !props.isNoUsers) {
-        props.getAndSetTenUsers(currentPage)
-    }
+    
+    if (!props.pagesCount && !props.isNoUsers) props.getAndSetTenUsers(currentPage)
+    
   
     return (
         <div >

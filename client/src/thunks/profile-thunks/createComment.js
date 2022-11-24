@@ -1,7 +1,7 @@
 import {
     setNewComment,
     updatePost
-} from "../store/profile-reducer";
+} from "../../store/profile-reducer";
 
 export const updateComment = (data, commentId, postId) => {
     return (dispatch) => {

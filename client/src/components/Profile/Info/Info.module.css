@@ -44,7 +44,14 @@
     font-style: italic;
 }
 
-.status:hover {
+.authUserStatus {
+    margin: 0;
+    height: 21px;
+    display: inline;
+    font-style: italic;
+}
+
+.authUserStatus:hover {
     cursor: pointer;
     text-decoration: underline;
 }

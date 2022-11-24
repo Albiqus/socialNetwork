@@ -1,6 +1,6 @@
 import {
     setProfileAvatar
-} from "../store/profile-reducer";
+} from "../../store/profile-reducer";
 
 export const setAvatar = (data, id) => {
     return (dispatch) => {

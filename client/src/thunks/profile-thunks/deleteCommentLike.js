@@ -1,12 +1,8 @@
-import {
-    setNewLikedCommentId,
-    updateComment
-} from "../store/profile-reducer";
+import { deleteLikedCommentId, updateComment } from "../../store/profile-reducer";
 
-
-export const createCommentLike = (authUserId, currentId, commentId, newLikesCount, postId, firstName, lastName, avatar) => {
+export const deleteCommentLike = (authUserId, currentId, commentId, newLikesCount, postId) => {
     return (dispatch) => {
-        fetch(`http://localhost:4000/api/createCommentLike`, {
+        fetch(`http://localhost:4000/api/deleteCommentLike`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8'
@@ -15,16 +11,13 @@ export const createCommentLike = (authUserId, currentId, commentId, newLikesCoun
                 authUserId,
                 currentId,
                 commentId,
-                newLikesCount,
-                firstName,
-                lastName,
-                avatar
+                newLikesCount
             })
         }).then(function (response) {
             return response.json();
         }).then(function (response) {
-            dispatch(setNewLikedCommentId(response.data.newLikedCommentId))
             dispatch(updateComment(response.data.updatedComment, postId))
+            dispatch(deleteLikedCommentId(response.data.deletedLikedCommentId))
         })
 
     }

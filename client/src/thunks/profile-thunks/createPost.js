@@ -2,7 +2,7 @@ import {
     setIsPostCreation,
     setNewPost,
     setNewPostPreloader
-} from "../store/profile-reducer";
+} from "../../store/profile-reducer";
 
 export const updatePost = (data, userId, postId) => {
     return (dispatch) => {

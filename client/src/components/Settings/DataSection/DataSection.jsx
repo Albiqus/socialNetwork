@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
 import { setCity, setCountry, setDateOfBirth, setFirstName, setGender, setLastName, setMaritalStatus, setPhone } from '../../../store/settings-reducer';
-import { getUserData } from '../../../thunks/settings-page/getUserData';
-import { updateUserData } from '../../../thunks/settings-page/updateUserData';
-
+import { getUserData } from '../../../thunks/settings-thunks/getUserData';
+import { updateUserData } from '../../../thunks/settings-thunks/updateUserData';
 import { format } from '../../../utils/common-utils/format';
 import { validate } from '../../../utils/settings-utils/validateDataSection';
 import { SectionPreloader } from '../SectionPreloader/SectionPreloader';

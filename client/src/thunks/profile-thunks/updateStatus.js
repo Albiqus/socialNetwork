@@ -1,6 +1,6 @@
 import {
     setProfileStatus
-} from "../store/profile-reducer";
+} from "../../store/profile-reducer";
 
 export const updateStatus = (id, status) => {
     return (dispatch) => {

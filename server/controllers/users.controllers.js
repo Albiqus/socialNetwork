@@ -34,7 +34,7 @@ class UsersControllers {
             currentUserPosition = Number(String(currentPage) + '0') - 10
         }
 
-        const usersResult = await db.query(`SELECT * FROM users OFFSET ${currentUserPosition} LIMIT 10`)
+        const usersResult = await db.query(`SELECT * FROM users ORDER BY id DESC OFFSET ${currentUserPosition} LIMIT 10`)
         const tenUsers = usersResult.rows.map((user) => {
             return {
                 id: user.id,
@@ -183,7 +183,7 @@ class UsersControllers {
         })
     }
     async uploadAvatar(req, res, next) {
-        const avatar = `http://localhost:4000/images/${req.file.filename}`
+        const avatar = req.file.filename 
         const userId = req.query.userId
 
         db.query(`UPDATE users set avatar = $1 where id = $2 RETURNING *`, [avatar, userId])

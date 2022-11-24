@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
-import { deleteOneComment } from '../../../../../../thunks/deleteOneComment';
 import classes from './CommentsItems.module.css';
 import CommentInfo from './CommentInfo/CommentInfo';
 import { CommentContent } from './CommentContent/CommentContent';
@@ -44,4 +43,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { deleteOneComment })(CommentsItems)
+export default connect(mapStateToProps, {  })(CommentsItems)

@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from '../../../hocs/withRouter';
-import { setAvatar } from '../../../thunks/setAvatar';
+import { setAvatar } from '../../../thunks/profile-thunks/setAvatar';
+import { deleteAvatar } from '../../../thunks/profile-thunks/deleteAvatar';
 import classes from './Avatar.module.css';
-
 import updateAvatarIcon from '../../../images/icons/update-avatar.png'
 import deleteAvatarIcon from '../../../images/icons/delete-avatar.png'
-import { deleteAvatar } from '../../../thunks/deleteAvatar';
+
 
 const Avatar = ({ setAvatar, deleteAvatar, avatar, router }) => {
 
@@ -47,7 +47,7 @@ const Avatar = ({ setAvatar, deleteAvatar, avatar, router }) => {
                     </label>
                     {currentId === authUserId && <input onChange={onAvatarChange} type="file" id="avatar" />}
                 </div>}
-                {avatar !== '' && <img className={classes.avatar} src={avatar} alt='аватар'></img>}
+                {avatar !== '' && <img className={classes.avatar} src={`http://localhost:4000/images/${avatar}`} alt='аватар'></img>}
             </div>
         </div>
     )

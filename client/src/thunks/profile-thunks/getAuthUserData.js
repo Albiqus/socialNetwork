@@ -1,9 +1,8 @@
-import { setPostLikesUsers } from "../store/profile-reducer";
+import { setAuthUserData } from "../../store/auth-user-reducer";
 
-
-export const getPostLikesUsers = (postId) => {
+export const getAuthUserData = (authUserId) => {
     return (dispatch) => {
-        fetch(`http://localhost:4000/api/getPostLikesUsers?postId=${postId}`, {
+        fetch(`http://localhost:4000/api/getAuthUserData/?authUserId=${authUserId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8'
@@ -12,8 +11,9 @@ export const getPostLikesUsers = (postId) => {
             return response.json();
         }).then(function (response) {
             if (response.statusCode === 1) {
-                dispatch(setPostLikesUsers(response.data.postLikesUsers))
+                dispatch(setAuthUserData(response.data))
             }
         })
+
     }
 }
