@@ -9,7 +9,14 @@ import { validate } from '../../utils/login-utils/validateLogin';
 import classes from './Login.module.css';
 import preloader from '../../images/preloaders/ellipsis-preloader.svg'
 
-const Login = ({ setInvalidAuthError, setSuccessRegistrationStatus, signIn, loginPreloader, successRegistrationStatus, invalidAuthError }) => {
+const Login = ({
+    setInvalidAuthError,
+    setSuccessRegistrationStatus,
+    signIn,
+    loginPreloader,
+    successRegistrationStatus,
+    invalidAuthError,
+    successUserDeleteStatus }) => {
 
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
@@ -46,8 +53,9 @@ const Login = ({ setInvalidAuthError, setSuccessRegistrationStatus, signIn, logi
             {!loginPreloader &&
                 <div className={classes.login}>
                     {localStorage.getItem('id') && <Navigate to={`/profile/${localStorage.getItem('id')}`} />}
-                    {successRegistrationStatus && <p className={classes.successRegistrationHeader}>Регистрация прошла успешно</p>}
-                    {!successRegistrationStatus && <p className={classes.header}>Вход</p>}
+                    {successRegistrationStatus && <p className={classes.successHeader}>Регистрация прошла успешно</p>}
+                    {successUserDeleteStatus && <p className={classes.successHeader}>Аккаунт успешно удалён</p>}
+                    {!successRegistrationStatus && !successUserDeleteStatus && <p className={classes.header}>Вход</p>}
                     <form>
                         {loginError && <p className={`${classes.error} ${classes.loginError}`}>{loginError}</p>}
                         {passwordError && <p className={`${classes.error} ${classes.passwordError}`}>{passwordError}</p>}
@@ -71,7 +79,8 @@ const mapStateToProps = (state) => {
     return {
         successRegistrationStatus: state.registerPage.successRegistrationStatus,
         invalidAuthError: state.loginPage.invalidAuthError,
-        loginPreloader: state.loginPage.loginPreloader
+        loginPreloader: state.loginPage.loginPreloader,
+        successUserDeleteStatus: state.loginPage.successUserDeleteStatus
     }
 }
 

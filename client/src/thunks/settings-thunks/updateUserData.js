@@ -1,4 +1,7 @@
-import { setDataSectionPreloader, setSuccessDataUpdate } from "../../store/settings-reducer";
+import {
+    setDataSectionPreloader,
+    setSuccessDataUpdate
+} from "../../store/settings-reducer";
 
 export const updateUserData = (userId, firstName, lastName, country, city, phone, dateOfBirth, gender, maritalStatus) => {
     return (dispatch) => {
@@ -23,8 +26,8 @@ export const updateUserData = (userId, firstName, lastName, country, city, phone
             return response.json();
         }).then(function (response) {
             if (response.statusCode === 1) {
-                dispatch(setDataSectionPreloader(false))
                 dispatch(setSuccessDataUpdate(true))
+                dispatch(setDataSectionPreloader(false))
             }
         })
     }

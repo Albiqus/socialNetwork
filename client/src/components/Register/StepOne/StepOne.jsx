@@ -11,7 +11,17 @@ import { format } from '../../../utils/common-utils/format';
 import { validate } from '../../../utils/register-utils/validate/validateStepOne';
 import classes from './StepOne.module.css';
 
-const StepOne = ({ setFirstName, setLastName, setExistingUserError, setEmail, setPassword, setSecondPassword, userData, checkExistingUser, currentStep, existingUserError }) => {
+const StepOne = ({
+    setFirstName,
+    setLastName,
+    setExistingUserError,
+    setEmail,
+    setPassword,
+    setSecondPassword,
+    userData,
+    checkExistingUser,
+    currentStep,
+    existingUserError }) => {
               
     let [passwordLength, setPasswordLength] = useState(null)
 
@@ -108,7 +118,6 @@ const StepOne = ({ setFirstName, setLastName, setExistingUserError, setEmail, se
 
                 <label>Пароль<span title='обязательное поле'>*</span></label>
                 <input onChange={onPasswordChange} value={userData.password} type={!firstPasswordVisibility ? 'password' : 'text'} required></input>
-
                 <FontAwesomeIcon onClick={onFirstEyeIconClick} className={classes.firstEyeIcon} icon={firstPasswordVisibility ? faEye : faEyeSlash} />
                 <div className={classes.passwordLevelBox}>
                     <div className={passwordLevel}></div>

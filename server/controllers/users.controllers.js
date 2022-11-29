@@ -165,7 +165,7 @@ class UsersControllers {
         if (!user.rows[0]) {
             res.json({
                 statusCode: 0,
-                message: 'пользователь не найден',
+                message: 'пользователь не найден, возможно страница удалена',
             })
         }
     }
@@ -183,7 +183,7 @@ class UsersControllers {
         })
     }
     async uploadAvatar(req, res, next) {
-        const avatar = req.file.filename 
+        const avatar = req.file.filename
         const userId = req.query.userId
 
         db.query(`UPDATE users set avatar = $1 where id = $2 RETURNING *`, [avatar, userId])
@@ -233,7 +233,17 @@ class UsersControllers {
                 phone: userResult.rows[0].phone
             },
         })
+    }
+    async getUserSafetySettings(req, res) {
+        const userId = req.query.userId
+        const userResult = await db.query(`SELECT * FROM users WHERE id=$1`, [userId])
 
+        res.json({
+            statusCode: 1,
+            data: {
+                email: userResult.rows[0].email,
+            },
+        })
     }
     async updateUserData(req, res) {
         const userId = req.body.userId
@@ -245,17 +255,80 @@ class UsersControllers {
         const dateOfBirth = req.body.dateOfBirth.replace('-', '.').replace('-', '.')
         const gender = req.body.gender
         const maritalStatus = req.body.maritalStatus
-        
-        const newUserDataResult = await db.query(`UPDATE users set first_name = $1, last_name = $2, country = $3, city = $4, phone = $5, date_of_birth = $6, gender = $7, marital_status = $8 where id = $9 RETURNING *`,
+
+        await db.query(`UPDATE users set first_name = $1, last_name = $2, country = $3, city = $4, phone = $5, date_of_birth = $6, gender = $7, marital_status = $8 where id = $9 RETURNING *`,
             [firstName, lastName, country, city, phone, dateOfBirth, gender, maritalStatus, userId])
         db.query(`UPDATE comments set first_name = $1, last_name = $2 where user_id = $3 RETURNING *`, [firstName, lastName, userId])
         db.query(`UPDATE posts_likes set first_name = $1, last_name = $2 where user_id = $3 RETURNING *`, [firstName, lastName, userId])
         db.query(`UPDATE comments_likes set first_name = $1, last_name = $2 where user_id = $3 RETURNING *`, [firstName, lastName, userId])
-        
-           res.json({
-               statusCode: 1,
-               message: 'данные успешно обновлены',
-           })
+
+        res.json({
+            statusCode: 1,
+            message: 'данные успешно обновлены',
+        })
+    }
+    async updateUserSafetySettings(req, res) {
+
+        const newEmail = req.body.newEmail
+        const newPassword = req.body.newPassword
+        const newSecretKey = req.body.newSecretKey
+        const currentPassword = req.body.currentPassword
+        const userId = req.body.userId
+
+        const userResult = await db.query(`SELECT * FROM users WHERE id=$1`, [userId])
+        const existingUserResult = await db.query(`SELECT * FROM users WHERE email=$1`, [newEmail])
+
+        if (existingUserResult.rows.length > 0 && existingUserResult.rows[0].id !== userId) {
+            res.json({
+                statusCode: 0,
+                message: 'почтовый адрес занят',
+            })
+            return
+        }
+        if (currentPassword === userResult.rows[0].password) {
+            if (newEmail !== '') await db.query(`UPDATE users set email = $1 where id = $2 RETURNING *`, [newEmail, userId])
+            if (newPassword !== '') await db.query(`UPDATE users set password = $1 where id = $2 RETURNING *`, [newPassword, userId])
+            if (newSecretKey !== '') await db.query(`UPDATE users set secret_key = $1 where id = $2 RETURNING *`, [newSecretKey, userId])
+            res.json({
+                statusCode: 1,
+                message: 'данные успешно обновлены',
+            })
+        } else {
+            res.json({
+                statusCode: 0,
+                message: 'неправильный пароль',
+            })
+        }
+    }
+    async deleteUser(req, res) {
+        const userId = req.query.userId
+        const password = req.query.password
+
+        const userResult = await db.query(`SELECT * FROM users WHERE id=$1`, [userId])
+
+        if (password === userResult.rows[0].password) {
+
+            await db.query(`DELETE FROM users WHERE id=$1`, [userId])
+
+            res.json({
+                statusCode: 1,
+                message: 'пользователь успешно удалён',
+            })
+        } else {
+            res.json({
+                statusCode: 0,
+                message: 'неправильный пароль',
+            })
+        }
+        // db.query(`UPDATE users set avatar = $1 where id = $2 RETURNING *`, [ userId])
+
+        // res.json({
+        //     statusCode: 1,
+        //     message: 'автар удалён',
+        //     data: {
+        //         avatar
+        //     }
+        // })
     }
 }
 

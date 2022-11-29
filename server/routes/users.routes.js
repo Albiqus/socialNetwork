@@ -18,6 +18,10 @@ usersRouter.delete('/deleteAvatar', usersControllers.deleteAvatar) //удали 
 
 usersRouter.get('/getUserData', usersControllers.getUserData) //дай данные пользователя
 usersRouter.put('/updateUserData', usersControllers.updateUserData) //обнови данные пользователя
+usersRouter.delete('/deleteUser', usersControllers.deleteUser) //удали пользователя
+
+usersRouter.get('/getUserSafetySettings', usersControllers.getUserSafetySettings) //дай настройки безопасности пользователя
+usersRouter.put('/updateUserSafetySettings', usersControllers.updateUserSafetySettings) //обнови данные пользователя
 
 usersRouter.get('/postman', usersControllers.getAllUsers) //дай всех пользователей
 

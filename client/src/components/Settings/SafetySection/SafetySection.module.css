@@ -1,0 +1,320 @@
+.safetySectionBox form {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    margin: 0 auto;
+    width: 500px;
+    height: auto;
+    padding-bottom: 50px;
+    position: relative;
+}
+
+.safetySectionBox label {
+    width: 300px;
+    height: 30px;
+    margin: 0;
+    margin-left: 150px;
+    margin-top: 25px;
+    font-size: 20px;
+}
+
+.safetySectionBox span {
+    color: red;
+}
+
+.safetySectionBox input {
+    width: 200px;
+    height: 30px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    background-color: rgb(136, 136, 136);
+    font-size: 20px;
+}
+
+.safetySectionBox input::placeholder {
+    color: rgba(0, 0, 0, 0.3)
+}
+
+.showPasswordSettings {
+    width: 500px;
+    margin-left: 150px;
+    margin-top: 36px;
+    font-size: 18px;
+    color: rgb(65, 65, 252);
+}
+
+.showSecretKeySettings {
+    width: 500px;
+    margin-left: 150px;
+    font-size: 18px;
+    color: rgb(65, 65, 252);
+}
+
+.showDeleteAccSettings {
+    width: 500px;
+    margin-left: 150px;
+    font-size: 18px;
+    color: rgb(65, 65, 252);
+}
+
+
+.showPasswordSettings:hover,
+.showSecretKeySettings:hover,
+.showDeleteAccSettings:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* passwordSettings */
+
+.passwordSettings {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.firstEyeIcon {
+    position: absolute;
+    right: 125px;
+    top: 65px;
+}
+
+.firstEyeIcon:hover {
+    cursor: pointer;
+}
+
+.secondEyeIcon {
+    position: absolute;
+    right: 0;
+    bottom: 5px;
+    right: 125px;
+}
+
+.secondEyeIcon:hover {
+    cursor: pointer;
+}
+
+/* secretKeySettings */
+
+.secretKeySettings {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.thirdEyeIcon {
+    position: absolute;
+    right: 125px;
+    top: 65px;
+}
+
+.thirdEyeIcon:hover {
+    cursor: pointer;
+}
+
+.fourthEyeIcon {
+    position: absolute;
+    bottom: 5px;
+    right: 125px;
+}
+
+.fourthEyeIcon:hover {
+    cursor: pointer;
+}
+
+/* deleteAccSettings */
+
+.deleteAccSettings {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 350px;
+    height: auto;
+    margin: 0 auto;
+    margin-top: 36px;
+    background-color: rgba(255, 127, 127, 0.301);
+    outline: 1px solid rgba(128, 37, 37, 0.301);
+}
+
+.deleteAccSettings:hover {
+    cursor: default;
+}
+
+.deleteAccSettings p {
+    text-align: center;
+    font-size: 18px;
+    margin: 0;
+}
+
+.deleteAccSettings span {
+    color: rgb(109, 0, 0)
+}
+
+.radioBox {
+    margin-left: 90px;
+    margin-top: 20px;
+    display: flex;
+    height: 40px;
+}
+
+.radioBox label {
+    width: 80px;
+    height: 30px;
+    margin: 0;
+    margin-left: 5px;
+    font-size: 20px;
+}
+
+.radioBox label:hover {
+    cursor: pointer;
+}
+
+.radio {
+    display: flex;
+    background-color: rgba(109, 109, 109, 0.459);
+    margin-top: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+}
+
+.selected {
+    margin: 0 auto;
+    background-color: rgb(77, 77, 77);
+    margin-top: 5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+}
+
+.radio:hover {
+    cursor: pointer;
+    outline: 2px solid white;
+}
+
+/* confirmBox */
+
+.confirmBox {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    margin: 0 auto;
+    margin-top: 40px;
+    width: 350px;
+    height: 125px;
+    outline: 1px solid rgba(0, 0, 0, 0.336);
+    border-radius: 30px 30px 30px 30px;
+}
+
+.confirmBox .header {
+    position: absolute;
+    background-color: rgb(158, 158, 158);
+    width: 200px;
+    top: -32px;
+    left: 65px;
+    padding-right: 10px;
+    padding-left: 10px;
+    font-size: 18px;
+}
+
+.confirmBox label {
+    margin-left: 75px;
+}
+
+.confirmBox button {
+    position: absolute;
+    margin: 0 auto;
+    display: block;
+    width: 200px;
+    height: 30px;
+    bottom: -15px;
+    left: 75px;
+    font-size: 18px;
+    background-color: rgb(136, 136, 136);
+    border: none;
+    border-radius: 20px;
+}
+
+.confirmBox button:hover {
+    cursor: pointer;
+}
+
+/* errors */
+
+.error {
+    position: absolute;
+    color: red;
+    margin: 0;
+    width: 500px;
+    text-align: center;
+}
+
+.emailError {
+    top: 85px;
+}
+
+.passwordError {
+    top: 95px;
+}
+
+.secondPasswordError {
+    top: 180px;
+}
+
+.secretKeyError {
+    top: 85px;
+}
+
+.secondSecretKeyError {
+    top: 170px;
+}
+
+.currentPasswordError {
+    width: 350px;
+    bottom: 20px;
+}
+
+/* password level */
+
+
+.passwordLevelBox {
+    width: 500px;
+}
+
+.passwordLevel {
+    margin: 0 auto;
+    width: 200px;
+    height: 10px;
+}
+
+.empty {
+    background-image: url(../../../images/password_strength/empty.png);
+}
+
+.low {
+    background-image: url(../../../images/password_strength/low.png);
+}
+
+.average {
+    background-image: url(../../../images/password_strength/average.png);
+}
+
+.strong {
+    background-image: url(../../../images/password_strength/strong.png);
+}
+
+/* icons */
+
+
+.fifthEyeIcon {
+    position: absolute;
+    right: 45px;
+    top: 61px;
+}
+
+.fifthEyeIcon:hover {
+    cursor: pointer;
+}

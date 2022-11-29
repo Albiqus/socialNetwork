@@ -1,9 +1,14 @@
-import { setProfileData, setProfileError, setProfilePreloader } from "../../store/profile-reducer";
+import {
+    setProfileData,
+    setProfileError,
+    setProfilePreloader
+} from "../../store/profile-reducer";
 
 
 export const getProfileData = (userId) => {
     return (dispatch) => {
         dispatch(setProfilePreloader(true))
+        dispatch(setProfileError(false))
         fetch(`http://localhost:4000/api/profile?userId=${userId}`, {
             method: 'GET',
             headers: {
@@ -16,7 +21,7 @@ export const getProfileData = (userId) => {
                 dispatch(setProfileData(response.profileData))
             }
             if (response.statusCode === 0) {
-                dispatch(setProfileError(response.message))
+                dispatch(setProfileError(true))
             }
             dispatch(setProfilePreloader(false))
         })

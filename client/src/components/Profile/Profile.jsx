@@ -20,6 +20,7 @@ export const Profile = ({ router, getProfileData, getAuthUserLikes, getPosts, ge
 
     const authUserId = localStorage.getItem('id')
 
+
     useEffect(() => {
         let userId = router.params.userId
         if (!userId) userId = authUserId
@@ -30,7 +31,7 @@ export const Profile = ({ router, getProfileData, getAuthUserLikes, getPosts, ge
         getAuthUserLikes(authUserId, userId)
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [router.params.userId]);
-
+    
     return (
         <div>
             {profilePreloader && <ProfilePreloader />}

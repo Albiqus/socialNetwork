@@ -1,4 +1,3 @@
-
 export const REGISTRATION_ERRORS = {
     firstName: {
         empty: 'Обязательное поле',
@@ -36,6 +35,7 @@ export const REGISTRATION_ERRORS = {
     },
     secretKey: {
         invalidSymbolsAmount: 'Секретный код должен содержать минимум 4 символа',
+        differenceSecretKeys: 'Ключи не совпадают',
     }
 }
 

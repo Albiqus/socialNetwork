@@ -9,7 +9,20 @@ import { SectionPreloader } from '../SectionPreloader/SectionPreloader';
 import classes from './DataSection.module.css';
 import { SuccessMessage } from './SuccessDataUpdateMessage/SuccessMessage';
 
-const DataSection = ({ dataSettings, getUserData, dataSectionPreloader, setFirstName, setLastName, setCountry, setCity, setPhone, setDateOfBirth, setGender, setMaritalStatus, updateUserData, successDataUpdate }) => {
+const DataSection = ({
+    dataSettings,
+    getUserData,
+    dataSectionPreloader,
+    setFirstName,
+    setLastName,
+    setCountry,
+    setCity,
+    setPhone,
+    setDateOfBirth,
+    setGender,
+    setMaritalStatus,
+    updateUserData,
+    successDataUpdate }) => {
 
     const authUserId = localStorage.getItem('id')
     if (!dataSettings) getUserData(authUserId)
@@ -77,7 +90,7 @@ const DataSection = ({ dataSettings, getUserData, dataSectionPreloader, setFirst
         setMaritalStatus(dataSettings.gender === 'Женский' ? 'Замужем' : 'Женат')
     }
 
-    const onUpdateDataButtonClick = (e) => {
+    const onUpdateDataSettingsButtonClick = (e) => {
         e.preventDefault()
 
         let errors = validate(dataSettings.firstName, dataSettings.lastName, dataSettings.country, dataSettings.city, dataSettings.phone)
@@ -158,7 +171,7 @@ const DataSection = ({ dataSettings, getUserData, dataSectionPreloader, setFirst
                             <label onClick={onMarriedRadioClick}>{dataSettings?.gender === 'Мужской' ? 'женат' : 'замужем'}</label>
                         </div>
                         <div className={classes.buttonBox}>
-                            <button onClick={onUpdateDataButtonClick} type='submit'>Сохранить</button>
+                            <button onClick={onUpdateDataSettingsButtonClick} type='submit'>Сохранить</button>
                         </div>
                     </form >
                 </div>
@@ -176,4 +189,15 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getUserData, setFirstName, setLastName, setCountry, setCity, setPhone, setDateOfBirth, setGender, setMaritalStatus, updateUserData })(DataSection)
+export default connect(mapStateToProps, {
+    getUserData,
+    setFirstName,
+    setLastName,
+    setCountry,
+    setCity,
+    setPhone,
+    setDateOfBirth,
+    setGender,
+    setMaritalStatus,
+    updateUserData
+})(DataSection)

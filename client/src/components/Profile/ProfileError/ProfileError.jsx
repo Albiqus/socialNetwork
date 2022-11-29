@@ -3,13 +3,18 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import classes from './ProfileError.module.css';
 
-const ProfileError = ({ profileError }) => {
+import errorIcon from '../../../images/icons/error.png'
+
+const ProfileError = () => {
     return (
         <div className={classes.profileBox}>
             <div className={classes.profileError}>
-                <p>{profileError}</p>
-            </div>
-        </div> 
+                <br /><br />
+                <p>пользователь не найден</p>
+                <p>возможно, страница удалена</p>
+                <img src={errorIcon} alt='пользователь не найден'></img>
+            </div>  
+        </div>
     )
 }
 
@@ -19,4 +24,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default compose(connect(mapStateToProps, { }))(ProfileError)
+export default compose(connect(mapStateToProps, {}))(ProfileError)
