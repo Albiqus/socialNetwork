@@ -9,6 +9,7 @@ import { deleteCommentLike } from '../../../../../../../thunks/profile-thunks/de
 import { useEffect, useState } from 'react';
 import { getCommentLikesUsers } from '../../../../../../../thunks/profile-thunks/getCommentLikesUsers';
 import { resetCommentLikesUsers, resetPostLikesUsers, setCommentLikesModalStatus } from '../../../../../../../store/profile-reducer';
+import { updateLastActivityTime } from '../../../../../../../thunks/common-thunks/updateLastActivityTime';
 
 const CommentCommunicationPanel = ({
     post,
@@ -24,13 +25,15 @@ const CommentCommunicationPanel = ({
     resetCommentLikesUsers,
     setCommentLikesModalStatus,
     commentLikesModalStatus,
-    resetPostLikesUsers}) => {
+    resetPostLikesUsers,
+    updateLastActivityTime }) => {
 
     const currentId = router.params.userId
     const authUserId = localStorage.getItem('id')
 
-
     const onLikeClick = (e) => {
+        updateLastActivityTime(authUserId)
+
         const commentId = e.currentTarget.id
 
         if (likedCommentsIds.includes(commentId)) {
@@ -39,13 +42,22 @@ const CommentCommunicationPanel = ({
         }
         if (!likedCommentsIds.includes(commentId)) {
             const newLikesCount = Number(comment.likesCount) + 1
-            createCommentLike(authUserId, currentId, commentId, newLikesCount, post.id, authUserData.firstName, authUserData.lastName, authUserData.avatar)
+            createCommentLike
+                (authUserId,
+                    currentId,
+                    commentId,
+                    newLikesCount,
+                    post.id,
+                    authUserData.firstName,
+                    authUserData.lastName,
+                    authUserData.avatar,
+                    authUserData.lastActivityTime)
         }
     }
 
     let likeButtonBoxClassName = classes.likesButtonBox;
     if (isHoverCommentId === comment.id || comment.likesCount !== '0') likeButtonBoxClassName += ` ${classes.visible}`
-    
+
 
     const [mouseEnterTimerId, setMouseEnterTimerId] = useState(null)
 
@@ -91,6 +103,8 @@ const CommentCommunicationPanel = ({
     }, [comment.likesCount]);
 
     const onTooltipClick = () => {
+        updateLastActivityTime(authUserId)
+
         setCommentLikesModalStatus(true)
     }
 
@@ -131,4 +145,12 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default compose(connect(mapStateToProps, { createCommentLike, deleteCommentLike, getCommentLikesUsers, resetCommentLikesUsers, setCommentLikesModalStatus, resetPostLikesUsers }), withRouter)(CommentCommunicationPanel)
+export default compose(connect(mapStateToProps, {
+    createCommentLike,
+    deleteCommentLike,
+    getCommentLikesUsers,
+    resetCommentLikesUsers,
+    setCommentLikesModalStatus,
+    resetPostLikesUsers,
+    updateLastActivityTime
+}), withRouter)(CommentCommunicationPanel)

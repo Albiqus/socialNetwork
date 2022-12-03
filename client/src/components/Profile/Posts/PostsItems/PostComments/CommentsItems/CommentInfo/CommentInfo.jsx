@@ -6,8 +6,10 @@ import { deleteOneComment } from '../../../../../../../thunks/profile-thunks/del
 import { getDateFormat } from '../../../../../../../utils/profile-utils/getFormatDate';
 import deleteIcon from '../../../../../../../images/icons/delete.png'
 import classes from './CommentInfo.module.css';
+import { updateLastActivityTime } from '../../../../../../../thunks/common-thunks/updateLastActivityTime';
+import { isOnline } from '../../../../../../../utils/common-utils/isOnline';
 
-const CommentInfo = ({ post, comment, router, deleteOneComment, deleteCommentButtonPostId }) => {
+const CommentInfo = ({ post, comment, router, deleteOneComment, deleteCommentButtonPostId, updateLastActivityTime }) => {
 
     const currentId = router.params.userId
     const authUserId = localStorage.getItem('id')
@@ -16,6 +18,8 @@ const CommentInfo = ({ post, comment, router, deleteOneComment, deleteCommentBut
     const dateFormat = getDateFormat(date)
 
     const onDeleteCommentClick = (e) => {
+        updateLastActivityTime(authUserId)
+
         const commentId = e.currentTarget.id
         const newCommentsCount = Number(post.commentsCount) - 1
         const postId = post.id
@@ -24,11 +28,14 @@ const CommentInfo = ({ post, comment, router, deleteOneComment, deleteCommentBut
 
     let deleteIconClassName = classes.deleteIcon
     if (deleteCommentButtonPostId === comment.id) deleteIconClassName += ` ${classes.visible}`
-    
 
+
+    const onlineStatus = isOnline(comment.lastActivityTime)
+   
     return (
         <div className={classes.commentInfo}>
             <div className={classes.commentAvatarBox}>
+                {onlineStatus && <div className={classes.activityStatus}></div>}
                 {comment.avatar === '' && <NavLink to={`/profile/${comment.userId}`}><img className={classes.commentAvatar} src={require('../../../../../../../images/incognito/incognito-small.png')} alt='аватар'></img></NavLink>}
                 {comment.avatar !== '' && <NavLink to={`/profile/${comment.userId}`}><img className={classes.commentAvatar} src={`http://localhost:4000/images/${comment.avatar}`} alt='аватар'></img></NavLink>}
             </div>
@@ -44,4 +51,4 @@ const mapStateToProps = (state) => {
     return {}
 }
 
-export default compose(connect(mapStateToProps, { deleteOneComment }), withRouter)(CommentInfo)
+export default compose(connect(mapStateToProps, { deleteOneComment, updateLastActivityTime }), withRouter)(CommentInfo)

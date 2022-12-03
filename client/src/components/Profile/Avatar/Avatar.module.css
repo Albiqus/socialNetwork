@@ -83,11 +83,11 @@
 /* ================================== avatarBox ================================== */
 
 .avatarBox {
+    position: relative;
     width: 200px;
     height: 200px;
     display: flex;
     overflow: hidden;
-    border-radius: 10px 10px 10px 10px;
 }
 
 .avatarBox input {
@@ -98,7 +98,7 @@
     height: 200px;
     width: 200px;
     background-image: url(../../../images/incognito/incognito-large.png);
-    background-color: rgb(136, 136, 136);
+    border-radius: 10px 10px 10px 10px;
 }
 
 .avatarDefault:hover {
@@ -117,8 +117,20 @@
     display: block;
     height: 100%;
     width: 100%;
+    border-radius: 10px 10px 10px 10px;
 }
 
 .avatar:hover {
     cursor: pointer;
+}
+
+.activityStatus {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    height: 15px;
+    width: 15px;
+    border-radius: 10px 10px 10px 10px;
+    background-color: rgb(0, 104, 0);
+    outline: 5px solid rgb(158, 158, 158);
 }

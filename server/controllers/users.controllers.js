@@ -43,7 +43,8 @@ class UsersControllers {
                 status: user.status,
                 country: user.country,
                 date_of_birth: user.date_of_birth,
-                avatar: user.avatar
+                avatar: user.avatar,
+                lastActivityTime: user.last_activity_time
             }
         })
 
@@ -79,6 +80,7 @@ class UsersControllers {
         } = req.body
         const status = ''
         const avatar = ''
+        const lastActivityTime = ''
         dateOfBirth = dateOfBirth.replace('-', '.').replace('-', '.')
 
         const existingUser = await db.query(`SELECT * FROM users WHERE email=$1`, [email])
@@ -89,7 +91,7 @@ class UsersControllers {
                 message: 'Пользователь с такой почтой уже зарегистрирован'
             })
         } else {
-            const newUser = await db.query('INSERT INTO users (first_name, last_name, status, email, password, country, city, phone, date_of_birth, gender, marital_status, secret_key, avatar) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *',
+            const newUser = await db.query('INSERT INTO users (first_name, last_name, status, email, password, country, city, phone, date_of_birth, gender, marital_status, secret_key, avatar, last_activity_time) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING *',
                 [
                     firstName,
                     lastName,
@@ -103,7 +105,8 @@ class UsersControllers {
                     gender,
                     maritalStatus,
                     secretKey,
-                    avatar
+                    avatar,
+                    lastActivityTime
                 ])
             res.json({
                 statusCode: 1,
@@ -146,7 +149,6 @@ class UsersControllers {
         const user = await db.query(`SELECT * FROM users WHERE id=$1`, [userId])
 
         if (user.rows[0]) {
-
             let profileData = {
                 id: user.rows[0].id,
                 firstName: user.rows[0].first_name,
@@ -155,7 +157,9 @@ class UsersControllers {
                 city: user.rows[0].city,
                 dateOfBirthday: user.rows[0].date_of_birth,
                 maritalStatus: user.rows[0].marital_status,
-                avatar: user.rows[0].avatar
+                avatar: user.rows[0].avatar,
+                lastActivityTime: user.rows[0].last_activity_time,
+                gender: user.rows[0].gender
             }
             res.json({
                 statusCode: 1,
@@ -220,30 +224,46 @@ class UsersControllers {
         const userId = req.query.userId
         const userResult = await db.query(`SELECT * FROM users WHERE id=$1`, [userId])
 
-        res.json({
-            statusCode: 1,
-            data: {
-                firstName: userResult.rows[0].first_name,
-                lastName: userResult.rows[0].last_name,
-                gender: userResult.rows[0].gender,
-                dateOfBirth: userResult.rows[0].date_of_birth.replace('.', '-').replace('.', '-'),
-                country: userResult.rows[0].country,
-                city: userResult.rows[0].city,
-                maritalStatus: userResult.rows[0].marital_status,
-                phone: userResult.rows[0].phone
-            },
-        })
+        if (userResult.rows.length === 0) {
+            res.json({
+                statusCode: 0,
+                message: 'Пользователь не найден',
+            })
+        }
+        if (userResult.rows.length !== 0) {
+            res.json({
+                statusCode: 1,
+                data: {
+                    firstName: userResult.rows[0].first_name,
+                    lastName: userResult.rows[0].last_name,
+                    gender: userResult.rows[0].gender,
+                    dateOfBirth: userResult.rows[0].date_of_birth.replace('.', '-').replace('.', '-'),
+                    country: userResult.rows[0].country,
+                    city: userResult.rows[0].city,
+                    maritalStatus: userResult.rows[0].marital_status,
+                    phone: userResult.rows[0].phone
+                },
+            })
+        }
     }
     async getUserSafetySettings(req, res) {
         const userId = req.query.userId
         const userResult = await db.query(`SELECT * FROM users WHERE id=$1`, [userId])
 
-        res.json({
-            statusCode: 1,
-            data: {
-                email: userResult.rows[0].email,
-            },
-        })
+        if (userResult.rows.length === 0) {
+            res.json({
+                statusCode: 0,
+                message: 'Пользователь не найден',
+            })
+        }
+        if (userResult.rows.length !== 0) {
+            res.json({
+                statusCode: 1,
+                data: {
+                    email: userResult.rows[0].email,
+                },
+            })
+        }
     }
     async updateUserData(req, res) {
         const userId = req.body.userId
@@ -320,15 +340,20 @@ class UsersControllers {
                 message: 'неправильный пароль',
             })
         }
-        // db.query(`UPDATE users set avatar = $1 where id = $2 RETURNING *`, [ userId])
+    }
+    async updateLastActivityTime(req, res) {
+        const userId = req.body.userId
+        const time = req.body.time
 
-        // res.json({
-        //     statusCode: 1,
-        //     message: 'автар удалён',
-        //     data: {
-        //         avatar
-        //     }
-        // })
+        db.query(`UPDATE users set last_activity_time = $1 where id = $2 RETURNING *`, [time, userId])
+        db.query(`UPDATE comments set last_activity_time = $1 where user_id = $2 RETURNING *`, [time, userId])
+        db.query(`UPDATE comments_likes set last_activity_time = $1 where user_id = $2 RETURNING *`, [time, userId])
+        db.query(`UPDATE posts_likes set last_activity_time = $1 where user_id = $2 RETURNING *`, [time, userId])
+
+        res.json({
+            statusCode: 1,
+            message: 'время последней активности обновлено',
+        })
     }
 }
 

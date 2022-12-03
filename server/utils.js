@@ -22,7 +22,7 @@ module.exports = {
                 image: post.image,
                 date: post.date,
                 likesCount: post.likes_count,
-                commentsCount: post.comments_count
+                commentsCount: post.comments_count,
             }
         })
         return formatedPosts
@@ -49,8 +49,9 @@ module.exports = {
                 userId: postLikesUser.user_id,
                 firstName: postLikesUser.first_name,
                 lastName: postLikesUser.last_name,
-                avatar: postLikesUser.avatar
-            }
+                avatar: postLikesUser.avatar,
+                lastActivityTime: postLikesUser.last_activity_time
+            }   
         })
 
         return formatedPostLikesUsers
@@ -81,7 +82,8 @@ module.exports = {
                 date: comment.date,
                 avatar: comment.avatar,
                 image: comment.image,
-                likesCount: comment.likes_count
+                likesCount: comment.likes_count,
+                lastActivityTime: comment.last_activity_time
             }
         })
         return formatedComments
@@ -93,7 +95,8 @@ module.exports = {
                 userId: commentLikesUser.user_id,
                 firstName: commentLikesUser.first_name,
                 lastName: commentLikesUser.last_name,
-                avatar: commentLikesUser.avatar
+                avatar: commentLikesUser.avatar,
+                lastActivityTime: commentLikesUser.last_activity_time
             }
         })
 

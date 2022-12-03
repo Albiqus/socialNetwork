@@ -2,14 +2,19 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { compose } from 'redux';
 import { getAge } from '../../../utils/common-utils/getAge';
+import { isOnline } from '../../../utils/common-utils/isOnline';
+
 import classes from './UsersItems.module.css';
 
 const UsersItems = ({users}) => {
 
     const usersItems = users?.map((user) => {
+        const onlineStatus = isOnline(user.lastActivityTime)
+        
         return (
             <NavLink to={`/profile/${user.id}`} className={classes.userItem} key={user.id} id={user.id}>
                 <div className={classes.avatarBox}>
+                    {onlineStatus && <div className={classes.activityStatus}></div>}
                     {user.avatar === '' && <div className={classes.avatarDefault}></div>}
                     {user.avatar !== '' && <img className={classes.avatar} src={`http://localhost:4000/images/${user.avatar}`} alt='аватар'></img>}
                 </div>

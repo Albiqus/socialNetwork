@@ -19,7 +19,7 @@ export const updateComment = (data, commentId, postId) => {
     }
 }
 
-export const createComment = (postId, userId, avatarAverage, firstName, lastName, commentText, date, newCommentsCount, data, imageStatus) => {
+export const createComment = (postId, userId, avatarAverage, firstName, lastName, commentText, date, newCommentsCount, data, imageStatus, lastActivityTime) => {
     return (dispatch) => {
         fetch(`http://localhost:4000/api/createComment`, {
             method: 'POST',
@@ -35,7 +35,8 @@ export const createComment = (postId, userId, avatarAverage, firstName, lastName
                 commentText,
                 date,
                 newCommentsCount,
-                imageStatus
+                imageStatus,
+                lastActivityTime
             })
         }).then(function (response) {
             return response.json();

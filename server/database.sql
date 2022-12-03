@@ -12,7 +12,8 @@ create table users (
     marital_status VARCHAR(10) NOT NULL,
     secret_key VARCHAR(20) NOT NULL,
     status VARCHAR(150),
-    avatar VARCHAR(300)
+    avatar VARCHAR(300),
+    last_activity_time VARCHAR(16)
 );
 
 create table posts (
@@ -32,13 +33,15 @@ create table posts_likes (
     user_id VARCHAR(10) NOT NULL,
     first_name VARCHAR(15) NOT NULL,
     last_name VARCHAR(25) NOT NULL,
-    avatar VARCHAR(300)
+    avatar VARCHAR(300),
+    last_activity_time VARCHAR(16)
 );
 
 create table comments (
     id BIGSERIAL NOT NULL PRIMARY KEY,
     post_id VARCHAR(10) NOT NULL,
     user_id VARCHAR(10) NOT NULL,
+    last_activity_time VARCHAR(16),
     first_name VARCHAR(15) NOT NULL,
     last_name VARCHAR(25) NOT NULL,
     text VARCHAR(500),
@@ -55,5 +58,6 @@ create table comments_likes (
     user_id VARCHAR(10) NOT NULL,
     first_name VARCHAR(15) NOT NULL,
     last_name VARCHAR(25) NOT NULL,
-    avatar VARCHAR(300)
+    avatar VARCHAR(300),
+    last_activity_time VARCHAR(16)
 );

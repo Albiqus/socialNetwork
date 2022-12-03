@@ -1,4 +1,4 @@
-export const getDate = () => {
+export const getCurrentTime = () => {
     const currentTime = new Date();
 
     const year = currentTime.getFullYear();

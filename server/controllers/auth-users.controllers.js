@@ -29,15 +29,24 @@ class authUsersControllers {
 
         const authUserResult = await db.query(`SELECT * FROM users WHERE id=$1`, [authUserId])
 
-        res.json({
-            statusCode: 1,
-            message: 'Отдаю данные залогиненного пользователя',
-            data: {
-                firstName: authUserResult.rows[0].first_name,
-                lastName: authUserResult.rows[0].last_name,
-                avatar: authUserResult.rows[0].avatar
-            }
-        })
+        if (authUserResult.rows.length === 0) {
+            res.json({
+                statusCode: 0,
+                message: 'Пользователь не найден',
+            })
+        }
+        if (authUserResult.rows.length !== 0) {
+            res.json({
+                statusCode: 1,
+                message: 'Отдаю данные залогиненного пользователя',
+                data: {
+                    firstName: authUserResult.rows[0].first_name,
+                    lastName: authUserResult.rows[0].last_name,
+                    avatar: authUserResult.rows[0].avatar,
+                    lastActivityTime: authUserResult.rows[0].last_activity_time
+                }
+            })
+        }
     }
 }
 module.exports = new authUsersControllers()

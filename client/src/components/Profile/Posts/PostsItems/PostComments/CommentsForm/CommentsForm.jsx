@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
 import { createComment } from '../../../../../../thunks/profile-thunks/createComment';
-import { getDate } from '../../../../../../utils/common-utils/getTime';
+import { getCurrentTime } from '../../../../../../utils/common-utils/getCurrentTime';
 import classes from './CommentsForm.module.css';
 import uploadCommentImageIMG from '../../../../../../images/icons/upload-comment-image.png'
 import { validateText } from '../../../../../../utils/common-utils/validateText';
+import { updateLastActivityTime } from '../../../../../../thunks/common-thunks/updateLastActivityTime';
 
-const CommentsForm = ({ authUserData, post, createComment }) => {
+const CommentsForm = ({ authUserData, post, createComment, updateLastActivityTime }) => {
 
     const authUserId = localStorage.getItem('id')
     const [commentText, setCommentText] = useState('')
@@ -23,15 +24,28 @@ const CommentsForm = ({ authUserData, post, createComment }) => {
         const validatedText = validateText(commentText)
 
         if (validatedText !== '' || fileIMG !== null) {
+            updateLastActivityTime(authUserId)
+
             const data = new FormData()
             data.append('commentImage', fileIMG)
 
-            const date = getDate()
+            const date = getCurrentTime()
             const newCommentsCount = Number(post.commentsCount) + 1
 
             const imageStatus = fileIMG ? 1 : 0
 
-            createComment(post.id, authUserId, authUserData.avatar, authUserData.firstName, authUserData.lastName, commentText, date, newCommentsCount, data, imageStatus)
+            createComment(
+                post.id,
+                authUserId,
+                authUserData.avatar,
+                authUserData.firstName,
+                authUserData.lastName,
+                commentText,
+                date,
+                newCommentsCount,
+                data,
+                imageStatus,
+                authUserData.lastActivityTime)
         }
         setCommentText('')
         setUploadIMG(null)
@@ -40,11 +54,11 @@ const CommentsForm = ({ authUserData, post, createComment }) => {
 
     const onFormKeyDown = (e) => {
         if (e.code === 'ShiftLeft') setIsShiftPressed(true)
-        if (e.code === 'Enter' && !isShiftPressed)  onSendCommentButtonClick()
+        if (e.code === 'Enter' && !isShiftPressed) onSendCommentButtonClick()
     }
 
     const onFormKeyUp = (e) => {
-        if (e.code === 'ShiftLeft')  setIsShiftPressed(false)
+        if (e.code === 'ShiftLeft') setIsShiftPressed(false)
     }
 
     const onFileInputChange = (e) => {
@@ -75,4 +89,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { createComment })(CommentsForm)
+export default connect(mapStateToProps, { createComment, updateLastActivityTime })(CommentsForm)

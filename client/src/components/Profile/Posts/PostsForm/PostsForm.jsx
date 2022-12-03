@@ -3,16 +3,18 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { useRef } from 'react';
 import { useEffect } from 'react';
-import { getDate } from '../../../../utils/common-utils/getTime';
+
 import { createPost } from '../../../../thunks/profile-thunks/createPost';
 import classes from './PostsForm.module.css';
 import uploadPostImageIMG from '../../../../images/icons/upload-post-image.png'
 import ellipsisPreloader from '../../../../images/preloaders/ellipsis-preloader.svg'
 import { setIsPostCreation } from '../../../../store/profile-reducer';
 import { validateText } from '../../../../utils/common-utils/validateText';
+import { getCurrentTime } from '../../../../utils/common-utils/getCurrentTime';
+import { updateLastActivityTime } from '../../../../thunks/common-thunks/updateLastActivityTime';
 
 
-const PostsForm = ({ createPost, newPostPreloader, setIsPostCreation, isPostCreation }) => {
+const PostsForm = ({ createPost, newPostPreloader, setIsPostCreation, isPostCreation, updateLastActivityTime }) => {
 
     const authUserId = localStorage.getItem('id')
     const [newPostText, setNewPostText] = useState('')
@@ -48,12 +50,13 @@ const PostsForm = ({ createPost, newPostPreloader, setIsPostCreation, isPostCrea
 
     const onFormSubmit = (e) => {
         e.preventDefault()
-
+        updateLastActivityTime(authUserId)
+        
         const data = new FormData()
         const img = e.target[1].files[0]
         data.append('postImage', img)
 
-        const date = getDate()
+        const date = getCurrentTime()
         const imageStatus = img ? 1 : 0
 
         const validatedText = validateText(newPostText)
@@ -88,7 +91,7 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default compose(connect(mapStateToProps, { createPost, setIsPostCreation }))(PostsForm)
+export default compose(connect(mapStateToProps, { createPost, setIsPostCreation, updateLastActivityTime }))(PostsForm)
 
 
 

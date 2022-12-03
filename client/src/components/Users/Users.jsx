@@ -8,8 +8,12 @@ import UsersNavigation from './UsersNavigation/UsersNavigation';
 import UsersItems from './UsersItems/UsersItems';
 import { UsersError } from './UsersError/UsersError';
 import { UsersForm } from './UsersForm/UsersForm';
+import { updateLastActivityTime } from '../../thunks/common-thunks/updateLastActivityTime';
 
-export const Users = ({ pagesCount, isNoUsers, getAndSetTenUsers, usersPreloader }) => {
+export const Users = ({ pagesCount, isNoUsers, getAndSetTenUsers, usersPreloader, updateLastActivityTime }) => {
+
+    const authUserId = localStorage.getItem('id')
+    updateLastActivityTime(authUserId)
 
     let currentPage = Number(localStorage.getItem('currentUsersPage'))
     if (currentPage === 0) currentPage = 1
@@ -44,4 +48,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default compose(connect(mapStateToProps, { getAndSetTenUsers }), withAuthRedirect)(Users)
+export default compose(connect(mapStateToProps, { getAndSetTenUsers, updateLastActivityTime }), withAuthRedirect)(Users)

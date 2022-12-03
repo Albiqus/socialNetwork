@@ -23,6 +23,8 @@ usersRouter.delete('/deleteUser', usersControllers.deleteUser) //удали по
 usersRouter.get('/getUserSafetySettings', usersControllers.getUserSafetySettings) //дай настройки безопасности пользователя
 usersRouter.put('/updateUserSafetySettings', usersControllers.updateUserSafetySettings) //обнови данные пользователя
 
+usersRouter.put('/updateLastActivityTime', usersControllers.updateLastActivityTime) //обнови время последней активности пользователя
+
 usersRouter.get('/postman', usersControllers.getAllUsers) //дай всех пользователей
 
 module.exports = usersRouter

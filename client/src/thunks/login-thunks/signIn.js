@@ -18,6 +18,7 @@ export const signIn = (login, password) => {
             if (response.statusCode === 1) {
                 localStorage.setItem('id', response.data.id)
                 dispatch(setNavVisible(true))
+                
             }
             if (response.statusCode === 0) {
                 dispatch(setInvalidAuthError(response.message))

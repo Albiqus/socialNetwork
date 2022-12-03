@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import classes from './PostLikesInfoModal.module.css';
 import closeModalIcon from '../../../../../../images/icons/close-modal.png'
 import { resetPostLikesUsers, setPostLikesModalStatus } from '../../../../../../store/profile-reducer';
+import { isOnline } from '../../../../../../utils/common-utils/isOnline';
 
 const PostLikesInfoModal = ({ postLikesUsers, setPostLikesModalStatus, resetPostLikesUsers }) => {
 
@@ -10,11 +11,13 @@ const PostLikesInfoModal = ({ postLikesUsers, setPostLikesModalStatus, resetPost
         setPostLikesModalStatus(false)
         resetPostLikesUsers()
     }
-
+   
     const userItems = postLikesUsers?.map((user) => {
+        const onlineStatus = isOnline(user.lastActivityTime)
         return (
             <div className={classes.userItem} key={user.userId}>
                 <div className={classes.avatarBox}>
+                    {onlineStatus && <div className={classes.activityStatus}></div>}
                     {user.avatar === '' &&
                         <NavLink onClick={onCloseModalClick} to={`/profile/${user.userId}`}>
                             <img className={classes.avatar} src={require('../../../../../../images/incognito/incognito-small.png')} alt='аватар'></img>

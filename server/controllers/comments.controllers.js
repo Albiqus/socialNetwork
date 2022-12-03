@@ -20,9 +20,10 @@ class commentsControllers {
         const image = null
         const imageStatus = req.body.imageStatus
         const likesCount = 0
+        const lastActivityTime = req.body.lastActivityTime
 
         const updatedPostResult = await db.query('UPDATE posts set comments_count=$1 WHERE id=$2 RETURNING *', [newCommentsCount, postId])
-        const newCommentResult = await db.query('INSERT INTO comments (post_id, user_id, avatar, first_name, last_name, text, date, image, likes_count) values ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *',
+        const newCommentResult = await db.query('INSERT INTO comments (post_id, user_id, avatar, first_name, last_name, text, date, image, likes_count, last_activity_time) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *',
             [
                 postId,
                 userId,
@@ -32,7 +33,8 @@ class commentsControllers {
                 commentText,
                 date,
                 image,
-                likesCount
+                likesCount,
+                lastActivityTime
             ])
         const newCommentId = newCommentResult.rows[0].id
         const newComment = formatComments(newCommentResult.rows)[0]
@@ -136,13 +138,13 @@ class commentsControllers {
         const firstName = req.body.firstName
         const lastName = req.body.lastName
         const avatar = req.body.avatar
-
+        const lastActivityTime = req.body.lastActivityTime
 
         const updatedCommentResult = await db.query('UPDATE comments set likes_count=$1 WHERE id=$2 RETURNING *', [newLikesCount, commentId])
         const updatedComment = formatComments(updatedCommentResult.rows)[0]
 
-        const userLikesResult = await db.query(`INSERT INTO comments_likes (user_id, author_id, comment_id, first_name, last_name, avatar) values ($1, $2, $3, $4, $5, $6) RETURNING *`,
-            [authUserId, currentId, commentId, firstName, lastName, avatar])
+        const userLikesResult = await db.query(`INSERT INTO comments_likes (user_id, author_id, comment_id, first_name, last_name, avatar, last_activity_time) values ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
+            [authUserId, currentId, commentId, firstName, lastName, avatar, lastActivityTime])
         const newLikedCommentId = userLikesResult.rows[0].comment_id
 
         res.json({

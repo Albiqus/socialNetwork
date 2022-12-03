@@ -6,14 +6,18 @@ import { deleteAvatar } from '../../../thunks/profile-thunks/deleteAvatar';
 import classes from './Avatar.module.css';
 import updateAvatarIcon from '../../../images/icons/update-avatar.png'
 import deleteAvatarIcon from '../../../images/icons/delete-avatar.png'
+import { updateLastActivityTime } from '../../../thunks/common-thunks/updateLastActivityTime';
+import { isOnline } from '../../../utils/common-utils/isOnline';
 
 
-const Avatar = ({ setAvatar, deleteAvatar, avatar, router }) => {
+const Avatar = ({ setAvatar, deleteAvatar, avatar, router, updateLastActivityTime, profileData }) => {
 
     const currentId = router.params.userId
     const authUserId = localStorage.getItem('id')
 
     const onAvatarChange = (e) => {
+        updateLastActivityTime(authUserId)
+
         const data = new FormData()
         const img = e.target.files[0]
         data.append('avatar', img)
@@ -22,8 +26,11 @@ const Avatar = ({ setAvatar, deleteAvatar, avatar, router }) => {
     }
 
     const onDeleteAvatarButtonClick = () => {
+        updateLastActivityTime(authUserId)
         deleteAvatar(authUserId)
     }
+
+    const onlineStatus = isOnline(profileData.lastActivityTime)
 
     return (
         <div className={classes.mainBox}>
@@ -39,6 +46,7 @@ const Avatar = ({ setAvatar, deleteAvatar, avatar, router }) => {
                 {currentId === authUserId && <input onChange={onAvatarChange} type="file" id="avatar" />}
             </div>
             <div className={classes.avatarBox}>
+                {onlineStatus && <div className={classes.activityStatus}></div>}
                 {avatar === '' && <div>
                     <label htmlFor="avatar">
                         <div className={classes.avatarDefault}>
@@ -56,7 +64,8 @@ const Avatar = ({ setAvatar, deleteAvatar, avatar, router }) => {
 const mapStateToProps = (state) => {
     return {
         avatar: state.profilePage.profileData.avatar,
+        profileData: state.profilePage.profileData
     }
 }
 
-export default compose(connect(mapStateToProps, { setAvatar, deleteAvatar }), withRouter)(Avatar)
+export default compose(connect(mapStateToProps, { setAvatar, deleteAvatar, updateLastActivityTime }), withRouter)(Avatar)

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
 import { setCity, setCountry, setDateOfBirth, setFirstName, setGender, setLastName, setMaritalStatus, setPhone } from '../../../store/settings-reducer';
+import { updateLastActivityTime } from '../../../thunks/common-thunks/updateLastActivityTime';
 import { getUserData } from '../../../thunks/settings-thunks/getUserData';
 import { updateUserData } from '../../../thunks/settings-thunks/updateUserData';
 import { format } from '../../../utils/common-utils/format';
@@ -22,7 +23,8 @@ const DataSection = ({
     setGender,
     setMaritalStatus,
     updateUserData,
-    successDataUpdate }) => {
+    successDataUpdate,
+    updateLastActivityTime}) => {
 
     const authUserId = localStorage.getItem('id')
     if (!dataSettings) getUserData(authUserId)
@@ -92,6 +94,7 @@ const DataSection = ({
 
     const onUpdateDataSettingsButtonClick = (e) => {
         e.preventDefault()
+        updateLastActivityTime(authUserId)
 
         let errors = validate(dataSettings.firstName, dataSettings.lastName, dataSettings.country, dataSettings.city, dataSettings.phone)
         setFirstNameError(errors.firstNameError)
@@ -199,5 +202,6 @@ export default connect(mapStateToProps, {
     setDateOfBirth,
     setGender,
     setMaritalStatus,
-    updateUserData
+    updateUserData,
+    updateLastActivityTime
 })(DataSection)

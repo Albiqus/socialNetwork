@@ -4,7 +4,7 @@ import {
 } from "../../store/profile-reducer";
 
 
-export const createCommentLike = (authUserId, currentId, commentId, newLikesCount, postId, firstName, lastName, avatar) => {
+export const createCommentLike = (authUserId, currentId, commentId, newLikesCount, postId, firstName, lastName, avatar, lastActivityTime) => {
     return (dispatch) => {
         fetch(`http://localhost:4000/api/createCommentLike`, {
             method: 'POST',
@@ -18,7 +18,8 @@ export const createCommentLike = (authUserId, currentId, commentId, newLikesCoun
                 newLikesCount,
                 firstName,
                 lastName,
-                avatar
+                avatar,
+                lastActivityTime
             })
         }).then(function (response) {
             return response.json();

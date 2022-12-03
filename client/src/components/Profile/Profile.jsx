@@ -9,14 +9,24 @@ import { getProfileData } from '../../thunks/profile-thunks/getProfileData';
 import { getAuthUserData } from '../../thunks/profile-thunks/getAuthUserData';
 import { getAuthUserLikes } from '../../thunks/profile-thunks/getAuthUserLikes';
 import Avatar from './Avatar/Avatar';
-import Info from './Info/Info'; 
+import Info from './Info/Info';
 import { Panels } from './Panels/Panels';
-import Posts  from './Posts/Posts';
+import Posts from './Posts/Posts';
 import classes from './Profile.module.css';
 import ProfileError from './ProfileError/ProfileError';
 import { ProfilePreloader } from './ProfilePreloader/ProfilePreloader';
+import { updateLastActivityTime } from '../../thunks/common-thunks/updateLastActivityTime';
 
-export const Profile = ({ router, getProfileData, getAuthUserLikes, getPosts, getAuthUserData, profilePreloader, profileError }) => {
+export const Profile = ({
+    router,
+    getProfileData,
+    getAuthUserLikes,
+    getPosts,
+    getAuthUserData,
+    profilePreloader,
+    profileError,
+    updateLastActivityTime,
+    }) => {
 
     const authUserId = localStorage.getItem('id')
 
@@ -24,14 +34,15 @@ export const Profile = ({ router, getProfileData, getAuthUserLikes, getPosts, ge
     useEffect(() => {
         let userId = router.params.userId
         if (!userId) userId = authUserId
-        
+        updateLastActivityTime(authUserId)
         getProfileData(userId)
         getPosts(userId)
         getAuthUserData(authUserId)
         getAuthUserLikes(authUserId, userId)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [router.params.userId]);
-    
+
     return (
         <div>
             {profilePreloader && <ProfilePreloader />}
@@ -50,8 +61,8 @@ export const Profile = ({ router, getProfileData, getAuthUserLikes, getPosts, ge
 const mapStateToProps = (state) => {
     return {
         profilePreloader: state.profilePage.profilePreloader,
-        profileError: state.profilePage.profileError,
+        profileError: state.profilePage.profileError
     }
 }
 
-export default compose(connect(mapStateToProps, { getProfileData, getPosts, getAuthUserLikes, setProfileStatus, getAuthUserData }), withRouter, withAuthRedirect)(Profile)
+export default compose(connect(mapStateToProps, { getProfileData, getPosts, getAuthUserLikes, setProfileStatus, getAuthUserData, updateLastActivityTime }), withRouter, withAuthRedirect)(Profile)

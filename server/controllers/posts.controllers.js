@@ -105,13 +105,13 @@ class PostsControllers {
         const firstName = req.body.firstName
         const lastName = req.body.lastName
         const avatar = req.body.avatar
-
+        const lastActivityTime = req.body.lastActivityTime
 
         const updatedPostResult = await db.query('UPDATE posts set likes_count=$1 WHERE id=$2 RETURNING *', [newLikesCount, postId])
         const updatedPost = formatPosts(updatedPostResult.rows)[0]
 
-        const userLikesResult = await db.query(`INSERT INTO posts_likes (user_id, author_id, post_id, first_name, last_name, avatar) values ($1, $2, $3, $4, $5, $6) RETURNING *`,
-            [userId, authorId, postId, firstName, lastName, avatar])
+        const userLikesResult = await db.query(`INSERT INTO posts_likes (user_id, author_id, post_id, first_name, last_name, avatar, last_activity_time) values ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
+            [userId, authorId, postId, firstName, lastName, avatar, lastActivityTime])
         const newLikedPostsId = userLikesResult.rows[0].post_id
 
         res.json({
@@ -149,7 +149,7 @@ class PostsControllers {
         const postLikesResult = await db.query(`SELECT * FROM posts_likes WHERE post_id=$1`, [postId])
 
         const postLikesUsers = formatPostLikesUsers(sortPostLikesUsers(postLikesResult.rows))
- 
+
         res.json({
             statusCode: 1,
             message: `Отдаю трёх последних пользователей лайкнувших, пост id=${postId}`,

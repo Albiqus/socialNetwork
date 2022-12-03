@@ -5,10 +5,11 @@ import CommentInfo from './CommentInfo/CommentInfo';
 import { CommentContent } from './CommentContent/CommentContent';
 import CommentCommunicationPanel from './CommentCommunicationPanel/CommentCommunicationPanel';
 
-const CommentsItems = ({ comments, post}) => {
+const CommentsItems = ({ comments, post }) => {
 
     const [deleteCommentButtonPostId, setDeleteCommentButtonPostId] = useState(null)
     const [isHoverCommentId, setIsHoverCommentId] = useState(false)
+
 
     const onCommentItemMouseEnter = (e) => {
         const commentId = e.currentTarget.id
@@ -43,4 +44,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {  })(CommentsItems)
+export default connect(mapStateToProps, {   })(CommentsItems)

@@ -12,6 +12,7 @@ import { resetCommentLikesUsers, resetPostLikesUsers, setNewOpenCommentsPostId, 
 import { getComments } from '../../../../../thunks/profile-thunks/getComments';
 import { getPostLikesUsers } from '../../../../../thunks/profile-thunks/getPostLikesUsers';
 import { useEffect, useState } from 'react';
+import { updateLastActivityTime } from '../../../../../thunks/common-thunks/updateLastActivityTime';
 
 const PostCommunicationPanel = ({
     post,
@@ -29,12 +30,15 @@ const PostCommunicationPanel = ({
     resetPostLikesUsers,
     setPostLikesModalStatus,
     postLikesModalStatus,
-    resetCommentLikesUsers}) => {
+    resetCommentLikesUsers,
+    updateLastActivityTime }) => {
 
     const currentId = router.params.userId
     const authUserId = localStorage.getItem('id')
 
     const onLikeBoxClick = (e) => {
+        updateLastActivityTime(authUserId)
+
         const postId = e.currentTarget.id
         const likesCount = Number(posts.find(post => post.id === postId).likesCount)
 
@@ -44,11 +48,22 @@ const PostCommunicationPanel = ({
         }
         if (!likedPostsIds.includes(postId)) {
             const newLikesCount = likesCount + 1
-            createPostLike(authUserId, currentId, postId, newLikesCount, authUserData.firstName, authUserData.lastName, authUserData.avatar)
+            createPostLike(
+                authUserId,
+                currentId,
+                postId,
+                newLikesCount,
+                authUserData.firstName,
+                authUserData.lastName,
+                authUserData.avatar,
+                authUserData.lastActivityTime
+            )
         }
     }
 
     const onCommentsBoxClick = (e) => {
+        updateLastActivityTime(authUserId)
+
         const postId = e.currentTarget.id
         if (!openСommentsPostsIds.includes(postId)) {
             setNewOpenCommentsPostId(postId)
@@ -95,10 +110,12 @@ const PostCommunicationPanel = ({
 
     useEffect(() => {
         if (mouseEnterTimerId) onLikeBoxMouseEnter(0)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [post.likesCount]);
 
     const onTooltipClick = () => {
+        updateLastActivityTime(authUserId)
+
         setPostLikesModalStatus(true)
     }
 
@@ -155,5 +172,6 @@ export default compose(connect(mapStateToProps, {
     getPostLikesUsers,
     resetPostLikesUsers,
     setPostLikesModalStatus,
-    resetCommentLikesUsers
+    resetCommentLikesUsers,
+    updateLastActivityTime
 }), withRouter)(PostCommunicationPanel)

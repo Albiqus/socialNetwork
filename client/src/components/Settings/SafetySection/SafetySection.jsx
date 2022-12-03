@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { connect } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import { setCurrentPassword, setEmail, setExistingUserError, setInvalidPasswordError, setNewPassword, setSecondNewPassword, setSecondSecretKey, setSecretKey } from '../../../store/settings-reducer';
+import { updateLastActivityTime } from '../../../thunks/common-thunks/updateLastActivityTime';
 import { deleteUser } from '../../../thunks/settings-thunks/deleteUser';
 import { getUserSafetySettings } from '../../../thunks/settings-thunks/getUserSafetySettings';
 import { updateUserSafetySettings } from '../../../thunks/settings-thunks/updateUserSafetySettings';
@@ -29,7 +30,8 @@ const SafetySection = ({
     updateUserSafetySettings,
     successSafetyUpdate,
     setInvalidPasswordError,
-    deleteUser }) => {
+    deleteUser,
+    updateLastActivityTime}) => {
 
     const authUserId = localStorage.getItem('id')
     if (!safetySettings) getUserSafetySettings(authUserId)
@@ -150,7 +152,8 @@ const SafetySection = ({
 
     const onUpdateSafetySettingsButtonClick = (e) => {
         e.preventDefault()
-        console.log('хуй')
+        updateLastActivityTime(authUserId)
+
         let errors = validate(safetySettings.email, safetySettings.newPassword, safetySettings.secondNewPassword, safetySettings.newSecretKey, safetySettings.secondNewSecretKey)
 
         setEmailError(errors.emailError)
@@ -272,5 +275,6 @@ export default connect(mapStateToProps, {
     setCurrentPassword,
     updateUserSafetySettings,
     setInvalidPasswordError,
-    deleteUser
+    deleteUser,
+    updateLastActivityTime
 })(SafetySection)

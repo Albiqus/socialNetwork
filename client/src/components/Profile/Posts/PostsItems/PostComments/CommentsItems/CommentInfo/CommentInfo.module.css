@@ -24,6 +24,17 @@
     width: 100%;
 }
 
+.activityStatus {
+    position: absolute;
+    bottom: 5px;
+    left: 41px;
+    height: 10px;
+    width: 10px;
+    border-radius: 10px 10px 10px 10px;
+    background-color: rgb(0, 104, 0);
+    outline: 3px solid rgb(172, 172, 172);
+}
+
 .fullName {
     height: 20px;
     margin: 0;
