@@ -6,6 +6,7 @@ const usersRouter = require('./routes/users.routes')
 const postsRouter = require('./routes/posts.routes')
 const authUserRouter = require('./routes/auth-users.routes')
 const commentsRouter = require('./routes/comments.routes')
+const friendsRouter = require('./routes/friends.routes')
 
 
 const PORT = process.env.PORT || 4000
@@ -21,7 +22,7 @@ app.use('/api', usersRouter)
 app.use('/api', postsRouter)
 app.use('/api', authUserRouter)
 app.use('/api', commentsRouter)
-
+app.use('/api', friendsRouter)
 
 app.listen(PORT, () => {
     console.log(`сервер работает на ${PORT}`)

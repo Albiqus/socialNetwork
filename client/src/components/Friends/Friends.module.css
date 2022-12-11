@@ -1,0 +1,9 @@
+.friendsBox {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    background-color: rgb(177, 177, 177);
+    width: 700px;
+    overflow: auto;
+}

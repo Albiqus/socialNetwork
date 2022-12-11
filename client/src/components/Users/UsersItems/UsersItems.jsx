@@ -6,11 +6,11 @@ import { isOnline } from '../../../utils/common-utils/isOnline';
 
 import classes from './UsersItems.module.css';
 
-const UsersItems = ({users}) => {
+const UsersItems = ({ users }) => {
 
     const usersItems = users?.map((user) => {
         const onlineStatus = isOnline(user.lastActivityTime)
-        
+    
         return (
             <NavLink to={`/profile/${user.id}`} className={classes.userItem} key={user.id} id={user.id}>
                 <div className={classes.avatarBox}>

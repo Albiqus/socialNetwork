@@ -178,6 +178,9 @@ class UsersControllers {
         const id = req.body.id
 
         await db.query(`UPDATE users set status = $1 where id = $2 RETURNING *`, [status, id])
+        db.query(`UPDATE friends_requests set status = $1 where new_friend_id = $2 RETURNING *`, [status, id])
+        db.query(`UPDATE friends set status = $1 where friend_id = $2 RETURNING *`, [status, id])
+
         res.json({
             statusCode: 1,
             message: 'статус обновлён',
@@ -194,6 +197,8 @@ class UsersControllers {
         db.query(`UPDATE comments set avatar = $1 where user_id = $2 RETURNING *`, [avatar, userId])
         db.query(`UPDATE posts_likes set avatar = $1 where user_id = $2 RETURNING *`, [avatar, userId])
         db.query(`UPDATE comments_likes set avatar = $1 where user_id = $2 RETURNING *`, [avatar, userId])
+        db.query(`UPDATE friends_requests set avatar = $1 where new_friend_id = $2 RETURNING *`, [avatar, userId])
+        db.query(`UPDATE friends set avatar = $1 where friend_id = $2 RETURNING *`, [avatar, userId])
 
         res.json({
             statusCode: 1,
@@ -211,6 +216,8 @@ class UsersControllers {
         db.query(`UPDATE comments set avatar = $1 where user_id = $2 RETURNING *`, [avatar, userId])
         db.query(`UPDATE posts_likes set avatar = $1 where user_id = $2 RETURNING *`, [avatar, userId])
         db.query(`UPDATE comments_likes set avatar = $1 where user_id = $2 RETURNING *`, [avatar, userId])
+        db.query(`UPDATE friends_requests set avatar = $1 where new_friend_id = $2 RETURNING *`, [avatar, userId])
+        db.query(`UPDATE friends set avatar = $1 where friend_id = $2 RETURNING *`, [avatar, userId])
 
         res.json({
             statusCode: 1,
@@ -281,6 +288,8 @@ class UsersControllers {
         db.query(`UPDATE comments set first_name = $1, last_name = $2 where user_id = $3 RETURNING *`, [firstName, lastName, userId])
         db.query(`UPDATE posts_likes set first_name = $1, last_name = $2 where user_id = $3 RETURNING *`, [firstName, lastName, userId])
         db.query(`UPDATE comments_likes set first_name = $1, last_name = $2 where user_id = $3 RETURNING *`, [firstName, lastName, userId])
+        db.query(`UPDATE friends_requests set first_name = $1, last_name = $2 where new_friend_id = $3 RETURNING *`, [firstName, lastName, userId])
+        db.query(`UPDATE friends set first_name = $1, last_name = $2 where friend_id = $3 RETURNING *`, [firstName, lastName, userId])
 
         res.json({
             statusCode: 1,
@@ -349,6 +358,8 @@ class UsersControllers {
         db.query(`UPDATE comments set last_activity_time = $1 where user_id = $2 RETURNING *`, [time, userId])
         db.query(`UPDATE comments_likes set last_activity_time = $1 where user_id = $2 RETURNING *`, [time, userId])
         db.query(`UPDATE posts_likes set last_activity_time = $1 where user_id = $2 RETURNING *`, [time, userId])
+        db.query(`UPDATE friends_requests set last_activity_time = $1 where new_friend_id = $2 RETURNING *`, [time, userId])
+        db.query(`UPDATE friends set last_activity_time = $1 where friend_id = $2 RETURNING *`, [time, userId])
 
         res.json({
             statusCode: 1,

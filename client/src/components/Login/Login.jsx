@@ -8,6 +8,9 @@ import { signIn } from '../../thunks/login-thunks/signIn';
 import { validate } from '../../utils/login-utils/validateLogin';
 import classes from './Login.module.css';
 import preloader from '../../images/preloaders/ellipsis-preloader.svg'
+import { useEffect } from 'react';
+import { resetUsersSettings } from '../../store/users-reducer';
+import { setNavVisible } from '../../store/nav-reducer';
 
 const Login = ({
     setInvalidAuthError,
@@ -16,7 +19,9 @@ const Login = ({
     loginPreloader,
     successRegistrationStatus,
     invalidAuthError,
-    successUserDeleteStatus }) => {
+    successUserDeleteStatus,
+    resetUsersSettings,
+    setNavVisible}) => {
 
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
@@ -48,6 +53,14 @@ const Login = ({
         if (!errors.errorStatus) signIn(login, password)
         
     }
+
+    useEffect(() => {
+        localStorage.clear()
+        resetUsersSettings()
+
+        setNavVisible(false)
+    }, [])
+
     return (
         <div className={classes.loginBox}>
             {!loginPreloader &&
@@ -85,4 +98,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default compose(connect(mapStateToProps, { setSuccessRegistrationStatus, signIn, setInvalidAuthError }))(Login)
+export default compose(connect(mapStateToProps, { setSuccessRegistrationStatus, signIn, setInvalidAuthError, resetUsersSettings, setNavVisible }))(Login)

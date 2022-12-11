@@ -8,6 +8,7 @@ import Profile  from './components/Profile/Profile';
 import  Settings  from './components/Settings/Settings';
 import  Users from './components/Users/Users';
 import Register from './components/Register/Register';
+import Friends from './components/Friends/Friends';
 
 function App() {
     return (
@@ -18,7 +19,8 @@ function App() {
             <Nav/>
             <Routes>
             <Route path='/login' element={<Login/>}/> 
-            <Route path='/profile/:userId' element={<Profile key={window.location.pathname}/>}/>       
+            <Route path='/profile/:userId' element={<Profile key={window.location.pathname} />} />  
+            <Route path='/friends/:userId' element={<Friends />} />        
             <Route path='/messages' element={<Messages/>}/> 
             <Route path='/users' element={<Users/>}/>
             <Route path='/settings' element={<Settings />} />

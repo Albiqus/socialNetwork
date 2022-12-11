@@ -61,3 +61,25 @@ create table comments_likes (
     avatar VARCHAR(300),
     last_activity_time VARCHAR(16)
 );
+
+create table friends_requests (
+    id BIGSERIAL NOT NULL PRIMARY KEY,
+    owner_id VARCHAR(10) NOT NULL,
+    new_friend_id VARCHAR(10) NOT NULL,
+    first_name VARCHAR(15) NOT NULL,
+    last_name VARCHAR(25) NOT NULL,
+    avatar VARCHAR(300),
+    last_activity_time VARCHAR(16),
+    status VARCHAR(150)
+);
+
+create table friends (
+    id BIGSERIAL NOT NULL PRIMARY KEY,
+    owner_id VARCHAR(10) NOT NULL,
+    friend_id VARCHAR(10) NOT NULL,
+    first_name VARCHAR(15) NOT NULL,
+    last_name VARCHAR(25) NOT NULL,
+    avatar VARCHAR(300),
+    last_activity_time VARCHAR(16),
+    status VARCHAR(150)
+);

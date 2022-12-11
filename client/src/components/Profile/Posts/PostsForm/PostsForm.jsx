@@ -14,7 +14,12 @@ import { getCurrentTime } from '../../../../utils/common-utils/getCurrentTime';
 import { updateLastActivityTime } from '../../../../thunks/common-thunks/updateLastActivityTime';
 
 
-const PostsForm = ({ createPost, newPostPreloader, setIsPostCreation, isPostCreation, updateLastActivityTime }) => {
+const PostsForm = ({
+    createPost,
+    newPostPreloader,
+    setIsPostCreation,
+    isPostCreation,
+    updateLastActivityTime }) => {
 
     const authUserId = localStorage.getItem('id')
     const [newPostText, setNewPostText] = useState('')

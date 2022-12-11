@@ -5,6 +5,10 @@ const SET_PROFILE_STATUS = 'SET_PROFILE_STATUS'
 const SET_PROFILE_AVATAR = 'SET_PROFILE_AVATAR'
 
 
+const SET_FRIEND_REQUEST_STATUS = 'SET_FRIEND_REQUEST_STATUS'
+const SET_FRIEND_STATUS = 'SET_FRIEND_STATUS'
+const SET_FRIEND_BUTTON_PRELOADER = 'SET_FRIEND_BUTTON_PRELOADER'
+
 const SET_IS_POST_CREATION = 'SET_IS_POST_CREATION'
 const SET_POSTS = 'SET_POSTS'
 const SET_NEW_POST = 'SET_NEW_POST'
@@ -47,6 +51,11 @@ const startState = {
     },
 
 
+    friendRequestStatus: null,
+    friendStatus: null,
+    firendButtonPreloader: false,
+
+    
     isPostCreation: false,
     posts: [],
     likedPostsIds: null,
@@ -107,6 +116,24 @@ export const profileReducer = (state = startState, action) => {
                     ...state.profileData,
                     avatar: action.avatarName
                 }
+            }
+        }
+        case SET_FRIEND_REQUEST_STATUS: {
+            return {
+                ...state,
+                friendRequestStatus: action.status
+            }
+        }
+        case SET_FRIEND_STATUS: {
+            return {
+                ...state,
+                friendStatus: action.status
+            }
+        }
+        case SET_FRIEND_BUTTON_PRELOADER: {
+            return {
+                ...state,
+                firendButtonPreloader: action.status
             }
         }
         case SET_IS_POST_CREATION: {
@@ -327,6 +354,20 @@ export const setProfileStatus = (text) => ({
 export const setProfileAvatar = (avatarName) => ({
     type: SET_PROFILE_AVATAR,
     avatarName
+})
+
+
+export const setFriendRequestStatus = (status) => ({
+    type: SET_FRIEND_REQUEST_STATUS,
+    status
+})
+export const setFriendStatus = (status) => ({
+    type: SET_FRIEND_STATUS,
+    status
+})
+export const setFriendButtonPreloader = (status) => ({
+    type: SET_FRIEND_BUTTON_PRELOADER,
+    status
 })
 
 

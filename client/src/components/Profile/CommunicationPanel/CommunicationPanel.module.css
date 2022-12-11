@@ -1,0 +1,36 @@
+.communicationPanelBox {
+    display: flex;
+    width: 200px;
+    margin-left: 30px;
+    margin-top: 20px;
+}
+
+.toggleFriendButton {
+    position: relative;
+    height: 30px;
+    width: 200px;
+    background-color: rgb(136, 136, 136);
+    border-radius: 10px 10px 10px 10px;
+    border: none;
+}
+
+.toggleFriendButton:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.2)
+}
+
+.toggleFriendButton p {
+    width: auto;
+    font-size: 15px;
+    margin: 0;
+    margin-bottom: 2px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.644);
+}
+
+.toggleFriendButton img {
+    position: absolute;
+    width: 40px;
+    left: 80px;
+    top: -5px;
+}

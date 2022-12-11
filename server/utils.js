@@ -51,7 +51,7 @@ module.exports = {
                 lastName: postLikesUser.last_name,
                 avatar: postLikesUser.avatar,
                 lastActivityTime: postLikesUser.last_activity_time
-            }   
+            }
         })
 
         return formatedPostLikesUsers
@@ -99,7 +99,60 @@ module.exports = {
                 lastActivityTime: commentLikesUser.last_activity_time
             }
         })
-
         return formatedCommentLikesUsers
+    },
+    sortFriendsRequests: function (requests) {
+        let counter = 1;
+        for (let i = 0; i < requests.length; i++) {
+            for (let j = counter; j < requests.length; j++) {
+                if (Number(requests[i].id) < Number(requests[j].id)) {
+                    let saver = requests[i]
+                    requests[i] = requests[j]
+                    requests[j] = saver
+                }
+            }
+            counter++
+        }
+        return requests
+    },
+    formatFriendsRequests: function (requests) {
+        const formatedRequests = requests.map((request) => {
+            return {
+                newFriendId: request.new_friend_id,
+                firstName: request.first_name,
+                lastName: request.last_name,
+                avatar: request.avatar,
+                lastActivityTime: request.last_activity_time,
+                status: request.status
+            }
+        })
+        return formatedRequests
+    },
+    sortFriends: function (friends) {
+        let counter = 1;
+        for (let i = 0; i < friends.length; i++) {
+            for (let j = counter; j < friends.length; j++) {
+                if (Number(friends[i].id) < Number(friends[j].id)) {
+                    let saver = friends[i]
+                    friends[i] = friends[j]
+                    friends[j] = saver
+                }
+            }
+            counter++
+        }
+        return friends
+    },
+    formatFriends: function (friends) {
+        const formatedFriends = friends.map((friend) => {
+            return {
+                friendId: friend.friend_id,
+                firstName: friend.first_name,
+                lastName: friend.last_name,
+                avatar: friend.avatar,
+                lastActivityTime: friend.last_activity_time,
+                status: friend.status
+            }
+        })
+        return formatedFriends
     },
 };
