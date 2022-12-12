@@ -5,6 +5,7 @@ import { createFriendRequest } from '../../../thunks/friends-thunks/createFriend
 import { deleteFriendRequest } from '../../../thunks/friends-thunks/deleteFriendRequest';
 import ellipsisPreloader from '../../../images/preloaders/ellipsis-preloader.svg'
 import classes from './CommunicationPanel.module.css';
+import { deleteFriend } from '../../../thunks/friends-thunks/deleteFriend';
 
 const CommunicationPanel = ({
     router,
@@ -13,7 +14,8 @@ const CommunicationPanel = ({
     friendRequestStatus,
     deleteFriendRequest,
     firendButtonPreloader,
-    friendStatus}) => {
+    friendStatus,
+    deleteFriend}) => {
 
     const currentId = router.params.userId
     const authUserId = localStorage.getItem('id')
@@ -35,6 +37,10 @@ const CommunicationPanel = ({
         deleteFriendRequest(authUserId, currentId)
     }
 
+    
+    const onDeleteFriendClick = () => {
+        deleteFriend(currentId, authUserId)
+    }
 
     return (
         <div className={classes.communicationPanelBox}>
@@ -48,7 +54,7 @@ const CommunicationPanel = ({
                     <p>отменить заявку</p>
                 </button>}
             {!firendButtonPreloader && currentId !== authUserId && friendStatus &&
-                <button className={classes.toggleFriendButton}>
+                <button onClick={onDeleteFriendClick} className={classes.toggleFriendButton}>
                     <p>удалить из друзей</p>
                 </button>}
         </div>
@@ -64,4 +70,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default compose(connect(mapStateToProps, { createFriendRequest, deleteFriendRequest }), withRouter)(CommunicationPanel)
+export default compose(connect(mapStateToProps, { createFriendRequest, deleteFriendRequest, deleteFriend }), withRouter)(CommunicationPanel)

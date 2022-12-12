@@ -12,6 +12,7 @@ friendsRouter.delete('/deleteFriend', friendsControllers.deleteFriend) //доб�
 friendsRouter.post('/addFriend', friendsControllers.addFriend) //добавь друга
 friendsRouter.get('/getFriends', friendsControllers.getFriends) //дай всех друзей
 friendsRouter.get('/getFriendStatus', friendsControllers.getFriendStatus) //дай статус друга
+friendsRouter.get('/getSixFriends', friendsControllers.getSixFriends) //дай 6 друзей
 
 
 

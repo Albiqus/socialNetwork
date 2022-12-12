@@ -37,7 +37,7 @@ const Friends = ({
     return (
         <div className={classes.friendsBox}>
             {friendsPreloader && <FriendsPreloader />}
-            {friendsRequests && !friendsPreloader && <FriendsRequests />}
+            {friendsRequests && !friendsPreloader && authUserId === userId && <FriendsRequests />}
             {!friendsPreloader && <CurrentFriends />}
         </div>
     )

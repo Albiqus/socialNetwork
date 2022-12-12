@@ -15,10 +15,12 @@ import classes from './Profile.module.css';
 import ProfileError from './ProfileError/ProfileError';
 import { ProfilePreloader } from './ProfilePreloader/ProfilePreloader';
 import { updateLastActivityTime } from '../../thunks/common-thunks/updateLastActivityTime';
-import  CommunicationPanel  from './CommunicationPanel/CommunicationPanel';
+import CommunicationPanel from './CommunicationPanel/CommunicationPanel';
 import { getFriendRequestStatus } from '../../thunks/friends-thunks/getFriendRequestStatus';
 import { getFriendsRequests } from '../../thunks/friends-thunks/getFriendsRequests';
 import { getFriendStatus } from '../../thunks/friends-thunks/getFriendStatus';
+import Friends from './Friends/Friends';
+import { getSixFriends } from '../../thunks/profile-thunks/getSixFriends';
 
 export const Profile = ({
     router,
@@ -31,11 +33,12 @@ export const Profile = ({
     updateLastActivityTime,
     getFriendRequestStatus,
     getFriendsRequests,
-    getFriendStatus
+    getFriendStatus,
+    getSixFriends
 }) => {
 
     const authUserId = localStorage.getItem('id')
-
+    const currentId = router.params.userId
 
     useEffect(() => {
         let userId = router.params.userId
@@ -49,6 +52,7 @@ export const Profile = ({
         getAuthUserLikes(authUserId, userId)
         getFriendRequestStatus(authUserId, userId)
         getFriendStatus(authUserId, userId)
+        getSixFriends(currentId)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [router.params.userId]);
 
@@ -60,7 +64,10 @@ export const Profile = ({
                 <div className={classes.profileBox}>
                     <Avatar />
                     <Info />
-                    <CommunicationPanel />
+                    <div className={classes.wrapper}>
+                        {authUserId !== currentId && <CommunicationPanel />}
+                        <Friends />
+                    </div>
                     <Posts />
                 </div>}
         </div>
@@ -83,5 +90,6 @@ export default compose(connect(mapStateToProps, {
     updateLastActivityTime,
     getFriendRequestStatus,
     getFriendsRequests,
-    getFriendStatus
+    getFriendStatus,
+    getSixFriends
 }), withRouter, withAuthRedirect)(Profile)

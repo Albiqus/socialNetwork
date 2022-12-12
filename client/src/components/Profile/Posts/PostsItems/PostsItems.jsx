@@ -32,7 +32,7 @@ const PostsItems = ({ posts, openСommentsPostsIds }) => {
     return (
         <div className={classes.postsItemsBox}>
             {postsItems}
-            {postsItems?.length === 0 && <p className={classes.noPostsText}>На стене пока нет ни одной записи</p>}
+            {postsItems?.length === 0 && <p className={classes.noPostsText}>на стене пока нет ни одной записи</p>}
         </div>
     )
 }

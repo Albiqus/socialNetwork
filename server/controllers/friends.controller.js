@@ -3,7 +3,8 @@ const {
     sortFriendsRequests,
     formatFriendsRequests,
     formatFriends,
-    sortFriends
+    sortFriends,
+    getSixRandomFriends
 } = require('../utils')
 
 class friendsControllers {
@@ -181,6 +182,26 @@ class friendsControllers {
                 message: `Пользователь найден`,
             })
         }
+    }
+    async getSixFriends(req, res) {
+        const id = req.query.id
+
+        const friendsResult = await db.query(`SELECT * FROM friends WHERE owner_id=$1`, [id])
+        let friends = formatFriends(sortFriends(friendsResult.rows))
+        if (friendsResult.rows.length > 6) {
+            friends = getSixRandomFriends(friends)
+        }
+        const friendsCount = friendsResult.rows.length
+
+        res.json({
+            statusCode: 1,
+            message: `Отдаю друзей пользователя id = ${id}`,
+            data: {
+                friends,
+                friendsCount
+            }
+        })
+
     }
 
 }

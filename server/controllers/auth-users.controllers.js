@@ -32,6 +32,7 @@ class authUsersControllers {
         const friendsRequestsResult = await db.query(`SELECT * FROM friends_requests WHERE owner_id=$1`, [authUserId])
         const friendsRequestsCount = friendsRequestsResult.rows.length > 0 && friendsRequestsResult.rows.length
 
+
         if (authUserResult.rows.length === 0) {
             res.json({
                 statusCode: 0,
@@ -48,8 +49,8 @@ class authUsersControllers {
                     avatar: authUserResult.rows[0].avatar,
                     lastActivityTime: authUserResult.rows[0].last_activity_time,
                     status: authUserResult.rows[0].status,
-                    friendsRequestsCount: friendsRequestsCount
-
+                    friendsRequestsCount: friendsRequestsCount,
+                    // friendsCount: 
                 }
             })
         }

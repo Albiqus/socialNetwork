@@ -1,0 +1,95 @@
+.friendsBox {
+    display: flex;
+    flex-wrap: wrap;
+    width: 200px;
+    height: auto;
+    margin-top: 20px;
+    margin-left: 30px;
+
+
+}
+
+.header {
+    position: relative;
+    width: 200px;
+    height: 30px;
+    border-radius: 10px 10px 0px 0px;
+    background-color: rgb(136, 136, 136);
+}
+
+
+.header a {
+    position: absolute;
+    margin: 0;
+    padding-left: 15px;
+    margin-top: 2px;
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+}
+
+.friendsItemsBox {
+    width: 200px;
+    padding-bottom: 12.5px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    border-left: 1px solid rgb(136, 136, 136);
+    border-right: 1px solid rgb(136, 136, 136);
+    border-bottom: 1px solid rgb(136, 136, 136);
+}
+
+.friendItem {
+    position: relative;
+    width: 50px;
+    height: 65px;
+    margin-left: 12.5px;
+    margin-top: 12.5px;
+    text-decoration: none;
+}
+
+.avatarBox {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    overflow: hidden;
+}
+
+.activityStatus {
+    position: absolute;
+    bottom: 15px;
+    right: 0px;
+    height: 10px;
+    width: 10px;
+    border-radius: 10px 10px 10px 10px;
+    background-color: rgb(0, 104, 0);
+    outline: 3px solid rgb(158, 158, 158);
+}
+
+.avatarDefault {
+    height: 50px;
+    width: 50px;
+    background-image: url(../../../images/incognito/incognito-smaller.png);
+    background-color: rgb(136, 136, 136);
+}
+
+.avatar {
+    object-fit: cover;
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.friendItem p {
+    margin: 0;
+    color: black;
+    height: 15px;
+    font-size: 12px;
+    text-align: center;
+}
+
+.noFriendsText {
+    width: 100%;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.644);
+}
