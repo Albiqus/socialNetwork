@@ -1,16 +1,20 @@
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { withRouter } from '../../../hocs/withRouter';
+import { withAuthUserId } from '../../../hocs/withAuthUserId';
+import { withCurrentUserId } from '../../../hocs/withCurrentUserId';
 import { updateLastActivityTime } from '../../../thunks/common-thunks/updateLastActivityTime';
 import { updateStatus } from '../../../thunks/profile-thunks/updateStatus';
 import { getActivityStatus } from '../../../utils/profile-utils/getActivityStatus';
 import classes from './Info.module.css';
 
-const Info = ({ profileData, router, updateStatus, updateLastActivityTime }) => {
-
-    const currentId = router.params.userId
-    const authUserId = localStorage.getItem('id')
+const Info = ({
+    profileData,
+    updateStatus,
+    updateLastActivityTime,
+    currentId,
+    authUserId }) => {
+    
 
     const [statusInputStatus, setStatusInputStatus] = useState(false)
     const [newStatusText, setNewStatusText] = useState(profileData.status)
@@ -80,4 +84,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default compose(connect(mapStateToProps, { updateStatus, updateLastActivityTime }), withRouter)(Info)
+export default compose(connect(mapStateToProps, { updateStatus, updateLastActivityTime }), withAuthUserId, withCurrentUserId)(Info)

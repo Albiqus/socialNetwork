@@ -1,17 +1,20 @@
 import { compose } from 'redux';
 import classes from './Posts.module.css';
-import { withRouter } from '../../../hocs/withRouter';
 import { PostsHeader } from './PostsHeader/PostsHeader';
 import PostsForm from './PostsForm/PostsForm';
 import PostsItems from './PostsItems/PostsItems';
 import PostLikesInfoModal from './PostsItems/PostCommunicationPanel/PostLikesInfoModal/PostLikesInfoModal';
 import { connect } from 'react-redux';
 import CommentLikesInfoModal from './PostsItems/PostComments/CommentsItems/CommentCommunicationPanel/CommentLikesInfoModal/CommentLikesInfoModal';
+import { withCurrentUserId } from '../../../hocs/withCurrentUserId';
+import { withAuthUserId } from '../../../hocs/withAuthUserId';
 
-const Posts = ({ router, postLikesModalStatus, commentLikesModalStatus }) => {
-
-    const currentId = router.params.userId
-    const authUserId = localStorage.getItem('id')
+const Posts = ({
+    postLikesModalStatus,
+    commentLikesModalStatus,
+    currentId,
+    authUserId }) => {
+    
 
     return (
         <div className={classes.postsBox} >
@@ -31,4 +34,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default compose(connect(mapStateToProps, {}), withRouter)(Posts)
+export default compose(connect(mapStateToProps, {}), withCurrentUserId, withAuthUserId)(Posts)

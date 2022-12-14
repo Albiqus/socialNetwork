@@ -1,7 +1,7 @@
 .userItemsBox {
     margin: 0 auto;
     width: 500px;
-    height: 1050px;
+    height: auto;
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;

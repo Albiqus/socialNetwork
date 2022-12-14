@@ -1,24 +1,24 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { withRouter } from '../../../hocs/withRouter';
 import { createFriendRequest } from '../../../thunks/friends-thunks/createFriendRequest';
 import { deleteFriendRequest } from '../../../thunks/friends-thunks/deleteFriendRequest';
 import ellipsisPreloader from '../../../images/preloaders/ellipsis-preloader.svg'
 import classes from './CommunicationPanel.module.css';
 import { deleteFriend } from '../../../thunks/friends-thunks/deleteFriend';
+import { withAuthUserId } from '../../../hocs/withAuthUserId';
+import { withCurrentUserId } from '../../../hocs/withCurrentUserId';
 
 const CommunicationPanel = ({
-    router,
     createFriendRequest,
     authUserData,
     friendRequestStatus,
     deleteFriendRequest,
     firendButtonPreloader,
     friendStatus,
-    deleteFriend}) => {
+    deleteFriend,
+    currentId,
+    authUserId}) => {
 
-    const currentId = router.params.userId
-    const authUserId = localStorage.getItem('id')
 
     const onCreateFriendRequestClick = () => {
         createFriendRequest(
@@ -70,4 +70,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default compose(connect(mapStateToProps, { createFriendRequest, deleteFriendRequest, deleteFriend }), withRouter)(CommunicationPanel)
+export default compose(connect(mapStateToProps, { createFriendRequest, deleteFriendRequest, deleteFriend }), withAuthUserId, withCurrentUserId)(CommunicationPanel)

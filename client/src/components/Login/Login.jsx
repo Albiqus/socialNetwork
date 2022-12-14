@@ -57,7 +57,6 @@ const Login = ({
     useEffect(() => {
         localStorage.clear()
         resetUsersSettings()
-
         setNavVisible(false)
     }, [])
 

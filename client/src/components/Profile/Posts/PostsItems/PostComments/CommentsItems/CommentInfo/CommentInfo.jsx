@@ -1,19 +1,24 @@
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { compose } from 'redux';
-import { withRouter } from '../../../../../../../hocs/withRouter';
 import { deleteOneComment } from '../../../../../../../thunks/profile-thunks/deleteOneComment';
 import { getDateFormat } from '../../../../../../../utils/profile-utils/getFormatDate';
 import deleteIcon from '../../../../../../../images/icons/delete.png'
 import classes from './CommentInfo.module.css';
 import { updateLastActivityTime } from '../../../../../../../thunks/common-thunks/updateLastActivityTime';
 import { isOnline } from '../../../../../../../utils/common-utils/isOnline';
+import { withAuthUserId } from '../../../../../../../hocs/withAuthUserId';
+import { withCurrentUserId } from '../../../../../../../hocs/withCurrentUserId';
 
-const CommentInfo = ({ post, comment, router, deleteOneComment, deleteCommentButtonPostId, updateLastActivityTime }) => {
-
-    const currentId = router.params.userId
-    const authUserId = localStorage.getItem('id')
-
+const CommentInfo = ({
+    post,
+    comment,
+    deleteOneComment,
+    deleteCommentButtonPostId,
+    updateLastActivityTime,
+    currentId,
+    authUserId}) => {
+        
     const date = comment.date
     const dateFormat = getDateFormat(date)
 
@@ -51,4 +56,4 @@ const mapStateToProps = (state) => {
     return {}
 }
 
-export default compose(connect(mapStateToProps, { deleteOneComment, updateLastActivityTime }), withRouter)(CommentInfo)
+export default compose(connect(mapStateToProps, { deleteOneComment, updateLastActivityTime }), withAuthUserId, withCurrentUserId)(CommentInfo)

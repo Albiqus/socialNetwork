@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withAuthRedirect } from '../../hocs/withAuthRedirect';
+import { withAuthUserId } from '../../hocs/withAuthUserId';
 import { updateLastActivityTime } from '../../thunks/common-thunks/updateLastActivityTime';
 import { getAuthUserData } from '../../thunks/profile-thunks/getAuthUserData';
 import classes from './Messages.module.css';
 
-export const Messages = ({ updateLastActivityTime, getAuthUserData }) => {
+export const Messages = ({ updateLastActivityTime, getAuthUserData, authUserId }) => {
 
-    const authUserId = localStorage.getItem('id')
     updateLastActivityTime(authUserId)
     getAuthUserData(authUserId)
 
@@ -23,4 +23,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default compose(connect(mapStateToProps, { updateLastActivityTime, getAuthUserData }), withAuthRedirect)(Messages)
+export default compose(connect(mapStateToProps, { updateLastActivityTime, getAuthUserData }), withAuthRedirect, withAuthUserId)(Messages)

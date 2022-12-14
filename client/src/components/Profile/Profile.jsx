@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withAuthRedirect } from '../../hocs/withAuthRedirect';
-import { withRouter } from '../../hocs/withRouter';
 import { setProfileStatus } from '../../store/profile-reducer';
 import { getPosts } from '../../thunks/profile-thunks/getPosts';
 import { getProfileData } from '../../thunks/profile-thunks/getProfileData';
@@ -21,9 +20,10 @@ import { getFriendsRequests } from '../../thunks/friends-thunks/getFriendsReques
 import { getFriendStatus } from '../../thunks/friends-thunks/getFriendStatus';
 import Friends from './Friends/Friends';
 import { getSixFriends } from '../../thunks/profile-thunks/getSixFriends';
+import { withAuthUserId } from '../../hocs/withAuthUserId';
+import { withCurrentUserId } from '../../hocs/withCurrentUserId';
 
 export const Profile = ({
-    router,
     getProfileData,
     getAuthUserLikes,
     getPosts,
@@ -34,14 +34,13 @@ export const Profile = ({
     getFriendRequestStatus,
     getFriendsRequests,
     getFriendStatus,
-    getSixFriends
+    getSixFriends,
+    currentId,
+    authUserId
 }) => {
 
-    const authUserId = localStorage.getItem('id')
-    const currentId = router.params.userId
-
     useEffect(() => {
-        let userId = router.params.userId
+        let userId = currentId
         if (!userId) userId = authUserId
         updateLastActivityTime(authUserId)
         getFriendsRequests(authUserId)
@@ -54,8 +53,9 @@ export const Profile = ({
         getFriendStatus(authUserId, userId)
         getSixFriends(currentId)
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [router.params.userId]);
-
+    }, [currentId]);
+    
+    
     return (
         <div>
             {profilePreloader && <ProfilePreloader />}
@@ -92,4 +92,4 @@ export default compose(connect(mapStateToProps, {
     getFriendsRequests,
     getFriendStatus,
     getSixFriends
-}), withRouter, withAuthRedirect)(Profile)
+}), withAuthRedirect, withAuthUserId, withCurrentUserId)(Profile)

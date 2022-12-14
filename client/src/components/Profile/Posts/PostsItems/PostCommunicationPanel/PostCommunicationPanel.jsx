@@ -1,7 +1,6 @@
 
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { withRouter } from '../../../../../hocs/withRouter';
 import { createPostLike } from '../../../../../thunks/profile-thunks/createPostLike';
 import { deletePostLike } from '../../../../../thunks/profile-thunks/deletePostLike';
 import likeEmpty from '../../../../../images/icons/like-empty.png'
@@ -13,10 +12,11 @@ import { getComments } from '../../../../../thunks/profile-thunks/getComments';
 import { getPostLikesUsers } from '../../../../../thunks/profile-thunks/getPostLikesUsers';
 import { useEffect, useState } from 'react';
 import { updateLastActivityTime } from '../../../../../thunks/common-thunks/updateLastActivityTime';
+import { withAuthUserId } from '../../../../../hocs/withAuthUserId';
+import { withCurrentUserId } from '../../../../../hocs/withCurrentUserId';
 
 const PostCommunicationPanel = ({
     post,
-    router,
     posts,
     likedPostsIds,
     createPostLike,
@@ -31,10 +31,10 @@ const PostCommunicationPanel = ({
     setPostLikesModalStatus,
     postLikesModalStatus,
     resetCommentLikesUsers,
-    updateLastActivityTime }) => {
-
-    const currentId = router.params.userId
-    const authUserId = localStorage.getItem('id')
+    updateLastActivityTime,
+    authUserId,
+    currentId }) => {
+    
 
     const onLikeBoxClick = (e) => {
         updateLastActivityTime(authUserId)
@@ -174,4 +174,4 @@ export default compose(connect(mapStateToProps, {
     setPostLikesModalStatus,
     resetCommentLikesUsers,
     updateLastActivityTime
-}), withRouter)(PostCommunicationPanel)
+}), withCurrentUserId, withAuthUserId)(PostCommunicationPanel)

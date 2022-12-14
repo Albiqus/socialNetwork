@@ -12,6 +12,7 @@ import { setIsPostCreation } from '../../../../store/profile-reducer';
 import { validateText } from '../../../../utils/common-utils/validateText';
 import { getCurrentTime } from '../../../../utils/common-utils/getCurrentTime';
 import { updateLastActivityTime } from '../../../../thunks/common-thunks/updateLastActivityTime';
+import { withAuthUserId } from '../../../../hocs/withAuthUserId';
 
 
 const PostsForm = ({
@@ -19,9 +20,9 @@ const PostsForm = ({
     newPostPreloader,
     setIsPostCreation,
     isPostCreation,
-    updateLastActivityTime }) => {
+    updateLastActivityTime,
+    authUserId}) => {
 
-    const authUserId = localStorage.getItem('id')
     const [newPostText, setNewPostText] = useState('')
     const [uploadIMG, setUploadIMG] = useState(null)
 
@@ -96,7 +97,7 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default compose(connect(mapStateToProps, { createPost, setIsPostCreation, updateLastActivityTime }))(PostsForm)
+export default compose(connect(mapStateToProps, { createPost, setIsPostCreation, updateLastActivityTime }), withAuthUserId)(PostsForm)
 
 
 

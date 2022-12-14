@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withAuthRedirect } from '../../hocs/withAuthRedirect';
+import { withAuthUserId } from '../../hocs/withAuthUserId';
 import { updateLastActivityTime } from '../../thunks/common-thunks/updateLastActivityTime';
 import { getAuthUserData } from '../../thunks/profile-thunks/getAuthUserData';
 import DataSection from './DataSection/DataSection';
@@ -9,9 +10,8 @@ import SafetySection from './SafetySection/SafetySection';
 import SectionsPanel from './SectionsPanel/SectionsPanel';
 import classes from './Settings.module.css';
 
-export const Settings = ({ currentSection, updateLastActivityTime, getAuthUserData }) => {
+export const Settings = ({ currentSection, updateLastActivityTime, getAuthUserData, authUserId }) => {
 
-    const authUserId = localStorage.getItem('id')
     updateLastActivityTime(authUserId)
     getAuthUserData(authUserId)
 
@@ -31,4 +31,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default compose(connect(mapStateToProps, { updateLastActivityTime, getAuthUserData }), withAuthRedirect)(Settings)
+export default compose(connect(mapStateToProps, { updateLastActivityTime, getAuthUserData }), withAuthRedirect, withAuthUserId)(Settings)

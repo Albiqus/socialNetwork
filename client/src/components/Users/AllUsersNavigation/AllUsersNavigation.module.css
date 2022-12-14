@@ -1,0 +1,22 @@
+.AllUsersNavigationBox {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    width: 700px;
+    height: auto;
+}
+
+.AllUsersNavigationBox p {
+    width: 100%;
+    margin: 0;
+    margin-top: 10px;
+    margin-left: 100px;
+    font-size: 18px;
+    color: rgb(65, 65, 252);
+}
+
+.AllUsersNavigationBox p:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}

@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { withRouter } from '../../../../../../../hocs/withRouter';
 import classes from './CommentCommunicationPanel.module.css';
 import likeEmpty from '../../../../../../../images/icons/like-empty.png'
 import like from '../../../../../../../images/icons/like.png'
@@ -10,6 +9,8 @@ import { useEffect, useState } from 'react';
 import { getCommentLikesUsers } from '../../../../../../../thunks/profile-thunks/getCommentLikesUsers';
 import { resetCommentLikesUsers, resetPostLikesUsers, setCommentLikesModalStatus } from '../../../../../../../store/profile-reducer';
 import { updateLastActivityTime } from '../../../../../../../thunks/common-thunks/updateLastActivityTime';
+import { withAuthUserId } from '../../../../../../../hocs/withAuthUserId';
+import { withCurrentUserId } from '../../../../../../../hocs/withCurrentUserId';
 
 const CommentCommunicationPanel = ({
     post,
@@ -18,7 +19,6 @@ const CommentCommunicationPanel = ({
     createCommentLike,
     deleteCommentLike,
     isHoverCommentId,
-    router,
     authUserData,
     commentLikesUsers,
     getCommentLikesUsers,
@@ -26,10 +26,10 @@ const CommentCommunicationPanel = ({
     setCommentLikesModalStatus,
     commentLikesModalStatus,
     resetPostLikesUsers,
-    updateLastActivityTime }) => {
+    updateLastActivityTime,
+    currentId,
+    authUserId}) => {
 
-    const currentId = router.params.userId
-    const authUserId = localStorage.getItem('id')
 
     const onLikeClick = (e) => {
         updateLastActivityTime(authUserId)
@@ -153,4 +153,4 @@ export default compose(connect(mapStateToProps, {
     setCommentLikesModalStatus,
     resetPostLikesUsers,
     updateLastActivityTime
-}), withRouter)(CommentCommunicationPanel)
+}), withAuthUserId, withCurrentUserId)(CommentCommunicationPanel)

@@ -6,10 +6,11 @@ import classes from './CommentsForm.module.css';
 import uploadCommentImageIMG from '../../../../../../images/icons/upload-comment-image.png'
 import { validateText } from '../../../../../../utils/common-utils/validateText';
 import { updateLastActivityTime } from '../../../../../../thunks/common-thunks/updateLastActivityTime';
+import { compose } from 'redux';
+import { withAuthUserId } from '../../../../../../hocs/withAuthUserId';
 
-const CommentsForm = ({ authUserData, post, createComment, updateLastActivityTime }) => {
+const CommentsForm = ({ authUserData, post, createComment, updateLastActivityTime, authUserId }) => {
 
-    const authUserId = localStorage.getItem('id')
     const [commentText, setCommentText] = useState('')
     const [isShiftPressed, setIsShiftPressed] = useState(false)
     const [uploadIMG, setUploadIMG] = useState(null)
@@ -89,4 +90,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { createComment, updateLastActivityTime })(CommentsForm)
+export default compose(connect(mapStateToProps, { createComment, updateLastActivityTime }), withAuthUserId)(CommentsForm)

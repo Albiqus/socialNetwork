@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { withRouter } from '../../../hocs/withRouter';
+import { withCurrentUserId } from '../../../hocs/withCurrentUserId';
 import { setAvatar } from '../../../thunks/profile-thunks/setAvatar';
 import { deleteAvatar } from '../../../thunks/profile-thunks/deleteAvatar';
 import classes from './Avatar.module.css';
@@ -8,12 +8,18 @@ import updateAvatarIcon from '../../../images/icons/update-avatar.png'
 import deleteAvatarIcon from '../../../images/icons/delete-avatar.png'
 import { updateLastActivityTime } from '../../../thunks/common-thunks/updateLastActivityTime';
 import { isOnline } from '../../../utils/common-utils/isOnline';
+import { withAuthUserId } from '../../../hocs/withAuthUserId';
 
 
-const Avatar = ({ setAvatar, deleteAvatar, avatar, router, updateLastActivityTime, profileData }) => {
+const Avatar = ({
+    setAvatar,
+    deleteAvatar,
+    avatar,
+    updateLastActivityTime,
+    profileData,
+    currentId,
+    authUserId }) => {
 
-    const currentId = router.params.userId
-    const authUserId = localStorage.getItem('id')
 
     const onAvatarChange = (e) => {
         updateLastActivityTime(authUserId)
@@ -68,4 +74,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default compose(connect(mapStateToProps, { setAvatar, deleteAvatar, updateLastActivityTime }), withRouter)(Avatar)
+export default compose(connect(mapStateToProps, { setAvatar, deleteAvatar, updateLastActivityTime }), withCurrentUserId, withAuthUserId)(Avatar)

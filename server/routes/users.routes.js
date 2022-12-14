@@ -6,6 +6,7 @@ const usersRouter = new Router()
 
 usersRouter.get('/user', usersControllers.getOneUser) //1 пользователь
 usersRouter.get('/users', usersControllers.getTenUsers) //10 пользователей
+usersRouter.get('/getDefiniteUsers', usersControllers.getDefiniteUsers) //дай определённых пользователей
 usersRouter.post('/register', usersControllers.registerUser) //зарегистрируйся
 usersRouter.get('/login', usersControllers.login) //логинизируйся
 usersRouter.get('/profile', usersControllers.getProfileData) //дай данные профиля

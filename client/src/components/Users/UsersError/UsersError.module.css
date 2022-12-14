@@ -1,13 +1,14 @@
 .usersBox {
+    
     background-color: rgb(158, 158, 158);
     width: 700px;
-    height: 1200px;
+    height: 200px;
     border-radius: 10px 10px 10px 10px;
 }
 
 .noUsersText {
     margin: 0;
     text-align: center;
-    padding-top: 30px;
+    margin-top: 50px;
     font-size: 20px;
 }

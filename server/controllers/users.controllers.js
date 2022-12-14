@@ -34,6 +34,7 @@ class UsersControllers {
             currentUserPosition = Number(String(currentPage) + '0') - 10
         }
 
+
         const usersResult = await db.query(`SELECT * FROM users ORDER BY id DESC OFFSET ${currentUserPosition} LIMIT 10`)
         const tenUsers = usersResult.rows.map((user) => {
             return {
@@ -60,6 +61,35 @@ class UsersControllers {
                     pagesCount: pagesCount,
                     tenUsers: tenUsers
                 }
+            })
+        }
+    }
+    async getDefiniteUsers(req, res) {
+        const searchValue = req.query.searchValue
+        const words = searchValue.split(' ')
+        const firstWord = words[0]
+        const secondWord = words[1]
+
+
+        let usersResult
+        if (words.length === 1) {
+            usersResult = await db.query(`SELECT * FROM users WHERE first_name=$1 OR last_name=$1 ORDER BY id DESC`, [firstWord])
+        }
+        if (words.length > 1) {
+            usersResult = await db.query(`SELECT * FROM users WHERE first_name=$1 AND last_name=$2 OR first_name=$2 AND last_name=$1 ORDER BY id DESC`, [firstWord, secondWord])
+        }
+        const pagesCount = Math.ceil(usersResult.rows.length / 10)
+        if (pagesCount !== 0) {
+            res.json({
+                statusCode: 1,
+                message: 'Отдаю всех найденных пользователей',
+                data: usersResult.rows
+            })
+        }
+        if (pagesCount === 0) {
+            res.json({
+                statusCode: 0,
+                message: 'Пользователь не найден',
             })
         }
     }

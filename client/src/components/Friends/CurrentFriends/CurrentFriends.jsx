@@ -1,15 +1,14 @@
 import { connect } from "react-redux"
 import { NavLink } from "react-router-dom";
 import { compose } from "redux"
-import { withRouter } from "../../../hocs/withRouter";
+import { withAuthUserId } from "../../../hocs/withAuthUserId";
 import { deleteFriend } from "../../../thunks/friends-thunks/deleteFriend";
 import { isOnline } from "../../../utils/common-utils/isOnline";
 import ellipsisPreloader from '../../../images/preloaders/ellipsis-preloader.svg'
 import classes from './CurrentFriends.module.css';
 
-const CurrentFriends = ({ friends, deleteFriend, deleteFriendPreloaderId }) => {
+const CurrentFriends = ({ friends, deleteFriend, deleteFriendPreloaderId, authUserId }) => {
 
-    const authUserId = localStorage.getItem('id')
 
     const onSendMessageButtonClick = () => {
 
@@ -65,4 +64,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default compose(connect(mapStateToProps, { deleteFriend }), withRouter)(CurrentFriends)
+export default compose(connect(mapStateToProps, { deleteFriend }), withAuthUserId )(CurrentFriends)

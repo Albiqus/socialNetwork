@@ -1,13 +1,12 @@
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { compose } from 'redux';
-import { withRouter } from '../../../hocs/withRouter';
+import { withCurrentUserId } from '../../../hocs/withCurrentUserId';
 import { isOnline } from '../../../utils/common-utils/isOnline';
 import classes from './Friends.module.css';
 
-const Friends = ({ router, friends, friendsCount }) => {
+const Friends = ({ friends, friendsCount, currentId }) => {
 
-    const currentId = router.params.userId
 
     const friendsItems = friends?.map((friend) => {
         const onlineStatus = isOnline(friend.lastActivityTime)
@@ -43,4 +42,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default compose(connect(mapStateToProps, {}), withRouter)(Friends)
+export default compose(connect(mapStateToProps, {}), withCurrentUserId)(Friends)

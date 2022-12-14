@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { connect } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+import { compose } from 'redux';
+import { withAuthUserId } from '../../../hocs/withAuthUserId';
 import { setCurrentPassword, setEmail, setExistingUserError, setInvalidPasswordError, setNewPassword, setSecondNewPassword, setSecondSecretKey, setSecretKey } from '../../../store/settings-reducer';
 import { updateLastActivityTime } from '../../../thunks/common-thunks/updateLastActivityTime';
 import { deleteUser } from '../../../thunks/settings-thunks/deleteUser';
@@ -31,9 +33,10 @@ const SafetySection = ({
     successSafetyUpdate,
     setInvalidPasswordError,
     deleteUser,
-    updateLastActivityTime}) => {
+    updateLastActivityTime,
+    authUserId}) => {
 
-    const authUserId = localStorage.getItem('id')
+    
     if (!safetySettings) getUserSafetySettings(authUserId)
 
 
@@ -154,6 +157,11 @@ const SafetySection = ({
         e.preventDefault()
         updateLastActivityTime(authUserId)
 
+        if (removalAccStatus === 'remove') {
+            deleteUser(authUserId, safetySettings.currentPassword) 
+            return
+        }
+
         let errors = validate(safetySettings.email, safetySettings.newPassword, safetySettings.secondNewPassword, safetySettings.newSecretKey, safetySettings.secondNewSecretKey)
 
         setEmailError(errors.emailError)
@@ -167,9 +175,7 @@ const SafetySection = ({
                 safetySettings.newSecretKey,
                 safetySettings.currentPassword,
                 authUserId
-            )
-            console.log('ща удал..')
-            removalAccStatus === 'remove' && deleteUser(authUserId, safetySettings.currentPassword)
+            ) 
         }
     }
 
@@ -264,7 +270,7 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {
+export default compose(connect(mapStateToProps, {
     setEmail,
     setNewPassword,
     setSecondNewPassword,
@@ -277,4 +283,4 @@ export default connect(mapStateToProps, {
     setInvalidPasswordError,
     deleteUser,
     updateLastActivityTime
-})(SafetySection)
+}), withAuthUserId)(SafetySection)

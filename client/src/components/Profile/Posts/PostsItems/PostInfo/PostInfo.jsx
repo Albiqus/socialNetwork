@@ -1,20 +1,26 @@
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { compose } from 'redux';
-import { withRouter } from '../../../../../hocs/withRouter';
 import { deleteOnePost } from '../../../../../thunks/profile-thunks/deleteOnePost';
 import { getDateFormat } from '../../../../../utils/profile-utils/getFormatDate';
 import deleteIcon from '../../../../../images/icons/delete.png'
 import preloader from '../../../../../images/preloaders/ellipsis-preloader.svg'
-
 import classes from './PostInfo.module.css';
 import { updateLastActivityTime } from '../../../../../thunks/common-thunks/updateLastActivityTime';
 import { isOnline } from '../../../../../utils/common-utils/isOnline';
+import { withCurrentUserId } from '../../../../../hocs/withCurrentUserId';
+import { withAuthUserId } from '../../../../../hocs/withAuthUserId';
 
-const PostInfo = ({ profileData, post, router, deletePostPreloader, deletePostButtonPostId, deleteOnePost, updateLastActivityTime }) => {
+const PostInfo = ({
+    profileData,
+    post,
+    deletePostPreloader,
+    deletePostButtonPostId,
+    deleteOnePost,
+    updateLastActivityTime,
+    currentId,
+    authUserId}) => {
 
-    const currentId = router.params.userId
-    const authUserId = localStorage.getItem('id')
 
     const date = post.date
     const dateFormat = getDateFormat(date)
@@ -53,4 +59,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default compose(connect(mapStateToProps, { deleteOnePost, updateLastActivityTime }), withRouter)(PostInfo)
+export default compose(connect(mapStateToProps, { deleteOnePost, updateLastActivityTime }), withCurrentUserId, withAuthUserId)(PostInfo)

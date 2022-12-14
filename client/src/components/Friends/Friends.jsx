@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import { connect } from "react-redux"
 import { compose } from "redux"
 import { withAuthRedirect } from "../../hocs/withAuthRedirect"
-import { withRouter } from "../../hocs/withRouter"
+import { withAuthUserId } from "../../hocs/withAuthUserId";
+import { withCurrentUserId } from "../../hocs/withCurrentUserId";
 import { updateLastActivityTime } from "../../thunks/common-thunks/updateLastActivityTime";
 import { getFriends } from "../../thunks/friends-thunks/getFriends";
 import { getFriendsRequests } from "../../thunks/friends-thunks/getFriendsRequests";
@@ -15,29 +16,28 @@ import FriendsRequests from "./FriendsRequests/FriendsRequests";
 const Friends = ({
     updateLastActivityTime,
     friendsRequests,
-    router,
     getFriendsRequests,
     getFriends,
     getAuthUserData,
-    friendsPreloader }) => {
+    friendsPreloader,
+    authUserId,
+    currentId }) => {
 
-    const authUserId = localStorage.getItem('id')
-    const userId = router.params.userId
-
+    
     updateLastActivityTime(authUserId)
 
     useEffect(() => {
-        getFriendsRequests(userId)
-        getFriends(userId)
+        getFriendsRequests(currentId)
+        getFriends(currentId)
         getAuthUserData(authUserId)
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [router.params.userId]);
+    }, [currentId]);
 
 
     return (
         <div className={classes.friendsBox}>
             {friendsPreloader && <FriendsPreloader />}
-            {friendsRequests && !friendsPreloader && authUserId === userId && <FriendsRequests />}
+            {friendsRequests && !friendsPreloader && authUserId === currentId && <FriendsRequests />}
             {!friendsPreloader && <CurrentFriends />}
         </div>
     )
@@ -56,4 +56,4 @@ export default compose(connect(mapStateToProps, {
     getFriendsRequests,
     getFriends,
     getAuthUserData
-}), withRouter, withAuthRedirect)(Friends)
+}), withCurrentUserId, withAuthRedirect, withAuthUserId)(Friends)

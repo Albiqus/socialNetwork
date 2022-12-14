@@ -7,9 +7,11 @@ import { UsersPreloader } from './UsersPreloader/UsersPreloader';
 import UsersNavigation from './UsersNavigation/UsersNavigation';
 import UsersItems from './UsersItems/UsersItems';
 import { UsersError } from './UsersError/UsersError';
-import { UsersForm } from './UsersForm/UsersForm';
+import UsersForm from './UsersForm/UsersForm';
 import { updateLastActivityTime } from '../../thunks/common-thunks/updateLastActivityTime';
 import { getAuthUserData } from '../../thunks/profile-thunks/getAuthUserData';
+import { withAuthUserId } from '../../hocs/withAuthUserId';
+import AllUsersNavigation from './AllUsersNavigation/AllUsersNavigation';
 
 export const Users = ({
     pagesCount,
@@ -17,30 +19,36 @@ export const Users = ({
     getAndSetTenUsers,
     usersPreloader,
     updateLastActivityTime,
-    getAuthUserData}) => {
+    getAuthUserData,
+    authUserId,
+    searchingStatus }) => {
 
-    const authUserId = localStorage.getItem('id')
+
     updateLastActivityTime(authUserId)
     getAuthUserData(authUserId)
 
     let currentPage = Number(localStorage.getItem('currentUsersPage'))
     if (currentPage === 0) currentPage = 1
-    
-    
+
+
     if (!pagesCount && !isNoUsers) getAndSetTenUsers(currentPage)
-    
-  
+
+
     return (
         <div >
             {usersPreloader && <UsersPreloader />}
-            {!usersPreloader && isNoUsers && <UsersError />}
 
-            {!usersPreloader && !isNoUsers &&
+            {!usersPreloader &&
                 <div className={classes.usersBox}>
                     <UsersForm />
-                    <UsersNavigation />
-                    <UsersItems />
-                    <UsersNavigation  />
+                    {!isNoUsers && < UsersNavigation />}
+                    {searchingStatus && <AllUsersNavigation />}
+                    {!isNoUsers && <UsersItems />}
+                    {isNoUsers && <UsersError />}
+                    {!isNoUsers &&
+                        <div className={classes.wrapper}>
+                            <UsersNavigation />
+                        </div>}
                 </div >
             }
 
@@ -53,7 +61,8 @@ const mapStateToProps = (state) => {
         usersPreloader: state.usersPage.usersPreloader,
         pagesCount: state.usersPage.pagesCount,
         isNoUsers: state.usersPage.isNoUsers,
+        searchingStatus: state.usersPage.searchingStatus
     }
 }
 
-export default compose(connect(mapStateToProps, { getAndSetTenUsers, updateLastActivityTime, getAuthUserData }), withAuthRedirect)(Users)
+export default compose(connect(mapStateToProps, { getAndSetTenUsers, updateLastActivityTime, getAuthUserData }), withAuthRedirect, withAuthUserId)(Users)

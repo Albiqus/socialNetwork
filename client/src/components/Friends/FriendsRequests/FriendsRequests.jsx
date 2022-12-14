@@ -1,7 +1,6 @@
 import { connect } from "react-redux"
 import { NavLink } from "react-router-dom";
 import { compose } from "redux"
-import { withRouter } from "../../../hocs/withRouter";
 import { isOnline } from "../../../utils/common-utils/isOnline";
 import acceptIcon from "../../../images/icons/accept.png"
 import rejectIcon from "../../../images/icons/reject.png"
@@ -9,6 +8,8 @@ import ellipsisPreloader from '../../../images/preloaders/ellipsis-preloader.svg
 import classes from './FriendsRequests.module.css';
 import { deleteFriendRequest } from "../../../thunks/friends-thunks/deleteFriendRequest";
 import { addFriend } from "../../../thunks/friends-thunks/addFriend";
+import { withCurrentUserId } from "../../../hocs/withCurrentUserId";
+import { withAuthUserId } from "../../../hocs/withAuthUserId";
 
 const FriendsRequests = ({
     friendsRequests,
@@ -16,9 +17,8 @@ const FriendsRequests = ({
     acceptRequestPreloaderId,
     rejectRequestPreloaderId,
     addFriend,
-    authUserData }) => {
-
-    const authUserId = localStorage.getItem('id')
+    authUserData,
+    authUserId}) => {
   
     const onAcceptButtonClick = (e) => {
         const newFriendId = e.currentTarget.id
@@ -88,4 +88,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default compose(connect(mapStateToProps, { deleteFriendRequest, addFriend }), withRouter)(FriendsRequests)
+export default compose(connect(mapStateToProps, { deleteFriendRequest, addFriend }), withCurrentUserId, withAuthUserId)(FriendsRequests)
